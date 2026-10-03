@@ -34,7 +34,7 @@
   {
     "char": "日",
     "order": 2,
-    "position": 2,
+    "position": 3,
     "variants": ["⽇", "⺜"],
     "components": [],
     "on": ["ニチ", "ジツ"],
@@ -50,7 +50,7 @@
   {
     "char": "大",
     "order": 3,
-    "position": 3,
+    "position": 6,
     "variants": ["⼤ (漢字)"],
     "components": ["一", "人"],
     "on": ["ダイ", "タイ"],
@@ -66,7 +66,7 @@
   {
     "char": "年",
     "order": 4,
-    "position": 4,
+    "position": 2,
     "variants": [],
     "components": ["𠂉", "ヰ"],
     "on": ["ネン"],
@@ -82,7 +82,7 @@
   {
     "char": "出",
     "order": 5,
-    "position": 5,
+    "position": 4,
     "variants": [],
     "components": ["山"],
     "on": ["シュツ", "スイ"],
@@ -98,7 +98,7 @@
   {
     "char": "本",
     "order": 6,
-    "position": 6,
+    "position": 5,
     "variants": [],
     "components": ["木", "一"],
     "on": ["ホン"],
@@ -242,7 +242,7 @@
   {
     "char": "分",
     "order": 15,
-    "position": 15,
+    "position": 14,
     "variants": [],
     "components": ["ハ", "刀"],
     "on": ["ブン", "ブ", "フン"],
@@ -274,7 +274,7 @@
   {
     "char": "手",
     "order": 17,
-    "position": 14,
+    "position": 16,
     "variants": ["扌", "⼿ (漢字)", "龵"],
     "components": [],
     "on": ["シュ"],
@@ -290,7 +290,7 @@
   {
     "char": "自",
     "order": 18,
-    "position": 19,
+    "position": 15,
     "variants": ["⾃ (漢字)"],
     "components": [],
     "on": ["ジ", "シ"],
@@ -322,7 +322,7 @@
   {
     "char": "者",
     "order": 20,
-    "position": 16,
+    "position": 18,
     "variants": [],
     "components": ["耂", "日"],
     "on": ["シャ"],
@@ -338,7 +338,7 @@
   {
     "char": "間",
     "order": 21,
-    "position": 18,
+    "position": 19,
     "variants": ["间 (漢字)"],
     "components": ["門", "日"],
     "on": ["カン", "ケン"],
@@ -627,7 +627,7 @@
   {
     "char": "長",
     "order": 39,
-    "position": 38,
+    "position": 37,
     "variants": ["⻑", "镸", "长 (漢字)"],
     "components": [],
     "on": ["チョウ"],
@@ -643,7 +643,7 @@
   {
     "char": "場",
     "order": 40,
-    "position": 37,
+    "position": 38,
     "variants": ["场 (漢字)"],
     "components": ["土", "昜"],
     "on": ["ジョウ"],
@@ -659,7 +659,7 @@
   {
     "char": "代",
     "order": 41,
-    "position": 39,
+    "position": 40,
     "variants": [],
     "components": ["亻", "弋"],
     "on": ["タイ", "ダイ"],
@@ -675,7 +675,7 @@
   {
     "char": "私",
     "order": 42,
-    "position": 40,
+    "position": 42,
     "variants": [],
     "components": ["禾", "厶"],
     "on": ["シ"],
@@ -707,7 +707,7 @@
   {
     "char": "立",
     "order": 44,
-    "position": 42,
+    "position": 39,
     "variants": ["⽴ (漢字)"],
     "components": ["亠", "䒑"],
     "on": ["リツ", "リュウ"],
@@ -867,7 +867,7 @@
   {
     "char": "体",
     "order": 54,
-    "position": 51,
+    "position": 52,
     "variants": ["體"],
     "components": ["亻", "本"],
     "on": ["タイ", "テイ"],
@@ -883,7 +883,7 @@
   {
     "char": "動",
     "order": 55,
-    "position": 52,
+    "position": 51,
     "variants": ["动 (漢字)"],
     "components": ["重", "力"],
     "on": ["ドウ"],
@@ -1061,7 +1061,7 @@
   {
     "char": "作",
     "order": 66,
-    "position": 65,
+    "position": 66,
     "variants": [],
     "components": ["亻", "乍"],
     "on": ["サク", "サ"],
@@ -1125,7 +1125,7 @@
   {
     "char": "今",
     "order": 70,
-    "position": 66,
+    "position": 65,
     "variants": [],
     "components": ["亼", "㇇"],
     "on": ["コン", "キン"],
@@ -1205,7 +1205,7 @@
   {
     "char": "戦",
     "order": 75,
-    "position": 75,
+    "position": 70,
     "variants": ["战 (漢字)", "戰"],
     "components": ["単", "戈"],
     "on": ["セン"],
@@ -1253,7 +1253,7 @@
   {
     "char": "金",
     "order": 78,
-    "position": 70,
+    "position": 73,
     "variants": ["⾦ (漢字)", "釒", "钅 (漢字)"],
     "components": ["𠆢", "丷", "王"],
     "on": ["キン", "コン"],
@@ -1269,7 +1269,7 @@
   {
     "char": "性",
     "order": 79,
-    "position": 73,
+    "position": 74,
     "variants": [],
     "components": ["忄", "生"],
     "on": ["セイ", "ショウ"],
@@ -1286,7 +1286,7 @@
   {
     "char": "対",
     "order": 80,
-    "position": 74,
+    "position": 75,
     "variants": ["對", "对 (漢字)"],
     "components": ["文", "寸"],
     "on": ["タイ", "ツイ"],
@@ -1319,7 +1319,7 @@
   {
     "char": "用",
     "order": 82,
-    "position": 78,
+    "position": 77,
     "variants": ["⽤ (漢字)", "𠂡"],
     "components": [],
     "on": ["ヨウ"],
@@ -1335,7 +1335,7 @@
   {
     "char": "男",
     "order": 83,
-    "position": 77,
+    "position": 78,
     "variants": [],
     "components": ["田", "力"],
     "on": ["ダン", "ナン"],
@@ -1383,7 +1383,7 @@
   {
     "char": "関",
     "order": 86,
-    "position": 82,
+    "position": 81,
     "variants": ["關"],
     "components": ["門", "关"],
     "on": ["カン"],
@@ -1399,7 +1399,7 @@
   {
     "char": "文",
     "order": 87,
-    "position": 81,
+    "position": 82,
     "variants": ["⽂ (漢字)"],
     "components": [],
     "on": ["ブン", "モン"],
@@ -1464,7 +1464,7 @@
   {
     "char": "業",
     "order": 91,
-    "position": 86,
+    "position": 87,
     "variants": [],
     "components": ["业", "䒑", "未"],
     "on": ["ギョウ", "ゴウ"],
@@ -1480,7 +1480,7 @@
   {
     "char": "定",
     "order": 92,
-    "position": 89,
+    "position": 90,
     "variants": [],
     "components": ["宀", "疋"],
     "on": ["テイ", "ジョウ"],
@@ -1496,7 +1496,7 @@
   {
     "char": "政",
     "order": 93,
-    "position": 93,
+    "position": 92,
     "variants": [],
     "components": ["正", "攵"],
     "on": ["セイ", "ショウ"],
@@ -1512,7 +1512,7 @@
   {
     "char": "持",
     "order": 94,
-    "position": 87,
+    "position": 86,
     "variants": [],
     "components": ["扌", "寺"],
     "on": ["ジ"],
@@ -1544,7 +1544,7 @@
   {
     "char": "外",
     "order": 96,
-    "position": 90,
+    "position": 89,
     "variants": [],
     "components": ["夕", "卜"],
     "on": ["ガイ", "ゲ"],
@@ -1576,7 +1576,7 @@
   {
     "char": "所",
     "order": 98,
-    "position": 92,
+    "position": 94,
     "variants": [],
     "components": ["戸", "斤"],
     "on": ["ショ"],
@@ -1592,7 +1592,7 @@
   {
     "char": "現",
     "order": 99,
-    "position": 94,
+    "position": 93,
     "variants": [],
     "components": ["王", "見"],
     "on": ["ゲン"],

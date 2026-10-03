@@ -1025,6 +1025,7 @@ function computeDensityPreview() {
     return n;
   }
   function computeDensity(char, prev, next) {
+    [prev, next] = [ next, prev ];
     const kunMulti = columns(char, "kun").length >= 2;
     const wOn = fieldWidth(char, "on", prev, "kun", true);
     const wKun = kunMulti ? fieldWidth(char, "kun", next, "onAdd", true) : fieldWidth(char, "kun", next, "on", true);
