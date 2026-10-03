@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kanji Grid</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header id="navMenu">
+    <span class="navTitle">Kanji Grid</span>
+    <label class="navToggle">
+      <input type="checkbox" id="extensiveComponentsToggle" class="slideToggleInput">
+      Extensive components
+      <span class="slideToggle" aria-hidden="true"></span>
+    </label>
+    <button id="resetDataBtn" type="button" disabled>Reset all changes</button>
+    <label class="navToggle">
+      <input type="checkbox" id="confirmOverwriteToggle" class="slideToggleInput" checked>
+      Confirm before editing existing kanji
+      <span class="slideToggle" aria-hidden="true"></span>
+    </label>
+    <label class="navToggle">
+      <input type="checkbox" id="editModeToggle" class="slideToggleInput">
+      Edit mode
+      <span class="slideToggle" aria-hidden="true"></span>
+    </label>
+    <label class="navToggle" title="Compares two ways of picking the fewest-change reordering that resolves a marginal reading against its neighbor: sequential (on) tries kun's own order first, only touching on as a fallback; joint (off) searches both sides together from the start, minimizing total changes across both.">
+      <input type="checkbox" id="densityFitStrategyToggle" class="slideToggleInput" checked>
+      Sequential density fit (vs. joint)
+      <span class="slideToggle" aria-hidden="true"></span>
+    </label>
+    <button id="addKanjiBtn" type="button">+ Add kanji</button>
+    <button id="exportAdditionsBtn" type="button" disabled>Export additions</button>
+  </header>
+  <div id="kanji-grid"></div>
+  <footer id="rulerFooter">
+    <div id="rulerRow"></div>
+  </footer>
+
+  <div id="addKanjiModal" class="modalOverlay" hidden>
+    <div class="modalBox" role="dialog" aria-modal="true" aria-labelledby="addKanjiModalTitle">
+      <h2 id="addKanjiModalTitle">Add a new kanji</h2>
+
+      <div class="modalTopGrid">
+        <div class="modalTopCol">
+          <div class="modalCharCompGrid">
+            <div class="modalFieldCharRow">
+              <label class="modalField modalFieldChar">character <input id="akChar" maxlength="4" placeholder="漢" autocomplete="off"></label>
+              <label class="modalField modalFieldPosition">position <input id="akPosition" type="number" step="1" autocomplete="off" title="Grid slot — lower numbers show first. Doesn't affect any other kanji's number."></label>
+            </div>
+            <label class="modalField">components (compact) <textarea id="akComponents" placeholder="comma-separated" rows="1" autocomplete="off"></textarea></label>
+            <label class="modalField">meaning <textarea id="akMeaning" placeholder="e.g. life" rows="1" autocomplete="off"></textarea></label>
+            <label class="modalField">components (extensive) <textarea id="akComponentsExtensive" placeholder="comma-separated" rows="1" autocomplete="off"></textarea></label>
+          </div>
+          <label class="modalField">variants <textarea id="akVariants" placeholder="comma-separated" rows="1" autocomplete="off"></textarea></label>
+          <h3>Frequent words <small>(the 3 shown on the card face — pick which word fills each)</small></h3>
+          <div class="modalFreqWordPickers">
+            <label>slot 1
+              <select class="akFreqWordPicker" data-slot="0"></select>
+              <input class="akCardGloss" data-slot="0" placeholder="short gloss shown on the card" autocomplete="off">
+            </label>
+            <label>slot 2
+              <select class="akFreqWordPicker" data-slot="1"></select>
+              <input class="akCardGloss" data-slot="1" placeholder="short gloss shown on the card" autocomplete="off">
+            </label>
+            <label>slot 3
+              <select class="akFreqWordPicker" data-slot="2"></select>
+              <input class="akCardGloss" data-slot="2" placeholder="short gloss shown on the card" autocomplete="off">
+            </label>
+          </div>
+        </div>
+        <div class="modalTopCol">
+          <div class="modalFieldRow">
+            <label class="modalField">on'yomi <textarea id="akOn" placeholder="comma-separated" rows="1" autocomplete="off"></textarea></label>
+            <label class="modalField">on'yomi (extra) <textarea id="akOnAdd" placeholder="comma-separated" rows="1" autocomplete="off"></textarea></label>
+          </div>
+          <div class="modalFieldRow">
+            <label class="modalField">kun'yomi <textarea id="akKun" placeholder="comma-separated" rows="1" autocomplete="off"></textarea></label>
+            <label class="modalField">kun'yomi (extra) <textarea id="akKunAdd" placeholder="comma-separated" rows="1" autocomplete="off"></textarea></label>
+          </div>
+          <div class="modalField">kun meaning <div id="akKunMeanings" class="modalKunMeanings"></div></div>
+          <div class="modalField" id="akKunAddMeaningField" hidden>kun (extra) meaning <div id="akKunAddMeanings" class="modalKunMeanings"></div></div>
+          <label class="modalField">name readings (nanori) <textarea id="akName" placeholder="comma-separated" rows="1" autocomplete="off"></textarea></label>
+        </div>
+      </div>
+
+      <h3>All words <small>(every word this kanji has — not just the 3 above)</small></h3>
+      <div id="akAllWords" class="modalAllWords"></div>
+      <button type="button" id="akAddWordBtn">+ Add word</button>
+
+      <div class="modalActions">
+        <button type="button" id="addKanjiDeleteBtn" hidden>Delete kanji</button>
+        <button type="button" id="addKanjiSaveBtn">Save</button>
+        <button type="button" id="addKanjiCancelBtn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/pitch.js"></script>
+  <script src="js/ruler.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

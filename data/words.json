@@ -1,0 +1,709 @@
+{
+  "人": [
+    { "word": "外国人", "kana": "がいこくじん", "meaning": ["foreigner; foreign citizen; foreign national; alien; non-Japanese"], "pos": "noun", "jlpt": "N5", "pitch": 4 },
+    { "word": "犯人", "kana": "はんにん", "meaning": ["offender; criminal"], "pos": "noun", "jlpt": "N3", "pitch": 1 },
+    { "word": "人", "kana": "ひと", "meaning": ["man; person", "human being; mankind; people"], "pos": "noun", "jlpt": "N5", "pitch": 0 },
+    { "word": "恋人", "kana": "こいびと", "meaning": ["lover; sweetheart"], "pos": "noun", "jlpt": "N3", "pitch": 0 },
+    { "word": "一人暮らし", "kana": "ひとりぐらし", "meaning": ["a single life; a solitary life; living alone"], "pos": "noun", "jlpt": null, "pitch": 4 },
+    { "word": "助っ人", "kana": "すけっと", "meaning": ["helper; supporter; second; backer (colloquialism)"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "蔵人", "kana": "くろうど", "meaning": ["keeper of imperial archives", "worker skilled in the brewing of sake or soy sauce"], "pos": "noun", "jlpt": null, "pitch": 2, "pronunciationSplit": [{ "kana": "くろうど", "pct": 50, "cause": ["onbin"] }, { "kana": "くらびと", "pct": 30, "cause": ["rendaku"] }, { "kana": "くらんど", "pct": 20, "cause": ["onbin"] }] },
+    { "word": "何人も", "kana": "なんぴとも", "meaning": ["everyone; all; nobody (with negative verb)"], "pos": "noun", "jlpt": null, "pitch": null },
+    { "word": "大人", "kana": "おとな", "meaning": ["adult"], "pos": "noun, 'no' adjective", "jlpt": "N5", "pitch": 0, "pronunciationSplit": [{ "kana": "おとな", "pct": 80 }, { "kana": "だいにん", "pct": 20 }] }
+  ],
+  "一": [
+    { "word": "一緒", "kana": "いっしょ", "meaning": ["together", "at the same time"], "pos": "adverbial noun (fukushitekimeishi), noun, 'no' adjective", "jlpt": null, "pitch": 0 },
+    { "word": "一度", "kana": "いちど", "meaning": ["once; one time; on one occasion", "temporarily; for a moment"], "pos": "adverbial noun (fukushitekimeishi)", "jlpt": "N4", "pitch": 3, "pronunciationSplit": [{ "kana": "ひとたび", "pct": 50 }, { "kana": "いちど", "pct": 50 }] },
+    { "word": "同一", "kana": "どういつ", "meaning": ["identical; same; one and the same; equal", "fair; equal treatment; without discrimination"], "pos": "'no' adjective, 'na' adjective", "jlpt": "N3", "pitch": 0 },
+    { "word": "一人", "kana": "ひとり", "meaning": ["one person", "alone; unmarried; solitary"], "pos": "noun", "jlpt": "N5", "pitch": 2 },
+    { "word": "一にかかって", "kana": "ひとつにかかって", "meaning": ["depends entirely on; depends above all on"], "pos": "expression", "jlpt": null, "pitch": null, "pronunciationSplit": [{ "kana": "ひとつにかかって", "pct": 70 }, { "kana": "いちにかかって", "pct": 30 }] },
+    { "word": "一日", "kana": "ついたち", "meaning": ["first day of the month", "first ten days of the lunar month"], "pos": "noun", "jlpt": "N5", "pitch": 2, "pronunciationSplit": [{ "kana": "ついたち", "pct": 70 }, { "kana": "いっぴ", "pct": 30, "cause": ["onbin", "hanDakuonka"] }] }
+  ],
+  "日": [
+    { "word": "毎日", "kana": "まいにち", "meaning": ["every day"], "pos": "adverbial noun (fukushitekimeishi), noun (temporal) (jisoumeishi)", "jlpt": "N5", "pitch": 1 },
+    { "word": "日本", "kana": "にほん", "meaning": ["Japan"], "pos": "noun", "jlpt": "N3", "pitch": 2, "pronunciationSplit": [{ "kana": "にほん", "pct": 70 }, { "kana": "にっぽん", "pct": 30, "cause": ["onbin", "hanDakuonka"] }] },
+    { "word": "休日", "kana": "きゅうじつ", "meaning": ["holiday; day off"], "pos": "adverbial noun (fukushitekimeishi), noun", "jlpt": null, "pitch": 0 },
+    { "word": "日記", "kana": "にっき", "meaning": ["diary; journal"], "pos": "noun", "jlpt": "N4", "pitch": 0 },
+    { "word": "日", "kana": "ひ", "meaning": ["day; days", "sun; sunshine; sunlight"], "pos": "adverbial noun (fukushitekimeishi), noun (temporal) (jisoumeishi)", "jlpt": "N4", "pitch": 0 },
+    { "word": "金曜日", "kana": "きんようび", "meaning": ["Friday"], "pos": "adverbial noun (fukushitekimeishi), noun (temporal) (jisoumeishi)", "jlpt": "N5", "pitch": 3 },
+    { "word": "三日", "kana": "みっか", "meaning": ["the third day of the month", "three days"], "pos": "noun", "jlpt": "N5", "pitch": 0 },
+    { "word": "生年月日", "kana": "せいねんがっぴ", "meaning": ["birth date; date of birth; DOB"], "pos": "noun", "jlpt": "N2", "pitch": 5 },
+    { "word": "春日明神", "kana": "かすがみょうじん", "meaning": ["Kasuga Myoujin (the deity of Kasuga Shrine)"], "pos": "noun", "jlpt": null, "pitch": null },
+    { "word": "明日の事を言えば鬼が笑う", "kana": "あすのことをいえばおにがわらう", "meaning": ["Nobody knows the morrow; speak of tomorrow and the demons laugh"], "pos": "expression", "jlpt": null, "pitch": null },
+    { "word": "今日", "kana": "きょう", "meaning": ["today; this day", "these days; recently; nowadays"], "pos": "noun (temporal) (jisoumeishi)", "jlpt": "N5", "pitch": 1, "pronunciationSplit": [{ "kana": "きょう", "pct": 90 }, { "kana": "こんじつ", "pct": 10 }] }
+  ],
+  "大": [
+    { "word": "大学", "kana": "だいがく", "meaning": ["post-secondary education institution, incl. university, college, etc.", "former central university of Kyoto (established under the ritsuryo system for the training of government administrators)"], "pos": "noun", "jlpt": "N5", "pitch": 0 },
+    { "word": "大切", "kana": "たいせつ", "meaning": ["important; necessary; indispensable", "beloved; precious; dear; cherished; valuable"], "pos": "'na' adjective, noun", "jlpt": "N5", "pitch": 0, "pronunciationSplit": [{ "kana": "たいせつ", "pct": 80 }, { "kana": "たいせち", "pct": 20 }] },
+    { "word": "大きい", "kana": "おおきい", "meaning": ["big; large; great; loud"], "pos": "'i' adjective", "jlpt": "N5", "pitch": 3 },
+    { "word": "大和鞍", "kana": "わぐら", "meaning": ["Japanese-style ritual saddle"], "pos": "noun", "jlpt": null, "pitch": 4, "pronunciationSplit": [{ "kana": "わぐら", "pct": 60 }, { "kana": "やまとぐら", "pct": 40 }] },
+    { "word": "大輔", "kana": "だゆう", "meaning": ["vice-minister (Meiji period); undersecretary"], "pos": "noun", "jlpt": null, "pitch": null },
+    { "word": "大っきい", "kana": "おっきい", "meaning": ["big; large; great"], "pos": "'i' adjective", "jlpt": null, "pitch": 3 },
+    { "word": "大夫", "kana": "たゆう", "meaning": ["high-ranking noh actor", "head of a school of noh performance"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "大人", "kana": "おとな", "meaning": ["adult"], "pos": "noun, 'no' adjective", "jlpt": "N5", "pitch": 0, "pronunciationSplit": [{ "kana": "おとな", "pct": 80 }, { "kana": "だいにん", "pct": 20 }] }
+  ],
+  "年": [
+    { "word": "年間", "kana": "ねんかん", "meaning": ["years (period of)"], "pos": "counter", "jlpt": "N3", "pitch": 0 },
+    { "word": "毎年", "kana": "まいとし", "meaning": ["every year; yearly; annually"], "pos": "noun (temporal) (jisoumeishi)", "jlpt": "N5", "pitch": 0, "pronunciationSplit": [{ "kana": "まいとし", "pct": 70 }, { "kana": "まいねん", "pct": 30 }] },
+    { "word": "同い年", "kana": "おないどし", "meaning": ["the same age"], "pos": "noun, 'no' adjective", "jlpt": "N1", "pitch": 2 },
+    { "word": "今年", "kana": "ことし", "meaning": ["this year"], "pos": "adverbial noun (fukushitekimeishi), noun (temporal) (jisoumeishi)", "jlpt": "N5", "pitch": 1, "pronunciationSplit": [{ "kana": "ことし", "pct": 80 }, { "kana": "こんねん", "pct": 20 }] }
+  ],
+  "出": [
+    { "word": "外出", "kana": "がいしゅつ", "meaning": ["outing; trip; going out"], "pos": "noun, 'suru' verb", "jlpt": "N3", "pitch": 0, "pronunciationSplit": [{ "kana": "がいしゅつ", "pct": 70 }, { "kana": "そとで", "pct": 30 }] },
+    { "word": "出身", "kana": "しゅっしん", "meaning": ["person's origin (e.g. city, country, parentage, school)"], "pos": "noun, 'no' adjective", "jlpt": "N3", "pitch": 0 },
+    { "word": "出納", "kana": "すいとう", "meaning": ["receipts and expenditure (disbursements)"], "pos": "noun, 'suru' verb", "jlpt": null, "pitch": 0 },
+    { "word": "出す", "kana": "だす", "meaning": ["to take out; to get out", "to put out; to reveal; to show"], "pos": "'su' godan verb, transitive verb", "jlpt": "N5", "pitch": 1 },
+    { "word": "出る", "kana": "でる", "meaning": ["to leave; to exit; to go out; to come out; to get out", "to leave (on a journey); to depart; to start out; to set out"], "pos": "ichidan verb, intransitive verb", "jlpt": "N5", "pitch": 1 },
+    { "word": "出でる", "kana": "いでる", "meaning": ["to go; to come"], "pos": "ichidan verb", "jlpt": null, "pitch": 2 },
+    { "word": "出口戦略", "kana": "いでぐちせんりゃく", "meaning": ["exit strategy (military, marketing, economics, etc.)"], "pos": "noun", "jlpt": null, "pitch": 4 },
+    { "word": "貸出用", "kana": "かしだしよう", "meaning": ["circulation or lending (e.g. library books)"], "pos": "noun", "jlpt": null, "pitch": null }
+  ],
+  "本": [
+    { "word": "本", "kana": "ほん", "meaning": ["book; volume; script", "this; present"], "pos": "noun", "jlpt": "N5", "pitch": 1, "pronunciationSplit": [{ "kana": "ほん", "pct": 90 }, { "kana": "ぽん", "pct": 10, "cause": ["hanDakuonka", "counterSuffix"] }] },
+    { "word": "一本", "kana": "いっぽん", "meaning": ["one long cylindrical thing; one film, TV show, etc.; one goal, home run, etc.; one telephone call", "one version"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "単行本", "kana": "たんこうぼん", "meaning": ["special book; separate volume; book of lectures"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "本木", "kana": "もとき", "meaning": ["original stock"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "本当", "kana": "ほんとう", "meaning": ["really; true"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true }
+  ],
+  "中": [
+    { "word": "中学生", "kana": "ちゅうがくせい", "meaning": ["junior high school student; middle school pupil"], "pos": "noun", "jlpt": null, "pitch": 3 },
+    { "word": "年中", "kana": "ねんじゅう", "meaning": ["whole year; all year round; throughout the year", "always; all the time"], "pos": "noun", "jlpt": "N3", "pitch": 1, "pronunciationSplit": [{ "kana": "ねんじゅう", "pct": 50, "cause": ["rendaku"] }, { "kana": "ねんちゅう", "pct": 30 }, { "kana": "ねんぢゅう", "pct": 20, "cause": ["rendaku"] }] },
+    { "word": "中", "kana": "なか", "meaning": ["inside; in", "among; within"], "pos": "noun", "jlpt": "N5", "pitch": 1 },
+    { "word": "心の中", "kana": "こころのなか", "meaning": ["one's mind"], "pos": "expression, noun", "jlpt": null, "pitch": null },
+    { "word": "食中り", "kana": "しょくあたり", "meaning": ["food poisoning"], "pos": "noun", "jlpt": null, "pitch": 3 },
+    { "word": "中国", "kana": "ちゅうごく", "meaning": ["China"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true }
+  ],
+  "子": [
+    { "word": "男子", "kana": "だんし", "meaning": ["youth; young man"], "pos": "noun", "jlpt": "N3", "pitch": 1 },
+    { "word": "様子", "kana": "ようす", "meaning": ["state; state of affairs; situation; circumstances", "appearance; look; aspect"], "pos": "noun", "jlpt": "N3", "pitch": 0 },
+    { "word": "王子", "kana": "おうじ", "meaning": ["prince", "subordinate Kumano shrine"], "pos": "noun", "jlpt": "N3", "pitch": 1 },
+    { "word": "綾子", "kana": "りんず", "meaning": ["figured satin"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "楪子", "kana": "ちゃつ", "meaning": ["type of lacquerware plate"], "pos": "noun", "jlpt": null, "pitch": null },
+    { "word": "男の子", "kana": "おとこのこ", "meaning": ["boy; male child; baby boy"], "pos": "expression, noun", "jlpt": "N5", "pitch": 3 },
+    { "word": "子の日", "kana": "ねのひ", "meaning": ["Day of the Rat (esp. the first Day of the Rat in the New Year)", "collecting herbs and pulling out young pine trees by the roots"], "pos": "expression, noun", "jlpt": null, "pitch": null, "pronunciationSplit": [{ "kana": "ねのび", "pct": 50, "cause": ["rendaku"] }, { "kana": "ねのひ", "pct": 50 }] },
+    { "word": "双子", "kana": "ふたご", "meaning": ["twins; twin"], "pos": "noun", "jlpt": "N3", "pitch": 0, "pronunciationSplit": [{ "kana": "ふたご", "pct": 70 }, { "kana": "そうし", "pct": 30 }] },
+    { "word": "刷子", "kana": "はけ", "meaning": ["brush; commutator brush"], "pos": "noun", "jlpt": null, "pitch": null },
+    { "word": "息子", "kana": "むすこ", "meaning": ["son", "penis"], "pos": "noun", "jlpt": "N4", "pitch": 0 },
+    { "word": "子供", "kana": "こども", "meaning": ["child"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true }
+  ],
+  "見": [
+    { "word": "意見", "kana": "いけん", "meaning": ["opinion; view; comment"], "pos": "noun, 'suru' verb, 'no' adjective", "jlpt": "N4", "pitch": 1 },
+    { "word": "一見", "kana": "いちげん", "meaning": ["first visit to inn, restaurant, etc. without an introduction"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "見える", "kana": "みえる", "meaning": ["to be seen; to be visible; to be in sight", "to look; to seem; to appear"], "pos": "ichidan verb, intransitive verb", "jlpt": "N4", "pitch": 2 },
+    { "word": "見る", "kana": "みる", "meaning": ["to see"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true }
+  ],
+  "国": [
+    { "word": "外国", "kana": "がいこく", "meaning": ["foreign country"], "pos": "noun, 'no' adjective", "jlpt": "N5", "pitch": 0, "pronunciationSplit": [{ "kana": "がいこく", "pct": 90 }, { "kana": "そとぐに", "pct": 10, "cause": ["rendaku"] }] },
+    { "word": "国家", "kana": "こっか", "meaning": ["state; country; nation"], "pos": "noun", "jlpt": "N3", "pitch": 1 },
+    { "word": "中国", "kana": "ちゅうごく", "meaning": ["China", "Chugoku region of western Honshu (incl. Okayama, Hiroshima, Shimane, Tottori and Yamaguchi prefectures)"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "国", "kana": "くに", "meaning": ["country; state", "region"], "pos": "noun", "jlpt": "N5", "pitch": 0 },
+    { "word": "山国", "kana": "やまぐに", "meaning": ["mountainous country"], "pos": "noun", "jlpt": null, "pitch": 2 }
+  ],
+  "二": [
+    { "word": "二", "kana": "に", "meaning": ["two"], "pos": "numeric", "jlpt": "N5", "pitch": 1 },
+    { "word": "不二", "kana": "ふじ", "meaning": ["being two sides of the same coin; being the same (while appearing different)", "Very sincerely yours"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "二つ", "kana": "ふたつ", "meaning": ["two"], "pos": "numeric", "jlpt": "N5", "pitch": 3 },
+    { "word": "羽二重", "kana": "はぶたえ", "meaning": ["habutai; habutae; fine Japanese silk"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "真っ二つ", "kana": "まっぷたつ", "meaning": ["in two equal parts"], "pos": "noun", "jlpt": "N1", "pitch": 3 },
+    { "word": "二返事", "kana": "ふたつへんじ", "meaning": ["immediate reply; quick answer; ready agreement"], "pos": "noun", "jlpt": null, "pitch": 4 },
+    { "word": "十重二十重", "kana": "とえはたえ", "meaning": ["multitude"], "pos": "noun", "jlpt": null, "pitch": 4 },
+    { "word": "二日", "kana": "ふつか", "meaning": ["second day of the month", "two days"], "pos": "noun", "jlpt": "N5", "pitch": 0 },
+    { "word": "二月", "kana": "にがつ", "meaning": ["February"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "二人", "kana": "ふたり", "meaning": ["two people"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true }
+  ],
+  "十": [
+    { "word": "十", "kana": "じゅう", "meaning": ["ten"], "pos": "numeric", "jlpt": "N5", "pitch": 1, "pronunciationSplit": [{ "kana": "じゅう", "pct": 60 }, { "kana": "と", "pct": 30 }, { "kana": "とお", "pct": 10 }] },
+    { "word": "十分", "kana": "じっぷん", "meaning": ["10 minutes"], "pos": "noun", "jlpt": "N1", "pitch": null },
+    { "word": "十指", "kana": "じゅっし", "meaning": ["the ten fingers"], "pos": "noun", "jlpt": null, "pitch": 1, "pronunciationSplit": [{ "kana": "じゅっし", "pct": 90 }, { "kana": "じっし", "pct": 10 }] },
+    { "word": "十日", "kana": "とおか", "meaning": ["the tenth day of the month", "ten days"], "pos": "noun", "jlpt": "N5", "pitch": 0 },
+    { "word": "十重", "kana": "とえ", "meaning": ["tenfold"], "pos": "noun, 'no' adjective", "jlpt": null, "pitch": 1 },
+    { "word": "三十日", "kana": "みそか", "meaning": ["last day of the month"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "二十日", "kana": "はつか", "meaning": ["twentieth day of the month", "twenty days"], "pos": "noun", "jlpt": "N5", "pitch": 0 },
+    { "word": "十分", "kana": "じゅうぶん", "meaning": ["enough"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "十月", "kana": "じゅうがつ", "meaning": ["October"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true }
+  ],
+  "言": [
+    { "word": "言語", "kana": "げんご", "meaning": ["language"], "pos": "noun", "jlpt": "N3", "pitch": 1 },
+    { "word": "無言", "kana": "むごん", "meaning": ["silence"], "pos": "noun", "jlpt": "N1", "pitch": 0 },
+    { "word": "言葉", "kana": "ことば", "meaning": ["language; dialect", "word; words; phrase; term; expression; remark"], "pos": "noun", "jlpt": "N5", "pitch": 3 },
+    { "word": "言う", "kana": "いう", "meaning": ["to say; to utter; to declare", "to name; to call"], "pos": "'u' godan verb", "jlpt": "N5", "pitch": 0 },
+    { "word": "独り言", "kana": "ひとりごと", "meaning": ["soliloquy; monologue; speaking to oneself"], "pos": "noun", "jlpt": "N2", "pitch": 0 }
+  ],
+  "上": [
+    { "word": "上下", "kana": "じょうげ", "meaning": ["top and bottom; high and low; above and below; upper and lower ends; up and down", "going up and down; rising and falling; fluctuating"], "pos": "noun, 'suru' verb", "jlpt": "N2", "pitch": 1 },
+    { "word": "上人", "kana": "しょうにん", "meaning": ["holy priest; saint"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "上", "kana": "うえ", "meaning": ["above; up; over; elder (e.g. daughter)", "top; summit"], "pos": "noun, 'no' adjective, adverbial noun (fukushitekimeishi), noun (suffix)", "jlpt": "N5", "pitch": 0 },
+    { "word": "川上", "kana": "かわかみ", "meaning": ["upper reaches of a river; upstream"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "上がる", "kana": "あがる", "meaning": ["to rise; to go up; to come up; to ascend; to be raised", "to enter (esp. from outdoors); to come in; to go in"], "pos": "'ru' godan verb, intransitive verb", "jlpt": "N1", "pitch": 0 },
+    { "word": "上着", "kana": "うわぎ", "meaning": ["coat; tunic; jacket; outer garment"], "pos": "noun", "jlpt": "N5", "pitch": 0 }
+  ],
+  "分": [
+    { "word": "自分", "kana": "じぶん", "meaning": ["myself; yourself; oneself; himself; herself", "I; me"], "pos": "pronoun, 'no' adjective", "jlpt": "N5", "pitch": 0 },
+    { "word": "五分", "kana": "ごぶ", "meaning": ["half; 50%; tie; evenness", "5 parts; 5%"], "pos": "adverbial noun (fukushitekimeishi), noun", "jlpt": null, "pitch": null },
+    { "word": "分間", "kana": "ふんかん", "meaning": ["minutes (period of)"], "pos": "counter", "jlpt": null, "pitch": null },
+    { "word": "十分", "kana": "じっぷん", "meaning": ["10 minutes"], "pos": "noun", "jlpt": "N1", "pitch": null },
+    { "word": "分かる", "kana": "わかる", "meaning": ["to understand; to comprehend; to grasp; to see; to get; to follow", "to become clear; to be known; to be discovered; to be realized; to be realised; to be found out"], "pos": "'ru' godan verb, intransitive verb", "jlpt": "N5", "pitch": 2 },
+    { "word": "追分", "kana": "おいわけ", "meaning": ["forked road"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "大分県", "kana": "おおいたけん", "meaning": ["Oita Prefecture (Kyushu)"], "pos": "noun", "jlpt": null, "pitch": 4 }
+  ],
+  "生": [
+    { "word": "中学生", "kana": "ちゅうがくせい", "meaning": ["junior high school student; middle school pupil"], "pos": "noun", "jlpt": null, "pitch": 3 },
+    { "word": "一生", "kana": "いっしょう", "meaning": ["whole life; a lifetime; all through life; one existence; a generation; an age; the whole world; the era", "(the only, the greatest, etc.) of one's life"], "pos": "'no' adjective", "jlpt": "N3", "pitch": 0 },
+    { "word": "誕生", "kana": "たんじょう", "meaning": ["birth; creation; formation"], "pos": "noun, 'suru' verb", "jlpt": "N3", "pitch": 0 },
+    { "word": "平生", "kana": "へいぜい", "meaning": ["usual; ordinary"], "pos": "'no' adjective, adverbial noun (fukushitekimeishi), noun (temporal) (jisoumeishi)", "jlpt": null, "pitch": 0 },
+    { "word": "生", "kana": "なま", "meaning": ["raw; uncooked; fresh", "natural; as it is; unedited; unprocessed"], "pos": "'no' adjective, 'na' adjective, noun, noun (prefix)", "jlpt": "N3", "pitch": null },
+    { "word": "生地", "kana": "きじ", "meaning": ["cloth; fabric; material; texture", "one's true character"], "pos": "noun", "jlpt": "N3", "pitch": 1 }
+  ],
+  "手": [
+    { "word": "歌手", "kana": "かしゅ", "meaning": ["singer"], "pos": "noun", "jlpt": "N3", "pitch": 1 },
+    { "word": "上手", "kana": "じょうず", "meaning": ["skill; skillful; dexterity", "flattery"], "pos": "noun", "jlpt": "N5", "pitch": 3 },
+    { "word": "転手", "kana": "てんじゅ", "meaning": ["tuning peg (of a shamisen, etc.)"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "相手", "kana": "あいて", "meaning": ["companion; partner; company", "other party; addressee"], "pos": "noun", "jlpt": "N3", "pitch": 3 },
+    { "word": "後ろ手", "kana": "うしろで", "meaning": ["hands behind one's back; hands tied behind one's back", "behind (e.g. someone); rear; back"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "下手", "kana": "へた", "meaning": ["unskillful; poor; awkward", "imprudent; untactful"], "pos": "'na' adjective, noun", "jlpt": "N5", "pitch": 0 },
+    { "word": "下手", "kana": "したで", "meaning": ["humble position; inferior", "underarm grip on opponent's belt"], "pos": "noun", "jlpt": null, "pitch": 0 }
+  ],
+  "自": [
+    { "word": "自分", "kana": "じぶん", "meaning": ["myself; yourself; oneself; himself; herself", "I; me"], "pos": "pronoun, 'no' adjective", "jlpt": "N5", "pitch": 0 },
+    { "word": "自然", "kana": "しぜん", "meaning": ["nature", "natural; spontaneous"], "pos": "'na' adjective, noun", "jlpt": "N3", "pitch": 0 },
+    { "word": "自ら", "kana": "みずから", "meaning": ["oneself", "for one's self; personally"], "pos": "adverb", "jlpt": null, "pitch": 1 },
+    { "word": "自ずから明らか", "kana": "おのずからあきらか", "meaning": ["self-evident"], "pos": "'na' adjective", "jlpt": null, "pitch": null }
+  ],
+  "行": [
+    { "word": "旅行", "kana": "りょこう", "meaning": ["travel; trip"], "pos": "noun, 'suru' verb, 'no' adjective", "jlpt": "N5", "pitch": 0 },
+    { "word": "行事", "kana": "ぎょうじ", "meaning": ["event; function"], "pos": "noun", "jlpt": "N2", "pitch": 1 },
+    { "word": "行脚", "kana": "あんぎゃ", "meaning": ["pilgrimage; traveling on foot"], "pos": "noun, 'suru' verb", "jlpt": null, "pitch": 1 },
+    { "word": "柳行李", "kana": "やなぎごうり", "meaning": ["wicker trunk"], "pos": "noun", "jlpt": null, "pitch": 4 },
+    { "word": "行く", "kana": "いく", "meaning": ["to go; to move (in a direction or towards a specific location); to head (towards); to be transported (towards); to reach", "to proceed; to take place"], "pos": "irregular godan verb 'iku/yuku', intransitive verb", "jlpt": "N5", "pitch": 0 },
+    { "word": "行き", "kana": "ゆき", "meaning": ["bound for ...", "going (to)"], "pos": "noun", "jlpt": "N3", "pitch": 0 }
+  ],
+  "者": [
+    { "word": "医者", "kana": "いしゃ", "meaning": ["(medical) doctor; physician"], "pos": "noun", "jlpt": "N5", "pitch": 0 },
+    { "word": "患者", "kana": "かんじゃ", "meaning": ["(a) patient"], "pos": "noun", "jlpt": "N3", "pitch": 0 },
+    { "word": "若者", "kana": "わかもの", "meaning": ["young man; young woman; young people; youth; youngsters"], "pos": "noun, 'no' adjective", "jlpt": null, "pitch": 0 },
+    { "word": "猛者", "kana": "もさ", "meaning": ["man of valour; man of valor; stalwart; tough guy; warrior"], "pos": "noun", "jlpt": null, "pitch": 1 }
+  ],
+  "間": [
+    { "word": "時間", "kana": "じかん", "meaning": ["time", "hours (period of)"], "pos": "counter", "jlpt": "N5", "pitch": 0 },
+    { "word": "人間", "kana": "にんげん", "meaning": ["human being; person; man; mankind; humankind", "character (of a person)"], "pos": "noun", "jlpt": "N3", "pitch": 0 },
+    { "word": "世間", "kana": "せけん", "meaning": ["world; society"], "pos": "noun", "jlpt": "N3", "pitch": 1 },
+    { "word": "間違い", "kana": "まちがい", "meaning": ["mistake; error; blunder", "accident; mishap; trouble"], "pos": "noun", "jlpt": "N3", "pitch": 3 },
+    { "word": "日間", "kana": "ひあい", "meaning": ["number of days; period of days", "daily interest rate"], "pos": "noun", "jlpt": null, "pitch": null },
+    { "word": "間", "kana": "あいだ", "meaning": ["space (between); gap; interval; distance; stretch", "period of time (during, while); duration; interval"], "pos": "noun, adverb", "jlpt": "N4", "pitch": 0 },
+    { "word": "垣間", "kana": "かいま", "meaning": ["chink (e.g. in fence); gap (e.g. in hedge)"], "pos": "noun", "jlpt": null, "pitch": null }
+  ],
+  "事": [
+    { "word": "火事", "kana": "かじ", "meaning": ["fire; conflagration"], "pos": "noun", "jlpt": "N4", "pitch": 1 },
+    { "word": "好事家", "kana": "こうずか", "meaning": ["dilettante; person of fantastic taste"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "事柄", "kana": "ことがら", "meaning": ["matter; thing; affair; circumstance"], "pos": "noun", "jlpt": "N1", "pitch": 0 },
+    { "word": "仕事", "kana": "しごと", "meaning": ["work; job; business; occupation; employment; vocation; task", "work"], "pos": "noun, 'suru' verb, 'no' adjective", "jlpt": "N5", "pitch": 0 },
+    { "word": "事える", "kana": "つかえる", "meaning": ["to serve; to work for; to attend"], "pos": "ichidan verb, intransitive verb", "jlpt": "N1", "pitch": 3 }
+  ],
+  "思": [
+    { "word": "思想", "kana": "しそう", "meaning": ["thought; idea; ideology"], "pos": "noun", "jlpt": "N3", "pitch": 0 },
+    { "word": "引っ込み思案", "kana": "ひっこみじあん", "meaning": ["reserved; introverted; reticent; shy; withdrawn"], "pos": "'no' adjective, 'na' adjective", "jlpt": null, "pitch": 5 },
+    { "word": "思う", "kana": "おもう", "meaning": ["to think; to consider; to believe", "to think (of doing); to plan (to do)"], "pos": "'u' godan verb, transitive verb", "jlpt": "N4", "pitch": 2 },
+    { "word": "思しき", "kana": "おぼしき", "meaning": ["apparently; appears to be"], "pos": "pre-noun adjectival (rentaishi)", "jlpt": null, "pitch": null }
+  ],
+  "時": [
+    { "word": "時間", "kana": "じかん", "meaning": ["time", "hours (period of)"], "pos": "counter", "jlpt": "N5", "pitch": 0 },
+    { "word": "時々", "kana": "ときどき", "meaning": ["sometimes; at times"], "pos": "adverb, noun, 'no' adjective", "jlpt": "N5", "pitch": 0 },
+    { "word": "今時", "kana": "いまどき", "meaning": ["present day; today; recently; these days; nowadays; at this hour"], "pos": "adverbial noun (fukushitekimeishi), noun (temporal) (jisoumeishi)", "jlpt": null, "pitch": 0 },
+    { "word": "置き時計", "kana": "おきどけい", "meaning": ["clock to be placed on tables, bookshelves, etc. (as opposed to a watch)"], "pos": "noun", "jlpt": null, "pitch": 3 },
+    { "word": "目覚まし時計", "kana": "めざましとけい", "meaning": ["alarm clock"], "pos": "noun", "jlpt": null, "pitch": 5 },
+    { "word": "時計", "kana": "とけい", "meaning": ["watch; clock; timepiece"], "pos": "noun", "jlpt": "N5", "pitch": 0 }
+  ],
+  "気": [
+    { "word": "天気", "kana": "てんき", "meaning": ["weather; the elements", "fair weather; fine weather"], "pos": "noun", "jlpt": "N5", "pitch": 1 },
+    { "word": "気配", "kana": "けはい", "meaning": ["indication; sign; hint; presence; trend", "quotation (esp. stock market)"], "pos": "noun", "jlpt": "N2", "pitch": 2 },
+    { "word": "何気ない", "kana": "なにげない", "meaning": ["casual; unconcerned; nonchalant"], "pos": "'i' adjective", "jlpt": "N1", "pitch": 4 },
+    { "word": "気味", "kana": "ぎみ", "meaning": ["-like; -looking; -looked; tending to ..."], "pos": "noun (suffix)", "jlpt": null, "pitch": null },
+    { "word": "合気道", "kana": "あいきどう", "meaning": ["aikido"], "pos": "noun", "jlpt": null, "pitch": 3 },
+    { "word": "浮気", "kana": "うわき", "meaning": ["extramarital sex; affair; fooling around", "infidelity; wantonness; unfaithfulness; inconstancy; fickleness; caprice"], "pos": "noun, 'na' adjective, 'suru' verb", "jlpt": "N1", "pitch": 0 }
+  ],
+  "会": [
+    { "word": "会社", "kana": "かいしゃ", "meaning": ["company; corporation", "workplace"], "pos": "noun", "jlpt": "N5", "pitch": 0 },
+    { "word": "社会", "kana": "しゃかい", "meaning": ["society; public; community; the world", "social studies"], "pos": "noun", "jlpt": "N3", "pitch": 1 },
+    { "word": "大会", "kana": "たいかい", "meaning": ["convention; tournament; mass meeting; rally"], "pos": "noun, 'no' adjective", "jlpt": "N3", "pitch": 1 },
+    { "word": "教会", "kana": "きょうかい", "meaning": ["church"], "pos": "noun, 'no' adjective", "jlpt": "N4", "pitch": 0 },
+    { "word": "国会", "kana": "こっかい", "meaning": ["National Diet; parliament; congress"], "pos": "noun, 'no' adjective", "jlpt": null, "pitch": 0 },
+    { "word": "会う", "kana": "あう", "meaning": ["to meet; to encounter; to see", "to have an accident; to have a bad experience"], "pos": "'u' godan verb, intransitive verb", "jlpt": "N5", "pitch": 1 }
+  ],
+  "家": [
+    { "word": "家", "kana": "いえ", "meaning": ["house; residence; dwelling", "family; household"], "pos": "noun", "jlpt": "N5", "pitch": 2 },
+    { "word": "作家", "kana": "さっか", "meaning": ["author; writer; novelist; artist"], "pos": "noun", "jlpt": "N3", "pitch": 0 },
+    { "word": "家族", "kana": "かぞく", "meaning": ["family; members of a family"], "pos": "noun, 'no' adjective", "jlpt": "N5", "pitch": 1 },
+    { "word": "家事", "kana": "かじ", "meaning": ["housework; domestic chores", "family affairs; household matters"], "pos": "noun", "jlpt": "N4", "pitch": 1 },
+    { "word": "家庭", "kana": "かてい", "meaning": ["home; family; household"], "pos": "noun, 'no' adjective", "jlpt": "N3", "pitch": 0 },
+    { "word": "家賃", "kana": "やちん", "meaning": ["rent"], "pos": "noun", "jlpt": null, "pitch": 1 }
+  ],
+  "女": [
+    { "word": "女", "kana": "おんな", "meaning": ["female; woman; female sex", "female lover; girlfriend; mistress"], "pos": "noun, noun (prefix)", "jlpt": "N5", "pitch": 1 },
+    { "word": "女の子", "kana": "おんなのこ", "meaning": ["girl; daughter", "young woman"], "pos": "expression, noun", "jlpt": "N5", "pitch": 3 },
+    { "word": "彼女", "kana": "かのじょ", "meaning": ["she; her", "her"], "pos": "pronoun, 'no' adjective", "jlpt": "N5", "pitch": 1 },
+    { "word": "女性", "kana": "じょせい", "meaning": ["woman; female", "feminine gender"], "pos": "noun, 'no' adjective", "jlpt": "N4", "pitch": 0 },
+    { "word": "少女", "kana": "しょうじょ", "meaning": ["little girl; maiden; young lady"], "pos": "noun", "jlpt": null, "pitch": 1 }
+  ],
+  "三": [
+    { "word": "三", "kana": "さん", "meaning": ["three", "tri-"], "pos": "numeric", "jlpt": "N5", "pitch": 0 },
+    { "word": "三つ", "kana": "みっつ", "meaning": ["three"], "pos": "numeric", "jlpt": "N5", "pitch": 3 },
+    { "word": "三月", "kana": "さんがつ", "meaning": ["March"], "pos": "adverbial noun (fukushitekimeishi)", "jlpt": "N5", "pitch": 1 },
+    { "word": "三千", "kana": "さんぜん", "meaning": ["3000", "many"], "pos": "noun", "jlpt": null, "pitch": 3 },
+    { "word": "三日", "kana": "みっか", "meaning": ["the third day of the month", "three days"], "pos": "noun", "jlpt": "N5", "pitch": 0 }
+  ],
+  "前": [
+    { "word": "名前", "kana": "なまえ", "meaning": ["name; full name", "given name; first name"], "pos": "noun", "jlpt": "N5", "pitch": 0 },
+    { "word": "前", "kana": "まえ", "meaning": ["in front (of); before", "before; earlier; previously; prior; ago"], "pos": "noun, 'no' adjective, adverb", "jlpt": "N5", "pitch": 1 },
+    { "word": "午前", "kana": "ごぜん", "meaning": ["morning; a.m."], "pos": "adverbial noun (fukushitekimeishi), noun (temporal) (jisoumeishi)", "jlpt": "N5", "pitch": 1 },
+    { "word": "以前", "kana": "いぜん", "meaning": ["ago; since; before; previous"], "pos": "adverbial noun (fukushitekimeishi), noun (temporal) (jisoumeishi)", "jlpt": "N4", "pitch": 1 },
+    { "word": "午前中", "kana": "ごぜんちゅう", "meaning": ["this morning; in the morning; throughout the morning"], "pos": "noun", "jlpt": null, "pitch": 0 }
+  ],
+  "的": [
+    { "word": "目的", "kana": "もくてき", "meaning": ["purpose; goal; aim; objective; intention"], "pos": "noun", "jlpt": "N4", "pitch": 0 },
+    { "word": "文化的", "kana": "ぶんかてき", "meaning": ["cultural"], "pos": "'na' adjective", "jlpt": null, "pitch": 0 },
+    { "word": "目的地", "kana": "もくてきち", "meaning": ["place of destination"], "pos": "noun", "jlpt": null, "pitch": 4 },
+    { "word": "理想的", "kana": "りそうてき", "meaning": ["ideal"], "pos": "'na' adjective", "jlpt": null, "pitch": 0 },
+    { "word": "文学的", "kana": "ぶんがくてき", "meaning": ["literary"], "pos": "'na' adjective", "jlpt": null, "pitch": 0 },
+    { "word": "一般的", "kana": "いっぱんてき", "meaning": ["popular; typical; general"], "pos": "'na' adjective", "jlpt": "N3", "pitch": 0 }
+  ],
+  "方": [
+    { "word": "方法", "kana": "ほうほう", "meaning": ["method; process; manner; way; means; technique"], "pos": "noun", "jlpt": "N4", "pitch": 0 },
+    { "word": "一方", "kana": "いっぽう", "meaning": ["one (esp. of two); the other; one way; the other way; one direction; the other direction; one side; the other side; one party; the other party", "on the one hand; on the other hand"], "pos": "noun, conjunction", "jlpt": "N3", "pitch": 3 },
+    { "word": "仕方", "kana": "しかた", "meaning": ["way; method; means; resource; course"], "pos": "noun", "jlpt": "N4", "pitch": 0 },
+    { "word": "夕方", "kana": "ゆうがた", "meaning": ["evening; dusk"], "pos": "adverbial noun (fukushitekimeishi), noun (temporal) (jisoumeishi)", "jlpt": "N5", "pitch": 0 },
+    { "word": "彼方", "kana": "かなた", "meaning": ["faraway; far-off"], "pos": "'no' adjective", "jlpt": null, "pitch": null }
+  ],
+  "入": [
+    { "word": "入学", "kana": "にゅうがく", "meaning": ["entry to school or university; matriculation; enrolment (in university, etc.)"], "pos": "noun, 'suru' verb", "jlpt": "N4", "pitch": 0 },
+    { "word": "入れる", "kana": "いれる", "meaning": ["to put in; to let in; to take in; to bring in; to insert; to set (a jewel, etc.); to ink in (e.g. a tattoo)", "to admit; to accept; to employ; to hire"], "pos": "ichidan verb, transitive verb", "jlpt": "N5", "pitch": 0 },
+    { "word": "入る", "kana": "はいる", "meaning": ["to enter; to go into", "to break into"], "pos": "'ru' godan verb, intransitive verb", "jlpt": "N5", "pitch": 1 },
+    { "word": "入水", "kana": "じゅすい", "meaning": ["suicide by drowning; drowning oneself"], "pos": "noun, 'suru' verb", "jlpt": null, "pitch": 0 },
+    { "word": "借入金", "kana": "かりいれきん", "meaning": ["loan; loan payable; debt"], "pos": "noun", "jlpt": null, "pitch": 0 }
+  ],
+  "小": [
+    { "word": "小学校", "kana": "しょうがっこう", "meaning": ["primary school; elementary school; grade school"], "pos": "noun", "jlpt": "N5", "pitch": 3 },
+    { "word": "小屋", "kana": "こや", "meaning": ["hut; cabin; shed; (animal) pen", "small theatre (theater); temporary playhouse; circus tent; booth"], "pos": "noun", "jlpt": null, "pitch": 2 },
+    { "word": "小さい", "kana": "ちいさい", "meaning": ["small; little; tiny"], "pos": "'i' adjective", "jlpt": "N5", "pitch": 3 },
+    { "word": "小川", "kana": "おがわ", "meaning": ["streamlet; brook"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "小豆", "kana": "あずき", "meaning": ["adzuki bean (Vigna angularis)"], "pos": "noun", "jlpt": null, "pitch": 3 }
+  ],
+  "地": [
+    { "word": "地図", "kana": "ちず", "meaning": ["map"], "pos": "noun", "jlpt": "N5", "pitch": 1 },
+    { "word": "地震", "kana": "じしん", "meaning": ["earthquake"], "pos": "noun", "jlpt": "N4", "pitch": 0 },
+    { "word": "心地", "kana": "ここち", "meaning": ["feeling; sensation; mood", "sensation of doing (usu. after -masu stem of verb)"], "pos": "noun, suffix", "jlpt": null, "pitch": 0 },
+    { "word": "地方", "kana": "ちほう", "meaning": ["region; area; district"], "pos": "noun", "jlpt": "N3", "pitch": 0 },
+    { "word": "土地", "kana": "とち", "meaning": ["plot of land; lot; soil; land; ground"], "pos": "noun", "jlpt": "N3", "pitch": 0 }
+  ],
+  "合": [
+    { "word": "都合", "kana": "つごう", "meaning": ["circumstances; condition; convenience", "to arrange; to manage"], "pos": "adverb, noun, 'suru' verb", "jlpt": "N3", "pitch": 0 },
+    { "word": "合併", "kana": "がっぺい", "meaning": ["combination; union; amalgamation; consolidation; merger; coalition; fusion; annexation; affiliation; incorporation"], "pos": "noun, 'suru' verb", "jlpt": "N2", "pitch": 0 },
+    { "word": "合戦", "kana": "かっせん", "meaning": ["battle; fight; fighting; engagement; contest"], "pos": "noun, 'suru' verb", "jlpt": null, "pitch": 0 },
+    { "word": "間に合う", "kana": "まにあう", "meaning": ["to be in time for", "to serve; to suit; to meet (a need, etc.)"], "pos": "'u' godan verb", "jlpt": "N4", "pitch": 3 }
+  ],
+  "後": [
+    { "word": "後輩", "kana": "こうはい", "meaning": ["junior (at work, school, etc.); younger people; younger student"], "pos": "noun", "jlpt": "N3", "pitch": 0 },
+    { "word": "午後", "kana": "ごご", "meaning": ["afternoon; p.m."], "pos": "adverbial noun (fukushitekimeishi), noun (temporal) (jisoumeishi)", "jlpt": "N5", "pitch": 1 },
+    { "word": "後", "kana": "あと", "meaning": ["behind; rear", "after; later"], "pos": "noun, 'no' adjective", "jlpt": "N5", "pitch": 1 },
+    { "word": "後", "kana": "のち", "meaning": ["later; afterwards; since", "future"], "pos": "noun, 'no' adjective", "jlpt": "N2", "pitch": 2 },
+    { "word": "後ろ", "kana": "うしろ", "meaning": ["back; behind; rear"], "pos": "noun", "jlpt": "N5", "pitch": 0 },
+    { "word": "気後れ", "kana": "きおくれ", "meaning": ["nervous; timid"], "pos": "noun, 'suru' verb", "jlpt": null, "pitch": 0 }
+  ],
+  "目": [
+    { "word": "目的", "kana": "もくてき", "meaning": ["purpose; goal; aim; objective; intention"], "pos": "noun", "jlpt": "N3", "pitch": 0 },
+    { "word": "面目", "kana": "めんぼく", "meaning": ["face; honour; honor; reputation; prestige; dignity; credit", "appearance; look"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "目下", "kana": "もっか", "meaning": ["at present; now"], "pos": "adverbial noun (fukushitekimeishi), noun (temporal) (jisoumeishi)", "jlpt": null, "pitch": 1 },
+    { "word": "真面目", "kana": "まじめ", "meaning": ["diligent; serious; honest; sober; grave; earnest; steady"], "pos": "'na' adjective, noun", "jlpt": "N4", "pitch": 0 },
+    { "word": "目の当たり", "kana": "まのあたり", "meaning": ["just before one's eyes; in one's presence; personally"], "pos": "expression, adverb", "jlpt": null, "pitch": 3 }
+  ],
+  "長": [
+    { "word": "社長", "kana": "しゃちょう", "meaning": ["company president; manager; director"], "pos": "noun", "jlpt": "N4", "pitch": 0 },
+    { "word": "長", "kana": "おさ", "meaning": ["head; chief; leader; elder", "the greatest of all; the most excellent"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "長い", "kana": "ながい", "meaning": ["long (distance)", "long (time); lengthy"], "pos": "'i' adjective", "jlpt": "N5", "pitch": 2 },
+    { "word": "長", "kana": "たけ", "meaning": ["height; stature", "length (esp. of clothing)"], "pos": "noun", "jlpt": null, "pitch": 2 }
+  ],
+  "場": [
+    { "word": "場所", "kana": "ばしょ", "meaning": ["place; location; spot; position", "room; space"], "pos": "noun", "jlpt": "N5", "pitch": 0 },
+    { "word": "工場", "kana": "こうじょう", "meaning": ["factory; plant; mill; workshop"], "pos": "noun", "jlpt": "N3", "pitch": 3 },
+    { "word": "立場", "kana": "たちば", "meaning": ["standpoint; position; situation"], "pos": "noun", "jlpt": "N3", "pitch": 3 },
+    { "word": "現場", "kana": "げんば", "meaning": ["actual spot; scene; scene of the crime; site; location; setting", "shop floor; factory floor; (on) site"], "pos": "noun", "jlpt": "N2", "pitch": 0 },
+    { "word": "市場", "kana": "いちば", "meaning": ["(town) market", "(the) marketplace"], "pos": "noun", "jlpt": "N3", "pitch": 1 }
+  ],
+  "代": [
+    { "word": "時代", "kana": "じだい", "meaning": ["period; epoch; era; age", "the times; those days"], "pos": "noun (temporal) (jisoumeishi), noun", "jlpt": "N4", "pitch": 0 },
+    { "word": "交代", "kana": "こうたい", "meaning": ["alternation; change; relief; relay; shift; substitution (sports, etc.); taking turns"], "pos": "noun, 'suru' verb", "jlpt": "N2", "pitch": 0 },
+    { "word": "代わり", "kana": "かわり", "meaning": ["substitute; replacement; substituting; replacing", "stand-in; proxy; alternate; deputy; relief; successor"], "pos": "noun, 'no' adjective", "jlpt": "N3", "pitch": 0 },
+    { "word": "代々", "kana": "よよ", "meaning": ["for generations; hereditary; generation after generation"], "pos": "adverbial noun (fukushitekimeishi), noun (temporal) (jisoumeishi)", "jlpt": null, "pitch": 1 },
+    { "word": "苗代", "kana": "なわしろ", "meaning": ["rice nursery; bed for rice seedlings"], "pos": "noun", "jlpt": null, "pitch": 0 }
+  ],
+  "私": [
+    { "word": "私", "kana": "わたし", "meaning": ["I; me"], "pos": "pronoun, 'no' adjective", "jlpt": "N5", "pitch": 0 },
+    { "word": "私立", "kana": "しりつ", "meaning": ["private (establishment)"], "pos": "noun, 'suru' verb, 'no' adjective", "jlpt": "N3", "pitch": 1 },
+    { "word": "私たち", "kana": "わたしたち", "meaning": ["we; us"], "pos": "pronoun, 'no' adjective", "jlpt": "N5", "pitch": 3 },
+    { "word": "私自身", "kana": "わたしじしん", "meaning": ["myself"], "pos": "pronoun", "jlpt": null, "pitch": null },
+    { "word": "私する", "kana": "わたくしする", "meaning": ["to use (public property) as if it belonged to oneself; to misappropriate; to appropriate; to embezzle", "to act selfishly (archaic)"], "pos": "suru verb - special class, transitive verb", "jlpt": null, "pitch": 0 }
+  ],
+  "下": [
+    { "word": "以下", "kana": "いか", "meaning": ["not exceeding; and downward; ... and below", "below (e.g. standard); under (e.g. a level)"], "pos": "noun", "jlpt": "N3", "pitch": 1 },
+    { "word": "上下", "kana": "じょうげ", "meaning": ["top and bottom; high and low; above and below; upper and lower ends; up and down", "going up and down; rising and falling; fluctuating"], "pos": "noun, 'suru' verb", "jlpt": "N2", "pitch": 1 },
+    { "word": "靴下", "kana": "くつした", "meaning": ["socks; sock; stockings; stocking"], "pos": "noun", "jlpt": "N5", "pitch": 2 },
+    { "word": "下", "kana": "しも", "meaning": ["lower reaches (of a river)", "bottom; lower part"], "pos": "noun", "jlpt": null, "pitch": 2 },
+    { "word": "下がる", "kana": "さがる", "meaning": ["to come down; to go down; to fall; to drop; to sink; to get lower", "to hang; to dangle"], "pos": "'ru' godan verb, intransitive verb", "jlpt": "N4", "pitch": 2 },
+    { "word": "下ろす", "kana": "おろす", "meaning": ["to take down (e.g. flag); to launch (e.g. boat); to drop; to lower (e.g. ladder); to let (a person) off; to unload; to discharge"], "pos": "'su' godan verb, transitive verb", "jlpt": "N3", "pitch": 2 }
+  ],
+  "立": [
+    { "word": "成立", "kana": "せいりつ", "meaning": ["coming into existence; arrangement; establishment; conclusion; completion", "to come into existence; to be true; to hold true"], "pos": "noun, 'suru' verb", "jlpt": "N2", "pitch": 0 },
+    { "word": "立派", "kana": "りっぱ", "meaning": ["splendid; fine; handsome; elegant; imposing; prominent; praiseworthy; creditable; worthy"], "pos": "'na' adjective", "jlpt": "N4", "pitch": 0 },
+    { "word": "立つ", "kana": "たつ", "meaning": ["to stand; to rise; to stand up; to find oneself (e.g. in a difficult position)"], "pos": "'tsu' godan verb, intransitive verb", "jlpt": "N4", "pitch": 1 },
+    { "word": "目立つ", "kana": "めだつ", "meaning": ["to be conspicuous; to stand out"], "pos": "'tsu' godan verb, intransitive verb", "jlpt": "N2", "pitch": 2 },
+    { "word": "立場", "kana": "たちば", "meaning": ["standpoint; position; situation"], "pos": "noun", "jlpt": "N3", "pitch": 3 }
+  ],
+  "部": [
+    { "word": "全部", "kana": "ぜんぶ", "meaning": ["all; entire; whole; altogether"], "pos": "adverbial noun (fukushitekimeishi), noun (temporal), 'no' adjective", "jlpt": "N4", "pitch": 1 },
+    { "word": "部分", "kana": "ぶぶん", "meaning": ["part; portion; segment"], "pos": "noun", "jlpt": "N3", "pitch": 1 },
+    { "word": "部屋", "kana": "へや", "meaning": ["room; chamber", "apartment; flat; pad"], "pos": "noun", "jlpt": "N5", "pitch": 2 },
+    { "word": "部", "kana": "べ", "meaning": ["hereditary occupational group (Yamato period)"], "pos": "noun", "jlpt": null, "pitch": null }
+  ],
+  "学": [
+    { "word": "大学", "kana": "だいがく", "meaning": ["post-secondary education institution, incl. university, college, etc."], "pos": "noun", "jlpt": "N5", "pitch": 0 },
+    { "word": "小学校", "kana": "しょうがっこう", "meaning": ["primary school; elementary school; grade school"], "pos": "noun", "jlpt": "N5", "pitch": 3 },
+    { "word": "学ぶ", "kana": "まなぶ", "meaning": ["to study (in depth); to learn; to take lessons in"], "pos": "'bu' godan verb, transitive verb", "jlpt": "N4", "pitch": 0 },
+    { "word": "学生", "kana": "がくせい", "meaning": ["student (esp. a university student)"], "pos": "noun", "jlpt": "N5", "pitch": 0 }
+  ],
+  "物": [
+    { "word": "動物", "kana": "どうぶつ", "meaning": ["animal"], "pos": "noun", "jlpt": "N4", "pitch": 0 },
+    { "word": "物質", "kana": "ぶっしつ", "meaning": ["material; substance; matter"], "pos": "noun", "jlpt": "N2", "pitch": 0 },
+    { "word": "荷物", "kana": "にもつ", "meaning": ["luggage; baggage; package; burden"], "pos": "noun", "jlpt": "N4", "pitch": 1 },
+    { "word": "着物", "kana": "きもの", "meaning": ["clothing; clothes; kimono"], "pos": "noun", "jlpt": "N4", "pitch": 0 },
+    { "word": "果物", "kana": "くだもの", "meaning": ["fruit"], "pos": "noun", "jlpt": "N5", "pitch": 2 }
+  ],
+  "月": [
+    { "word": "月曜日", "kana": "げつようび", "meaning": ["Monday"], "pos": "adverbial noun (fukushitekimeishi), noun (temporal)", "jlpt": "N5", "pitch": 3 },
+    { "word": "月間", "kana": "げっかん", "meaning": ["month-long period; (during) month"], "pos": "noun, noun or verb acting prenominally", "jlpt": null, "pitch": 0 },
+    { "word": "正月", "kana": "しょうがつ", "meaning": ["New Year; January"], "pos": "noun", "jlpt": "N4", "pitch": 4 },
+    { "word": "毎月", "kana": "まいつき", "meaning": ["every month; each month; monthly"], "pos": "adverbial noun (fukushitekimeishi), noun", "jlpt": "N4", "pitch": 0 },
+    { "word": "三日月", "kana": "みかづき", "meaning": ["new moon; crescent moon"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "月", "kana": "つき", "meaning": ["month", "moon"], "pos": "noun", "jlpt": "N5", "pitch": 2 }
+  ],
+  "田": [
+    { "word": "水田", "kana": "すいでん", "meaning": ["(water-filled) paddy field"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "田", "kana": "た", "meaning": ["rice field"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "半田", "kana": "はんだ", "meaning": ["solder; pewter"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "田舎", "kana": "いなか", "meaning": ["rural area; countryside; the sticks; hometown"], "pos": "noun, 'no' adjective", "jlpt": "N4", "pitch": 0 }
+  ],
+  "何": [
+    { "word": "幾何", "kana": "きか", "meaning": ["geometry"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "何百", "kana": "なんびゃく", "meaning": ["hundreds"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "何", "kana": "なに", "meaning": ["what", "how many (prefix; followed by a counter; this meaning restricted to reading なん)"], "pos": "pronoun, 'no' adjective", "jlpt": "N5", "pitch": 1 },
+    { "word": "何か", "kana": "なにか", "meaning": ["something; some; anything; any"], "pos": "pronoun", "jlpt": "N5", "pitch": 1 },
+    { "word": "何故", "kana": "なぜ", "meaning": ["why; how"], "pos": "adverb", "jlpt": "N4", "pitch": 1 }
+  ],
+  "来": [
+    { "word": "来年", "kana": "らいねん", "meaning": ["next year"], "pos": "adverbial noun (fukushitekimeishi), noun (temporal) (jisoumeishi)", "jlpt": "N5", "pitch": 0 },
+    { "word": "出来事", "kana": "できごと", "meaning": ["event; incident; occurrence; happening"], "pos": "noun", "jlpt": "N3", "pitch": 2 },
+    { "word": "来る", "kana": "くる", "meaning": ["to come; to come along", "to arrive; to reach"], "pos": "kuru verb - special class, intransitive verb", "jlpt": "N5", "pitch": 1 },
+    { "word": "未来", "kana": "みらい", "meaning": ["future"], "pos": "noun, 'no' adjective", "jlpt": "N4", "pitch": 1 },
+    { "word": "出来る", "kana": "できる", "meaning": ["to be able (in a position) to do; to be up to the task", "to be ready; to be completed"], "pos": "ichidan verb, intransitive verb", "jlpt": "N5", "pitch": 2 }
+  ],
+  "彼": [
+    { "word": "彼", "kana": "かれ", "meaning": ["he; him", "boyfriend"], "pos": "pronoun", "jlpt": "N5", "pitch": 1 },
+    { "word": "彼女", "kana": "かのじょ", "meaning": ["she; her", "girlfriend"], "pos": "pronoun, 'no' adjective", "jlpt": "N5", "pitch": 1 },
+    { "word": "彼氏", "kana": "かれし", "meaning": ["boyfriend", "he; him"], "pos": "noun", "jlpt": "N4", "pitch": 1 },
+    { "word": "彼岸", "kana": "ひがん", "meaning": ["equinoctial week (when Buddhist services are held)", "the other side of the river of death (i.e. Paradise)"], "pos": "noun", "jlpt": null, "pitch": 0 }
+  ],
+  "話": [
+    { "word": "電話", "kana": "でんわ", "meaning": ["telephone; phone call"], "pos": "noun, 'suru' verb", "jlpt": "N5", "pitch": 0 },
+    { "word": "話", "kana": "はなし", "meaning": ["talk; speech; chat; story; conversation"], "pos": "noun", "jlpt": "N4", "pitch": 3 },
+    { "word": "話す", "kana": "はなす", "meaning": ["to talk; to speak"], "pos": "'su' godan verb, transitive verb", "jlpt": "N5", "pitch": 2 },
+    { "word": "昔話", "kana": "むかしばなし", "meaning": ["old tale; folklore; folk tale"], "pos": "noun", "jlpt": null, "pitch": 4 },
+    { "word": "会話", "kana": "かいわ", "meaning": ["conversation"], "pos": "noun, 'suru' verb", "jlpt": "N4", "pitch": 0 }
+  ],
+  "体": [
+    { "word": "体", "kana": "からだ", "meaning": ["body; physique; constitution", "torso; trunk"], "pos": "noun", "jlpt": "N5", "pitch": 0 },
+    { "word": "一体", "kana": "いったい", "meaning": ["in the first place; in the world; on earth", "one object; one body; unity"], "pos": "adverb", "jlpt": "N2", "pitch": 0 },
+    { "word": "体裁", "kana": "ていさい", "meaning": ["outward appearance; form", "propriety"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "体育", "kana": "たいいく", "meaning": ["physical education"], "pos": "noun", "jlpt": "N4", "pitch": 1 }
+  ],
+  "動": [
+    { "word": "動物", "kana": "どうぶつ", "meaning": ["animal"], "pos": "noun", "jlpt": "N4", "pitch": 0 },
+    { "word": "動き", "kana": "うごき", "meaning": ["movement; move; activity; trend"], "pos": "noun", "jlpt": "N3", "pitch": 3 },
+    { "word": "動く", "kana": "うごく", "meaning": ["to move; to stir; to shift; to shake; to swing"], "pos": "'ku' godan verb, intransitive verb", "jlpt": "N4", "pitch": 2 },
+    { "word": "運動", "kana": "うんどう", "meaning": ["exercise; sports", "movement; campaign"], "pos": "noun, 'suru' verb", "jlpt": "N3", "pitch": 0 }
+  ],
+  "社": [
+    { "word": "会社", "kana": "かいしゃ", "meaning": ["company; corporation", "workplace"], "pos": "noun", "jlpt": "N5", "pitch": 0 },
+    { "word": "神社", "kana": "じんじゃ", "meaning": ["Shinto shrine"], "pos": "noun", "jlpt": "N4", "pitch": 1 },
+    { "word": "社", "kana": "やしろ", "meaning": ["shrine (usually Shinto)"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "本社", "kana": "ほんしゃ", "meaning": ["head office; main office"], "pos": "noun", "jlpt": "N3", "pitch": 1 },
+    { "word": "出社", "kana": "しゅっしゃ", "meaning": ["attendance at office; going to the office"], "pos": "noun, 'suru' verb", "jlpt": null, "pitch": 0 }
+  ],
+  "知": [
+    { "word": "知識", "kana": "ちしき", "meaning": ["knowledge; information"], "pos": "noun", "jlpt": "N3", "pitch": 1 },
+    { "word": "知る", "kana": "しる", "meaning": ["to know; to be aware (of); to be conscious (of); to learn (of); to find out; to discover", "to sense; to feel; to notice; to realize"], "pos": "'ru' godan verb, transitive verb", "jlpt": "N4", "pitch": 0 },
+    { "word": "通知", "kana": "つうち", "meaning": ["notification; notice; report"], "pos": "noun, 'suru' verb", "jlpt": "N3", "pitch": 1 },
+    { "word": "知人", "kana": "ちじん", "meaning": ["acquaintance"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "承知", "kana": "しょうち", "meaning": ["consent; assent; acquiescence", "knowledge; awareness; information"], "pos": "noun, 'suru' verb", "jlpt": "N2", "pitch": 1 }
+  ],
+  "理": [
+    { "word": "料理", "kana": "りょうり", "meaning": ["cooking; cookery; cuisine", "dealing with something; handling; administration; management"], "pos": "noun, 'suru' verb", "jlpt": "N5", "pitch": 1 },
+    { "word": "理由", "kana": "りゆう", "meaning": ["reason; pretext; motive"], "pos": "noun", "jlpt": "N4", "pitch": 0 },
+    { "word": "理解", "kana": "りかい", "meaning": ["understanding; comprehension"], "pos": "noun, 'suru' verb", "jlpt": "N4", "pitch": 1 },
+    { "word": "無理", "kana": "むり", "meaning": ["unreasonable; unnatural; impossible", "forcibly; compulsorily; by force"], "pos": "'na' adjective, noun, 'suru' verb", "jlpt": "N4", "pitch": 1 },
+    { "word": "理", "kana": "ことわり", "meaning": ["reason; truth; way of things; justice"], "pos": "noun", "jlpt": null, "pitch": null }
+  ],
+  "山": [
+    { "word": "火山", "kana": "かざん", "meaning": ["volcano"], "pos": "noun, 'no' adjective", "jlpt": "N3", "pitch": 1 },
+    { "word": "山", "kana": "やま", "meaning": ["mountain; hill", "mine (e.g. coal mine)"], "pos": "noun, counter", "jlpt": "N5", "pitch": 2 },
+    { "word": "山間", "kana": "さんかん", "meaning": ["among the mountains"], "pos": "noun, 'no' adjective", "jlpt": null, "pitch": 0 },
+    { "word": "登山", "kana": "とざん", "meaning": ["mountain climbing"], "pos": "noun, 'suru' verb", "jlpt": "N3", "pitch": 0 }
+  ],
+  "内": [
+    { "word": "内容", "kana": "ないよう", "meaning": ["subject; contents; matter; substance; detail; import"], "pos": "noun", "jlpt": "N4", "pitch": 0 },
+    { "word": "境内", "kana": "けいだい", "meaning": ["grounds (esp. of shrines and temples); compound; churchyard; precincts"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "内側", "kana": "うちがわ", "meaning": ["inside; interior; inner part"], "pos": "noun, 'no' adjective", "jlpt": "N3", "pitch": 0 },
+    { "word": "案内", "kana": "あんない", "meaning": ["guidance; leading; conducting", "information; guide; leaflet; pamphlet"], "pos": "noun, 'suru' verb", "jlpt": "N4", "pitch": 0 },
+    { "word": "国内", "kana": "こくない", "meaning": ["domestic; internal (to a country); within the country"], "pos": "noun, 'no' adjective", "jlpt": "N3", "pitch": 0 }
+  ],
+  "同": [
+    { "word": "同時", "kana": "どうじ", "meaning": ["simultaneous; concurrent; same time; synchronous; together"], "pos": "noun, 'no' adjective", "jlpt": "N3", "pitch": 0 },
+    { "word": "同", "kana": "おなじ", "meaning": ["same; identical; equal; uniform; equivalent; similar; common (origin); changeless; alike", "(usu. part of a 'nara' conditional) anyway; anyhow; in either case"], "pos": "noun or verb acting prenominally, noun", "jlpt": "N5", "pitch": 0 },
+    { "word": "共同", "kana": "きょうどう", "meaning": ["cooperation; collaboration; partnership; joint (case, etc.)"], "pos": "noun, 'no' adjective, 'suru' verb", "jlpt": "N2", "pitch": 0 },
+    { "word": "同意", "kana": "どうい", "meaning": ["agreement; consent; approval", "same opinion; same meaning"], "pos": "noun, 'suru' verb", "jlpt": "N2", "pitch": 1 }
+  ],
+  "心": [
+    { "word": "心配", "kana": "しんぱい", "meaning": ["worry; concern; anxiety", "care; help; aid; assistance"], "pos": "'na' adjective, noun, 'suru' verb", "jlpt": "N3", "pitch": 0 },
+    { "word": "肝心", "kana": "かんじん", "meaning": ["essential; fundamental; crucial; vital; main"], "pos": "'na' adjective, noun, 'no' adjective", "jlpt": "N2", "pitch": 0 },
+    { "word": "心", "kana": "こころ", "meaning": ["heart; mind; spirit"], "pos": "noun", "jlpt": "N4", "pitch": 3 },
+    { "word": "真心", "kana": "まごころ", "meaning": ["sincerity; devotion"], "pos": "noun", "jlpt": null, "pitch": 2 },
+    { "word": "心地", "kana": "ここち", "meaning": ["feeling; sensation; mood", "sensation of doing (usu. after -masu stem of verb)"], "pos": "noun, suffix", "jlpt": null, "pitch": 0 },
+    { "word": "関心", "kana": "かんしん", "meaning": ["concern; interest"], "pos": "noun", "jlpt": "N3", "pitch": null }
+  ],
+  "発": [
+    { "word": "発音", "kana": "はつおん", "meaning": ["pronunciation"], "pos": "noun, 'suru' verb, 'no' adjective", "jlpt": "N4", "pitch": 0 },
+    { "word": "発表", "kana": "はっぴょう", "meaning": ["announcement; publication; presenting; statement; communique; making known"], "pos": "noun, 'suru' verb", "jlpt": "N3", "pitch": 0 },
+    { "word": "出発", "kana": "しゅっぱつ", "meaning": ["departure"], "pos": "noun, 'suru' verb", "jlpt": "N4", "pitch": 0 },
+    { "word": "発足", "kana": "ほっそく", "meaning": ["starting; inauguration; launch; founding; establishment; start-up"], "pos": "noun, 'suru' verb", "jlpt": null, "pitch": 0 }
+  ],
+  "高": [
+    { "word": "高校", "kana": "こうこう", "meaning": ["senior high school; high school"], "pos": "noun", "jlpt": "N4", "pitch": 0 },
+    { "word": "高い", "kana": "たかい", "meaning": ["high; tall", "expensive"], "pos": "'i' adjective", "jlpt": "N5", "pitch": 2 },
+    { "word": "円高", "kana": "えんだか", "meaning": ["appreciation of the yen; strong yen; strengthening of the yen; high-valued yen"], "pos": "noun, 'suru' verb", "jlpt": null, "pitch": 0 },
+    { "word": "最高", "kana": "さいこう", "meaning": ["highest; supreme; best", "wonderful; awesome (colloquialism)"], "pos": "'na' adjective, noun, 'no' adjective", "jlpt": "N3", "pitch": 0 }
+  ],
+  "実": [
+    { "word": "実際", "kana": "じっさい", "meaning": ["practicality; practical", "reality; actuality; actual conditions"], "pos": "'no' adjective, adverb, noun", "jlpt": "N3", "pitch": 0 },
+    { "word": "実は", "kana": "じつは", "meaning": ["as a matter of fact; by the way; to tell you the truth; to be honest; frankly"], "pos": "expression, adverb", "jlpt": "N4", "pitch": 2 },
+    { "word": "実る", "kana": "みのる", "meaning": ["to bear fruit; to ripen"], "pos": "'ru' godan verb, intransitive verb", "jlpt": "N3", "pitch": 2 },
+    { "word": "充実", "kana": "じゅうじつ", "meaning": ["fulfillment; enrichment; completeness"], "pos": "noun, 'suru' verb", "jlpt": "N2", "pitch": 0 }
+  ],
+  "作": [
+    { "word": "作品", "kana": "さくひん", "meaning": ["work (e.g. book, film, composition, etc.); opus; performance; production"], "pos": "noun", "jlpt": "N4", "pitch": 0 },
+    { "word": "作業", "kana": "さぎょう", "meaning": ["work; operation; manufacturing; fatigue duty"], "pos": "noun, 'suru' verb", "jlpt": "N3", "pitch": 1 },
+    { "word": "作家", "kana": "さっか", "meaning": ["author; writer; novelist; artist"], "pos": "noun", "jlpt": "N3", "pitch": 0 },
+    { "word": "作る", "kana": "つくる", "meaning": ["to make; to produce; to manufacture; to build; to construct"], "pos": "'ru' godan verb, transitive verb", "jlpt": "N5", "pitch": 2 }
+  ],
+  "当": [
+    { "word": "本当", "kana": "ほんとう", "meaning": ["truth; reality; actuality; fact"], "pos": "'no' adjective, 'na' adjective, adverb, noun", "jlpt": "N4", "pitch": 0 },
+    { "word": "当たる", "kana": "あたる", "meaning": ["to be hit; to strike", "to touch; to be in contact; to be affixed"], "pos": "'ru' godan verb, intransitive verb", "jlpt": "N3", "pitch": 0 },
+    { "word": "手当", "kana": "てあて", "meaning": ["salary; pay; compensation; allowance (e.g. housing allowance); benefit; bonus"], "pos": "noun, 'suru' verb", "jlpt": "N2", "pitch": 1 },
+    { "word": "相当", "kana": "そうとう", "meaning": ["considerable; substantial; appropriate; worthy of; proportionate to"], "pos": "'na' adjective, noun, 'suru' verb", "jlpt": "N3", "pitch": 0 }
+  ],
+  "新": [
+    { "word": "新聞", "kana": "しんぶん", "meaning": ["newspaper"], "pos": "noun, 'no' adjective", "jlpt": "N5", "pitch": 0 },
+    { "word": "新しい", "kana": "あたらしい", "meaning": ["new; novel; fresh; recent; latest; up-to-date; modern"], "pos": "'i' adjective", "jlpt": "N5", "pitch": 4 },
+    { "word": "新た", "kana": "あらた", "meaning": ["new; fresh; novel"], "pos": "'na' adjective, noun", "jlpt": "N3", "pitch": 1 },
+    { "word": "最新", "kana": "さいしん", "meaning": ["latest; newest"], "pos": "noun, 'no' adjective", "jlpt": "N2", "pitch": 0 }
+  ],
+  "世": [
+    { "word": "世界", "kana": "せかい", "meaning": ["the world; society; the universe", "sphere; circle; world"], "pos": "noun", "jlpt": "N4", "pitch": 1 },
+    { "word": "世紀", "kana": "せいき", "meaning": ["century; era"], "pos": "noun", "jlpt": "N3", "pitch": 1 },
+    { "word": "三世", "kana": "さんぜ", "meaning": ["past, present and future existences (Buddhist term)"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "世の中", "kana": "よのなか", "meaning": ["society; the world; the times"], "pos": "expression, noun", "jlpt": "N3", "pitch": 2 }
+  ],
+  "今": [
+    { "word": "今月", "kana": "こんげつ", "meaning": ["this month"], "pos": "adverbial noun (fukushitekimeishi), noun (temporal) (jisoumeishi)", "jlpt": "N5", "pitch": 0 },
+    { "word": "今上", "kana": "きんじょう", "meaning": ["the reigning emperor"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "今", "kana": "いま", "meaning": ["now; the present time; just now; soon; immediately; (one) more"], "pos": "adverbial noun (fukushitekimeishi), noun", "jlpt": "N5", "pitch": 1 },
+    { "word": "今日", "kana": "きょう", "meaning": ["today; this day", "these days; recently"], "pos": "noun (temporal) (jisoumeishi)", "jlpt": "N5", "pitch": 1 }
+  ],
+  "書": [
+    { "word": "図書館", "kana": "としょかん", "meaning": ["library"], "pos": "noun", "jlpt": "N5", "pitch": 2 },
+    { "word": "古文書", "kana": "こもんじょ", "meaning": ["ancient document; archives; ancient manuscript; paleograph"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "書く", "kana": "かく", "meaning": ["to write; to compose; to pen", "to draw; to paint"], "pos": "'ku' godan verb, transitive verb", "jlpt": "N5", "pitch": 1 },
+    { "word": "下書き", "kana": "したがき", "meaning": ["rough copy; draft; draught"], "pos": "noun, 'suru' verb", "jlpt": "N3", "pitch": 0 }
+  ],
+  "度": [
+    { "word": "今度", "kana": "こんど", "meaning": ["this time; now", "next time; another time; shortly; soon"], "pos": "adverbial noun (fukushitekimeishi), noun (temporal) (jisoumeishi)", "jlpt": "N4", "pitch": 1 },
+    { "word": "支度", "kana": "したく", "meaning": ["preparation; arrangements"], "pos": "noun, 'suru' verb", "jlpt": "N3", "pitch": 0 },
+    { "word": "法度", "kana": "はっと", "meaning": ["law; ban; prohibition; ordinance"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "度々", "kana": "たびたび", "meaning": ["often; again and again; over and over again; repeatedly; frequently"], "pos": "adverb", "jlpt": "N2", "pitch": 0 }
+  ],
+  "明": [
+    { "word": "説明", "kana": "せつめい", "meaning": ["explanation; exposition"], "pos": "noun, 'suru' verb, 'no' adjective", "jlpt": "N4", "pitch": 0 },
+    { "word": "明日", "kana": "あした", "meaning": ["tomorrow", "near future"], "pos": "noun (temporal) (jisoumeishi)", "jlpt": "N5", "pitch": 3 },
+    { "word": "明るい", "kana": "あかるい", "meaning": ["bright; colourful", "cheerful"], "pos": "'i' adjective", "jlpt": "N5", "pitch": 0 },
+    { "word": "明らか", "kana": "あきらか", "meaning": ["obvious; evident; clear; plain"], "pos": "'na' adjective, adverb, noun", "jlpt": "N3", "pitch": 2 }
+  ],
+  "五": [
+    { "word": "五", "kana": "ご", "meaning": ["five (伍 is used in legal documents)"], "pos": "numeric", "jlpt": "N5", "pitch": 1 },
+    { "word": "五つ", "kana": "いつつ", "meaning": ["five"], "pos": "numeric", "jlpt": "N5", "pitch": 2 },
+    { "word": "五十路", "kana": "いそじ", "meaning": ["age fifty"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "五月", "kana": "ごがつ", "meaning": ["May"], "pos": "adverbial noun (fukushitekimeishi)", "jlpt": "N5", "pitch": 1 }
+  ],
+  "戦": [
+    { "word": "戦争", "kana": "せんそう", "meaning": ["war"], "pos": "noun, 'suru' verb", "jlpt": "N3", "pitch": 0 },
+    { "word": "戦", "kana": "いくさ", "meaning": ["war; battle; campaign; fight", "troops; forces (archaic)"], "pos": "noun", "jlpt": null, "pitch": 3 },
+    { "word": "戦い", "kana": "たたかい", "meaning": ["battle; fight; struggle; conflict"], "pos": "noun", "jlpt": "N3", "pitch": 0 },
+    { "word": "戦き", "kana": "おののき", "meaning": ["shudder; shiver; agitation"], "pos": "noun", "jlpt": null, "pitch": 4 },
+    { "word": "作戦", "kana": "さくせん", "meaning": ["tactics; strategy; military operation"], "pos": "noun", "jlpt": "N2", "pitch": 0 }
+  ],
+  "力": [
+    { "word": "努力", "kana": "どりょく", "meaning": ["great effort; exertion; endeavour; endeavor; effort"], "pos": "noun, 'suru' verb", "jlpt": "N3", "pitch": 1 },
+    { "word": "力学", "kana": "りきがく", "meaning": ["mechanics; dynamics"], "pos": "noun", "jlpt": null, "pitch": 2 },
+    { "word": "力", "kana": "ちから", "meaning": ["force; strength; might; vigour (vigor); energy", "capability; ability; proficiency; capacity"], "pos": "noun", "jlpt": "N4", "pitch": 3 },
+    { "word": "実力", "kana": "じつりょく", "meaning": ["real ability; competence; proficiency"], "pos": "noun", "jlpt": "N3", "pitch": 0 },
+    { "word": "協力", "kana": "きょうりょく", "meaning": ["cooperation; collaboration"], "pos": "noun, 'suru' verb", "jlpt": "N3", "pitch": 0 }
+  ],
+  "名": [
+    { "word": "有名", "kana": "ゆうめい", "meaning": ["famous", "fame"], "pos": "'na' adjective, noun", "jlpt": "N4", "pitch": 0 },
+    { "word": "本名", "kana": "ほんみょう", "meaning": ["true name; real name"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "名前", "kana": "なまえ", "meaning": ["name; full name", "given name; first name"], "pos": "noun", "jlpt": "N5", "pitch": 0 },
+    { "word": "名残", "kana": "なごり", "meaning": ["remains; traces; vestiges; relics", "hint; touch; aftertaste"], "pos": "noun", "jlpt": null, "pitch": 3 }
+  ],
+  "金": [
+    { "word": "金曜日", "kana": "きんようび", "meaning": ["Friday"], "pos": "adverbial noun (fukushitekimeishi), noun (temporal) (jisoumeishi)", "jlpt": "N5", "pitch": 3 },
+    { "word": "黄金", "kana": "おうごん", "meaning": ["gold"], "pos": "noun, 'no' adjective", "jlpt": null, "pitch": 0 },
+    { "word": "お金", "kana": "おかね", "meaning": ["money"], "pos": "noun", "jlpt": "N5", "pitch": 0 },
+    { "word": "引き金", "kana": "ひきがね", "meaning": ["trigger; gunlock"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "現金", "kana": "げんきん", "meaning": ["cash; ready money", "mercenary; self-interested"], "pos": "noun, 'na' adjective", "jlpt": "N3", "pitch": 0 }
+  ],
+  "性": [
+    { "word": "性格", "kana": "せいかく", "meaning": ["character; personality; disposition; nature"], "pos": "noun", "jlpt": "N3", "pitch": 0 },
+    { "word": "相性", "kana": "あいしょう", "meaning": ["affinity; compatibility (of people, ideas, etc.)"], "pos": "noun", "jlpt": "N2", "pitch": 3 },
+    { "word": "根性", "kana": "こんじょう", "meaning": ["willpower; guts; spirit; nature; disposition"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "性", "kana": "さが", "meaning": ["one's nature; one's destiny"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "個性", "kana": "こせい", "meaning": ["individuality; personality; identity; character"], "pos": "noun", "jlpt": "N3", "pitch": 0 }
+  ],
+  "対": [
+    { "word": "反対", "kana": "はんたい", "meaning": ["opposition; resistance; antagonism; hostility", "reverse; opposite; contrary; inverse"], "pos": "'na' adjective, noun, 'suru' verb, 'no' adjective", "jlpt": "N4", "pitch": 0 },
+    { "word": "一対", "kana": "いっつい", "meaning": ["pair; couple"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "向かう", "kana": "むかう", "meaning": ["to face", "to go towards; to head towards"], "pos": "'u' godan verb, intransitive verb", "jlpt": "N3", "pitch": 0 },
+    { "word": "対応", "kana": "たいおう", "meaning": ["interaction; correspondence; coping with; dealing with; handling"], "pos": "noun, 'suru' verb", "jlpt": "N3", "pitch": 0 },
+    { "word": "絶対", "kana": "ぜったい", "meaning": ["absolutely; unconditionally; positively", "absolute; unconditional"], "pos": "adverb, noun, 'no' adjective", "jlpt": "N3", "pitch": 0 }
+  ],
+  "意": [
+    { "word": "意味", "kana": "いみ", "meaning": ["meaning; significance"], "pos": "noun, 'suru' verb", "jlpt": "N5", "pitch": 1 },
+    { "word": "意気地", "kana": "いくじ", "meaning": ["self-respect; self-confidence; guts; backbone"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "意見", "kana": "いけん", "meaning": ["opinion; view; comment"], "pos": "noun, 'suru' verb", "jlpt": "N4", "pitch": 1 },
+    { "word": "意思", "kana": "いし", "meaning": ["intention; wish; purpose"], "pos": "noun", "jlpt": "N3", "pitch": 1 }
+  ],
+  "用": [
+    { "word": "用意", "kana": "ようい", "meaning": ["preparation; arrangements; provision; getting ready; laying out (e.g. a meal)"], "pos": "noun, 'suru' verb", "jlpt": "N4", "pitch": 1 },
+    { "word": "用いる", "kana": "もちいる", "meaning": ["to use; to make use of; to utilize; to utilise"], "pos": "ichidan verb, transitive verb", "jlpt": "N2", "pitch": 3 },
+    { "word": "利用", "kana": "りよう", "meaning": ["use; utilization; utilisation; application"], "pos": "noun, 'suru' verb", "jlpt": "N4", "pitch": 0 },
+    { "word": "用事", "kana": "ようじ", "meaning": ["business; something to attend to"], "pos": "noun", "jlpt": "N3", "pitch": 0 }
+  ],
+  "男": [
+    { "word": "男子", "kana": "だんし", "meaning": ["youth; young man"], "pos": "noun", "jlpt": "N3", "pitch": 1 },
+    { "word": "長男", "kana": "ちょうなん", "meaning": ["eldest son (may be the only son); first-born son"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "男の子", "kana": "おとこのこ", "meaning": ["boy; male child; baby boy"], "pos": "expression, noun", "jlpt": "N5", "pitch": 3 },
+    { "word": "男性", "kana": "だんせい", "meaning": ["man; male"], "pos": "noun", "jlpt": "N4", "pitch": 0 }
+  ],
+  "主": [
+    { "word": "主要", "kana": "しゅよう", "meaning": ["chief; main; principal; major"], "pos": "'na' adjective, noun", "jlpt": "N3", "pitch": 0 },
+    { "word": "坊主", "kana": "ぼうず", "meaning": ["Buddhist priest; bonze", "close-cropped hair; crew cut; person with a shorn head"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "地主", "kana": "じぬし", "meaning": ["landlord; landowner"], "pos": "noun", "jlpt": "N2", "pitch": 0 },
+    { "word": "主に", "kana": "おもに", "meaning": ["mainly; primarily"], "pos": "adverb", "jlpt": "N3", "pitch": 1 },
+    { "word": "主", "kana": "あるじ", "meaning": ["head (of a household); proprietor (of a store); landlord; master (of a servant)"], "pos": "noun", "jlpt": null, "pitch": 1 }
+  ],
+  "通": [
+    { "word": "普通", "kana": "ふつう", "meaning": ["general; ordinary; usual", "normally; generally; usually"], "pos": "'no' adjective, adverb", "jlpt": "N4", "pitch": 0 },
+    { "word": "通る", "kana": "とおる", "meaning": ["to go by; to go past; to go along; to pass through; to use (a road); to take (a route)", "to run (between); to operate (between); to connect"], "pos": "'ru' godan verb, intransitive verb", "jlpt": "N4", "pitch": 1 },
+    { "word": "通う", "kana": "かよう", "meaning": ["to go to and from (a place); to go back and forth between; to run between (e.g. bus, train)", "to go to (school, work, etc.); to attend; to commute; to frequent"], "pos": "'u' godan verb, intransitive verb", "jlpt": "N4", "pitch": 0 },
+    { "word": "交通", "kana": "こうつう", "meaning": ["traffic; transportation; communication"], "pos": "noun", "jlpt": "N4", "pitch": 0 }
+  ],
+  "関": [
+    { "word": "関係", "kana": "かんけい", "meaning": ["relation; relationship; connection", "participation; involvement; concern"], "pos": "noun, 'suru' verb, 'no' adjective", "jlpt": "N3", "pitch": 0 },
+    { "word": "関", "kana": "せき", "meaning": ["barrier; checkpoint"], "pos": "noun, noun (suffix)", "jlpt": null, "pitch": 1 },
+    { "word": "関わる", "kana": "かかわる", "meaning": ["to be affected; to be influenced", "to be concerned with; to have to do with"], "pos": "'ru' godan verb, intransitive verb", "jlpt": "N2", "pitch": 3 },
+    { "word": "大関", "kana": "おおぜき", "meaning": ["ōzeki (second highest rank in sumo)"], "pos": "noun", "jlpt": null, "pitch": 1 }
+  ],
+  "文": [
+    { "word": "文化", "kana": "ぶんか", "meaning": ["culture; civilization; civilisation", "Bunka era (1804.2.11-1818.4.22)"], "pos": "noun", "jlpt": "N4", "pitch": 1 },
+    { "word": "文句", "kana": "もんく", "meaning": ["complaint; grumbling; objection", "phrase; words; expression"], "pos": "noun", "jlpt": "N3", "pitch": 1 },
+    { "word": "文", "kana": "ふみ", "meaning": ["letter; writings"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "恋文", "kana": "こいぶみ", "meaning": ["love letter"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "文字", "kana": "もじ", "meaning": ["letter (of alphabet); character", "literal"], "pos": "noun, 'no' adjective", "jlpt": "N4", "pitch": 1 }
+  ],
+  "屋": [
+    { "word": "屋上", "kana": "おくじょう", "meaning": ["rooftop"], "pos": "noun", "jlpt": "N3", "pitch": 0 },
+    { "word": "屋根", "kana": "やね", "meaning": ["roof"], "pos": "noun", "jlpt": "N4", "pitch": 1 },
+    { "word": "部屋", "kana": "へや", "meaning": ["room; chamber", "apartment; flat; pad"], "pos": "noun", "jlpt": "N5", "pitch": 2 },
+    { "word": "パン屋", "kana": "パンや", "meaning": ["bakery; bread shop"], "pos": "noun", "jlpt": "N5", "pitch": null }
+  ],
+  "感": [
+    { "word": "感謝", "kana": "かんしゃ", "meaning": ["thanks; gratitude"], "pos": "noun, 'suru' verb", "jlpt": "N3", "pitch": 1 },
+    { "word": "感じる", "kana": "かんじる", "meaning": ["to feel; to sense; to experience"], "pos": "ichidan verb, transitive verb", "jlpt": "N4", "pitch": null },
+    { "word": "感動", "kana": "かんどう", "meaning": ["being deeply moved emotionally; excitement; passion; impression; deep emotion; inspiration"], "pos": "noun, 'suru' verb", "jlpt": "N3", "pitch": null },
+    { "word": "感情", "kana": "かんじょう", "meaning": ["emotion; feeling; sentiment"], "pos": "noun", "jlpt": "N3", "pitch": null }
+  ],
+  "郎": [
+    { "word": "新郎", "kana": "しんろう", "meaning": ["bridegroom"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "野郎", "kana": "やろう", "meaning": ["bastard; guy; fellow", "damn; damn it"], "pos": "noun, interjection", "jlpt": null, "pitch": null },
+    { "word": "和郎", "kana": "わろ", "meaning": ["boy (sometimes derog.) (archaic)", "you (familiar language)"], "pos": "noun, pronoun", "jlpt": null, "pitch": 1 }
+  ],
+  "業": [
+    { "word": "授業", "kana": "じゅぎょう", "meaning": ["lesson; class work; teaching; instruction"], "pos": "noun, 'suru' verb", "jlpt": "N4", "pitch": 1 },
+    { "word": "業", "kana": "ごう", "meaning": ["karma (i.e. actions committed in a former life)"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "仕業", "kana": "しわざ", "meaning": ["deed (esp. negative); act; action; one's doing"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "事業", "kana": "じぎょう", "meaning": ["enterprise; business; industry; project; program; programme; undertaking; scheme; work"], "pos": "noun", "jlpt": "N3", "pitch": null },
+    { "word": "卒業", "kana": "そつぎょう", "meaning": ["graduation; completion"], "pos": "noun, 'suru' verb", "jlpt": "N4", "pitch": null }
+  ],
+  "定": [
+    { "word": "予定", "kana": "よてい", "meaning": ["plans; arrangement; schedule; program; programme; expectation"], "pos": "noun, 'suru' verb", "jlpt": "N4", "pitch": 0 },
+    { "word": "勘定", "kana": "かんじょう", "meaning": ["calculation; computation; counting; reckoning; count", "bill; check; account; payment (of a bill); settlement (of an account)"], "pos": "noun, 'suru' verb", "jlpt": "N3", "pitch": 3 },
+    { "word": "定める", "kana": "さだめる", "meaning": ["to decide; to determine; to fix; to establish; to enact"], "pos": "ichidan verb, transitive verb", "jlpt": "N2", "pitch": 3 },
+    { "word": "決定", "kana": "けってい", "meaning": ["decision; determination"], "pos": "noun, 'suru' verb", "jlpt": "N3", "pitch": null }
+  ],
+  "政": [
+    { "word": "政府", "kana": "せいふ", "meaning": ["government; administration"], "pos": "noun", "jlpt": "N3", "pitch": 1 },
+    { "word": "摂政", "kana": "せっしょう", "meaning": ["regent; regency"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "太政官", "kana": "だじょうかん", "meaning": ["Grand Council of State (1868-1885 CE)", "Department of State (under the ritsuryo system)"], "pos": "noun", "jlpt": null, "pitch": 3 },
+    { "word": "政", "kana": "まつりごと", "meaning": ["rule; government; administration"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "行政", "kana": "ぎょうせい", "meaning": ["administration; government"], "pos": "noun", "jlpt": "N2", "pitch": 0 }
+  ],
+  "持": [
+    { "word": "維持", "kana": "いじ", "meaning": ["maintenance; preservation; improvement"], "pos": "noun, 'suru' verb", "jlpt": "N2", "pitch": 1 },
+    { "word": "持つ", "kana": "もつ", "meaning": ["to hold (in one's hand); to take; to carry", "to possess; to have; to own"], "pos": "'tsu' godan verb", "jlpt": "N4", "pitch": 1 },
+    { "word": "持株", "kana": "もちかぶ", "meaning": ["stock holding; shareholding"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "気持ち", "kana": "きもち", "meaning": ["feeling; sensation; mood"], "pos": "noun", "jlpt": "N4", "pitch": 0 }
+  ],
+  "道": [
+    { "word": "道路", "kana": "どうろ", "meaning": ["road; highway"], "pos": "noun", "jlpt": "N4", "pitch": 1 },
+    { "word": "神道", "kana": "しんとう", "meaning": ["Shinto; Shintoism"], "pos": "noun", "jlpt": null, "pitch": 1 },
+    { "word": "道", "kana": "みち", "meaning": ["road; street; way; path; course; route; lane", "distance; ways (e.g. \"a long ways\")"], "pos": "noun", "jlpt": "N4", "pitch": 0 },
+    { "word": "道産子", "kana": "どさんこ", "meaning": ["horse native to Hokkaido", "person born and raised in Hokkaido"], "pos": "noun", "jlpt": null, "pitch": 0 }
+  ],
+  "外": [
+    { "word": "外国", "kana": "がいこく", "meaning": ["foreign country"], "pos": "noun, 'no' adjective", "jlpt": "N5", "pitch": 0 },
+    { "word": "外科", "kana": "げか", "meaning": ["surgery", "department of surgery (hospital, etc.)"], "pos": "noun, 'no' adjective", "jlpt": "N3", "pitch": 0 },
+    { "word": "外", "kana": "そと", "meaning": ["outside; exterior", "open air"], "pos": "noun", "jlpt": "N5", "pitch": 1 },
+    { "word": "外す", "kana": "はずす", "meaning": ["to unfasten; to undo", "to remove; to take off; to deinstall"], "pos": "'su' godan verb, transitive verb", "jlpt": "N3", "pitch": 0 }
+  ],
+  "取": [
+    { "word": "取材", "kana": "しゅざい", "meaning": ["news coverage; collecting data (e.g. for an article); covering (something for media)", "interview"], "pos": "noun, 'suru' verb", "jlpt": null, "pitch": 0 },
+    { "word": "取る", "kana": "とる", "meaning": ["to take; to pick up; to harvest; to earn; to win; to choose", "to steal"], "pos": "'ru' godan verb, transitive verb", "jlpt": "N4", "pitch": 1 },
+    { "word": "取引", "kana": "とりひき", "meaning": ["transactions; dealings; business"], "pos": "noun, 'suru' verb", "jlpt": "N3", "pitch": 2 },
+    { "word": "日取り", "kana": "ひどり", "meaning": ["fixed date; appointed day"], "pos": "noun", "jlpt": null, "pitch": 0 }
+  ],
+  "所": [
+    { "word": "場所", "kana": "ばしょ", "meaning": ["place; location; spot; position", "room; space"], "pos": "noun", "jlpt": "N5", "pitch": 0 },
+    { "word": "近所", "kana": "きんじょ", "meaning": ["neighbourhood; neighborhood"], "pos": "noun, 'no' adjective", "jlpt": "N4", "pitch": 1 },
+    { "word": "所", "kana": "ところ", "meaning": ["place; spot; scene; site", "address"], "pos": "noun, suffix", "jlpt": "N4", "pitch": 3 },
+    { "word": "台所", "kana": "だいどころ", "meaning": ["kitchen", "financial situation"], "pos": "noun, 'no' adjective", "jlpt": "N4", "pitch": 0 }
+  ],
+  "現": [
+    { "word": "現在", "kana": "げんざい", "meaning": ["now; current; present; present time; as of"], "pos": "adverbial noun (fukushitekimeishi), noun (temporal) (jisoumeishi)", "jlpt": "N4", "pitch": 1 },
+    { "word": "現", "kana": "うつつ", "meaning": ["reality; consciousness"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "現れる", "kana": "あらわれる", "meaning": ["to appear; to come in sight; to become visible; to come out; to embody; to materialize", "to be expressed (e.g. emotions); to become apparent (e.g. trends, effects)"], "pos": "ichidan verb, intransitive verb", "jlpt": "N3", "pitch": 4 },
+    { "word": "実現", "kana": "じつげん", "meaning": ["realization; materialization; implementation"], "pos": "noun, 'suru' verb", "jlpt": "N3", "pitch": 0 }
+  ]
+}
