@@ -1,0 +1,6 @@
+.claude/
+node_modules/
+external/GPT/
+external/TODO.md
+external/ideas.md
+external/ignore.md

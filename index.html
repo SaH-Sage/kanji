@@ -15,21 +15,28 @@
       <span class="slideToggle" aria-hidden="true"></span>
     </label>
     <button id="resetDataBtn" type="button" disabled>Reset all changes</button>
-    <label class="navToggle">
-      <input type="checkbox" id="confirmOverwriteToggle" class="slideToggleInput" checked>
-      Confirm before editing existing kanji
-      <span class="slideToggle" aria-hidden="true"></span>
-    </label>
-    <label class="navToggle">
-      <input type="checkbox" id="editModeToggle" class="slideToggleInput">
-      Edit mode
-      <span class="slideToggle" aria-hidden="true"></span>
-    </label>
-    <label class="navToggle" title="Compares two ways of picking the fewest-change reordering that resolves a marginal reading against its neighbor: sequential (on) tries kun's own order first, only touching on as a fallback; joint (off) searches both sides together from the start, minimizing total changes across both.">
-      <input type="checkbox" id="densityFitStrategyToggle" class="slideToggleInput" checked>
-      Sequential density fit (vs. joint)
-      <span class="slideToggle" aria-hidden="true"></span>
-    </label>
+    <div class="navDropdown">
+      <label class="navToggle">
+        <input type="checkbox" id="editModeToggle" class="slideToggleInput">
+        Edit mode
+        <span class="slideToggle" aria-hidden="true"></span>
+        <span class="navDropdownArrow" aria-hidden="true">&#9662;</span>
+      </label>
+      <div class="navDropdownPanel">
+        <label class="navToggle">
+          <input type="checkbox" id="confirmOverwriteToggle" class="slideToggleInput" checked>
+          Confirm before editing existing kanji
+          <span class="slideToggle" aria-hidden="true"></span>
+        </label>
+        <label class="navToggle" title="Compares two ways of picking the fewest-change reordering that resolves a marginal reading against its neighbor: sequential (on) tries kun's own order first, only touching on as a fallback; joint (off) searches both sides together from the start, minimizing total changes across both.">
+          <input type="checkbox" id="densityFitStrategyToggle" class="slideToggleInput" checked>
+          Sequential density fit (vs. joint)
+          <span class="slideToggle" aria-hidden="true"></span>
+        </label>
+        <button id="recalculateDensityBtn" type="button" title="Density/position is cached off the current kanji, word, and extensive-components data — this forces a guaranteed-fresh recomputation from scratch regardless.">Recalculate density</button>
+      </div>
+    </div>
+    <button id="posterBtn" type="button">Poster</button>
     <button id="addKanjiBtn" type="button">+ Add kanji</button>
     <button id="exportAdditionsBtn" type="button" disabled>Export additions</button>
   </header>
@@ -97,8 +104,34 @@
     </div>
   </div>
 
+  <div id="posterModal" class="modalOverlay" hidden>
+    <div class="modalBox" role="dialog" aria-modal="true" aria-labelledby="posterModalTitle">
+      <h2 id="posterModalTitle">Poster / print layout</h2>
+      <p class="modalHint">Pick the physical size you're printing onto. Card size never
+        changes — the grid's own width and row count do, so kanji that don't fit get
+        dropped (least frequent first) unless you protect them below.</p>
+
+      <div class="modalFieldRow">
+        <label class="modalField">width (cm) <input id="posterWidthCm" type="number" min="1" step="0.1" autocomplete="off"></label>
+        <label class="modalField">height (cm) <input id="posterHeightCm" type="number" min="1" step="0.1" autocomplete="off"></label>
+      </div>
+      <label class="modalField">always include <textarea id="posterForcedChars" placeholder="paste kanji to force-include, e.g. 郎 屋 千" rows="1" autocomplete="off"></textarea></label>
+
+      <div id="posterSummary" class="posterSummary" aria-live="polite"></div>
+
+      <div class="modalActions">
+        <button type="button" id="posterPreviewBtn">Preview</button>
+        <button type="button" id="posterPrintBtn" disabled>Print</button>
+        <button type="button" id="posterExitBtn" disabled>Exit poster mode</button>
+        <button type="button" id="posterCloseBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
   <script src="js/pitch.js"></script>
   <script src="js/ruler.js"></script>
+  <script src="js/counters.js"></script>
+  <script src="js/explorer.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

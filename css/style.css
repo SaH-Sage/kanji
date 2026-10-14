@@ -1,10 +1,11 @@
-
+/* ── Design tokens ───────────────────────────────────────────── */
 :root {
-
+  /* Layout */
   --card-size:  280px;
   --kanji-size: 192px;
   --col-width:  80px;
 
+  /* Spacing */
   --pad-big:    0.4em 0.8em;
   --pad-tight:  0.1em 0.2em;
   --pad-big-solo:     0.8em;
@@ -13,31 +14,40 @@
   --pad-adjecent:     0px;
   --pad-adjecent-big: 4px;
 
+  /* Colours */
   --color-warm-parchment: #e0d8b8;
   --color-bg:             #0c1f2e;
   --color-border:         #1d4472;
   --color-text:           var(--color-warm-parchment);
   --color-muted:          #3d6a8a;
   --color-footer:         #ffffff;
-  --color-on:             #8ab8d8;
-  --color-kun:            #71c386;
-  --color-name:           #6aa898;
-  --color-num:            #e8c060;
-  --color-word:           #c2b47c;
-  --color-component:      #d6c890;
-  --color-pitch:          #e8c060;
+  --color-on:             #8ab8d8;   /* On'yomi */
+  --color-kun:            #71c386;   /* Kun'yomi */
+  --color-name:           #6aa898;   /* Name readings */
+  --color-num:            #e8c060;   /* Stroke-order numbers */
+  --color-word:           #c2b47c;   /* Frequent-word examples */
+  --color-component:      #d6c890;   /* Kanji components */
+  --color-pitch:          #e8c060;   /* Pitch-accent line over furigana */
 
-  --parchment-bg:         #f2e8cc;
-  --parchment-bg-row:     #e8dab0;
-  --parchment-border:     #a9825a;
-  --parchment-border-row: #c2a273;
-  --parchment-text:       #3c2f1e;
-  --parchment-muted:      #7c6a4e;
-  --parchment-word:       #8a4a1f;
-  --parchment-accent:     #92661a;
-  --parchment-warn:       #a13e1f;
-  --parchment-link:       #1f5c6e;
+  /* Parchment — the info-card popup's own palette. It's really a
+     second, denser reference card rather than a footnote, so it gets
+     a warm aged-paper surface instead of just another dark panel; the
+     app's own blues/greens/golds (tuned for the dark --color-bg) read
+     as washed-out or illegible against something this light, so every
+     info-card colour below is its own, darker-for-light-background
+     pick rather than a reuse of the dark-theme tokens. */
+  --parchment-bg:         #f2e8cc;   /* popup surface */
+  --parchment-bg-row:     #e8dab0;   /* each word's own box, a shade darker than the popup */
+  --parchment-border:     #a9825a;   /* popup's own border */
+  --parchment-border-row: #c2a273;   /* dashed word-box / footer dividers */
+  --parchment-text:       #3c2f1e;   /* body text */
+  --parchment-muted:      #7c6a4e;   /* meta line (meaning/pos), pitch furigana */
+  --parchment-word:       #8a4a1f;   /* word kanji, pitch dots */
+  --parchment-accent:     #92661a;   /* JLPT tag */
+  --parchment-warn:       #a13e1f;   /* "unverified" badge */
+  --parchment-link:       #1f5c6e;   /* kanshudo links */
 
+  /* Typography */
   --font-top:     15px;
   --font-bot:     14px;
   --font-reading: 18px;
@@ -46,11 +56,13 @@
   --font-smaller:  7px;
   --font-tiniest:  6px;
 
+  /* Animate button */
   --btn-bg:       #1a5070;
   --btn-bg-hover: #226088;
   --btn-color:    #b8d8ec;
   --btn-font:     var(--font-small);
 
+  /* Borders */
   --border-default:     1px solid var(--color-border);
   --border-phonem:      0px solid var(--color-border);
   --border-kanji:       1px solid var(--color-border);
@@ -60,27 +72,88 @@
   --mora-dot-color:     color-mix(in srgb, var(--color-muted) 100%, transparent);
 }
 
+/* ── Page ────────────────────────────────────────────────────── */
+/* overflow-x: hidden — a closed popup (.infoPopup, .phenomenonPopup, ...)
+   stays display:flex at all times (only opacity/visibility toggle, see
+   the Generic click-to-lock popup section below), so its full box —
+   .infoPopup alone is min-width: 520px — still occupies real layout
+   space positioned off to the side of its trigger, even unopened. For
+   a card near the grid's right edge that box extends well past the
+   viewport, inflating the page's scrollable width though nothing is
+   visibly there. Nothing on this page is meant to scroll sideways. */
+/* Not on html or body — either one clips via overflow-x: hidden, but
+   that forces its own overflow-y to 'auto' too (you can't mix
+   'visible' with a non-'visible' value on the same box), which turns
+   it into its own scroll container distinct from the real viewport.
+   #navMenu's position: sticky (see the Nav menu section) sticks to
+   its nearest scrolling ancestor — with html/body promoted to that
+   role instead of the viewport, and neither one ever actually
+   overflowing itself (each is exactly as tall as its content), sticky
+   just sat static instead of sticking. Clipping on #kanji-grid instead
+   (below) reaches the same result — the invisible-popup overflow it's
+   actually guarding against (see that comment) stays contained — all
+   without touching html/body's own overflow at all. */
 body { margin: 0; background: var(--color-bg); }
+
+/* The grid and the ruler footer are both meant to be wider than the
+   viewport (#kanji-grid: 7300px below; the ruler: its own natural
+   width for 120 numbers at 60px each, never clipped — see
+   js/ruler.js) — neither has its own overflow-x set, so the DOCUMENT
+   itself scrolls sideways to see the rest of either one, same as any
+   normal page with content wider than the viewport. No wrapper div
+   needed for this: #navMenu's position: sticky sticks to the nearest
+   scrolling ancestor, and since html/body are never given an explicit
+   overflow-x here, that ancestor is the real viewport either way —
+   sticky keeps working against it whether or not a wrapper exists.
+   (An earlier version of this introduced a dedicated #pageScroll
+   wrapper out of caution carried over from a DIFFERENT, unrelated
+   problem — overflow-x: hidden on html/body, needed elsewhere to clip
+   invisible popup overflow, breaks sticky by forcing body into its
+   own scroll container — but that only applies when overflow-x is
+   explicitly SET; leaving it unset was always fine and the wrapper
+   was unnecessary, confirmed by testing.) */
 
 #kanji-grid {
   display: flex;
   flex-wrap: wrap;
-
+  /* row-reverse — Japanese-style reading order: each row fills
+     right-to-left instead of left-to-right, so the legend card (first
+     in DOM order, unchanged) renders at the top-RIGHT and reading
+     proceeds right-to-left across a row, then down to the next row
+     (also right-to-left). Only the VISUAL order flips here — DOM
+     order, and therefore every kanji's actual reading-order position,
+     is untouched. This does NOT mirror each card's own internal
+     layout (on'yomi/kun'yomi/name still sit on the same sides within
+     a card as before) — only the sequence cards appear in changes. */
   flex-direction: row-reverse;
   overflow-x: clip;
   width: 7283px;
   padding: 4rem 4rem 0 4rem;
-
+  /* margin: 0 auto would center this within body's own shrink-to-fit
+     width instead of sitting flush at its left edge — body's width is
+     set by whichever of #kanji-grid/the ruler footer is wider
+     (currently the ruler, slightly), so auto-centering would shift
+     the grid right by half that difference and break alignment with
+     the ruler's own flush-left footer below it. margin: 0 keeps both
+     flush at the same left edge regardless of which one is wider. */
   margin: 0;
-
+  /* justify-content: space-between; */
   background-color: var(--color-bg);
 }
 
+/* ── Ruler footer ────────────────────────────────────────────── */
+/* Visual reference for how Japanese numbers 0-120 are actually read —
+   see js/ruler.js for what it shows. Deliberately NOT its own
+   overflow-x: auto box (the ported-from version had one, but only for
+   standalone testing) — it just renders at its full width and runs
+   past #kanji-grid's own width, scrolling as part of the document
+   itself (see the comment above #kanji-grid) instead of independently. */
 #rulerFooter {
-  background: var(--color-bg);
-  padding: 1.5rem 0 2rem 4rem;
+  background: var(--color-bg); /* matches #kanji-grid's own background-color, not the ported file's near-black */
+  padding: 0.8rem 0 2rem 4rem; /* left padding matches #kanji-grid's own 4rem, so its content (the label column) starts at the same x as the grid's own first card */
 }
 
+/* ── Error state (shown when JSON fetch fails) ───────────────── */
 #kanji-grid.error {
   color: var(--color-warm-parchment);
   font-family: sans-serif;
@@ -88,11 +161,12 @@ body { margin: 0; background: var(--color-bg); }
   padding: 4rem;
 }
 
+/* ── Card shell ──────────────────────────────────────────────── */
 .kc {
   display: block;
   width: var(--card-size);
-  padding: 0.4em 0.34em;
-  margin: 0;
+  padding: 0.4em 0.34em; /* use horizontal padding here to increase min-width between cards*/
+  margin: 0; 
   overflow: visible;
   font-family: sans-serif;
   background: var(--color-bg);
@@ -102,14 +176,37 @@ body { margin: 0; background: var(--color-bg); }
 }
 .kc div { box-sizing: border-box; }
 
+/* Debug aid (see markDensityResolutionClasses in main.js): marks which
+   resolution path made a card dense. Queue = genuinely rescuable in
+   principle, resolved among other queue members (e.g. 政/現); unconditional
+   = dense from the moment its best case was first checked, no neighbor
+   ever a possibility (e.g. 上/下/明/生). Solid outline = round 0, dashed =
+   round 1 — a card gets at most one of these. */
 .densityQueueR0, .densityQueueR1 { outline: 0px solid var(--color-kun); outline-offset: 2px; }
 .densityUnconditionalR0, .densityUnconditionalR1 { outline: 0px solid var(--color-num); outline-offset: 2px; }
 .densityQueueR1, .densityUnconditionalR1 { outline-style: dashed; }
-
+/* Flex items don't collapse margins, so this is a true minimum gap on
+   each side, not just a suggestion — queue cards get at least 1.5em of
+   breathing room from their neighbors, unconditional cards at least 3em. */
 .densityQueueR0, .densityQueueR1 { margin: 0 1.5em; }
 .densityUnconditionalR0 { margin: 0 3.1em; }
 .densityUnconditionalR1 { margin: 0 7.0em; }
+/* 生 (densityUnconditionalR1, position right after 明 — see TODO.md's
+   "Asymmetric density-tier margins" note) is the dataset's last kanji,
+   so nothing ever sits to its physical left — its own 7em margin there
+   was reserving clearance against a neighbor that doesn't exist, which
+   is exactly what pushed it onto its own trailing row despite 明's row
+   having the most slack anywhere in the grid (489px, ~26px short of
+   what the full symmetric margin demanded). Dropping just that unused
+   side lets it settle onto 明's row instead — margin-right (clearance
+   against 明's own overflow) is untouched. One-off, not a general rule:
+   if anything is ever repositioned after 生, this stops being true. */
+#kc-生 { margin-left: 0; }
 
+/* ── Frequent-word spans (shared by .r-top and .r-bot) ────────── */
+/* .wordMeaning is a <button> (it's a popup trigger — see .wordSlotWrap
+   below), not a <span> like .wordKanji — these selectors deliberately
+   have no element qualifier so they match either. */
 .wordKanji::before,
 .wordMeaning::before {
   position: relative;
@@ -121,30 +218,76 @@ body { margin: 0; background: var(--color-bg); }
   content: ' ';
 }
 .variantsKanji, .componentKanji, .meaningKanji { padding: 0 0.3em 0 0; }
-
+/* .popupTrigger (below) resets padding/font/cursor generically for
+   every popup-trigger button, at the same specificity as a bare
+   .wordMeaning rule — and, being declared later in the file, would
+   win that tie. Every .wordMeaning override below that needs to beat
+   it is written as .wordMeaning.popupTrigger (one extra class'
+   specificity) rather than relying on source order. */
 .wordKanji > ruby, .wordMeaning.popupTrigger { padding: 0 0.3em; }
 .wordKanji:last-child > ruby, .wordMeaning:last-child { padding: 0 0 0 0.3em; }
 .wordMeaning::before { right: 0.3em; }
 .wordKanji, .wordMeaning { color: var(--color-word); }
 .wordMeaning.popupTrigger { font-size: var(--font-small); }
 .componentKanji { color: var(--color-component); }
-
+/* .wordMeaning opens a popup (the word-slot editor — see .wordSlotWrap
+   below) rather than editing in place directly, so it just needs the
+   same "there's more here" hover affordance every other popup trigger
+   in this app uses, not its own editing-specific chrome. */
 .wordMeaning.popupTrigger { cursor: default; }
-
+/* Only an inviting click target while edit mode (#editModeToggle,
+   initNavMenu) is on — off, locking it open via click is JS-blocked
+   anyway (see initWordSlotEditing), so hinting at it here would be
+   misleading. That JS gate doesn't reach the hover preview though —
+   .popupWrap > .popupTrigger:hover ~ .popupContent (generic popup
+   plumbing, above) is pure CSS, so without the display:none below the
+   word-slot editor form would still hover-open outside edit mode too. */
 body.editMode .wordMeaning { cursor: pointer; }
 body.editMode .wordMeaning:hover, body.editMode .wordMeaning:focus-visible { color: var(--color-text); }
-
+body:not(.editMode) .wordSlotPopup { display: none; }
+/* Marks a word slot that came from an edit (this browser's
+   localStorage, or a committed data/wordOverrides.json — see
+   loadWordDomain, main.js) rather than kanji.json/words.json's own
+   data, so an edited card doesn't look identical to an unedited one at
+   a glance. */
 .wordMeaning.overridden { border-bottom: 1px solid var(--color-num); }
 
+/* ── Top row (variants / components / frequent words) ────────── */
+/* 0.4em, not var(--pad-big-solo) (0.8em) — that variable was doubled
+   from its predecessor (--pad-big-vertical, 0.4em) during an earlier
+   restyling pass, which .wordSlotActions button (below) was written
+   against and genuinely needs at 0.8em, but r-top/r-bot's own gap to
+   .kc-body was never meant to change; this restores its actual
+   pre-restyling history without touching the shared variable other
+   things now depend on. */
 .r-top, .r-bot { padding: 2px 0em; text-align: center; }
 .r-top {
   border-bottom: var(--border-phonem);
   font-size: var(--font-top);
   color: var(--color-on);
   line-height: 1em;
-
+  /* height: 2em — matches .r-bot's own fixed height, rather than
+     leaving r-top's height to auto-resolve from its padding + content,
+     which turned out not to be content-independent: a kanji whose
+     variants include a tagged glyph (the "(漢字)" popup trigger) is a
+     <button>, and an inline-block button contributes to its line box's
+     height differently than the plain text on every other card,
+     making r-top randomly 2px taller wherever one happens to appear —
+     visible as cards in the same grid row not lining up. A fixed
+     height sidesteps that regardless of what r-top's content is. */
   height: 2em;
-
+  /* width: max-content + left:50%/translateX(-50%) — .kc-left/.kc-right
+     (Side columns, below) already extend the card's real visual width
+     well past .kc's own border on both sides; .r-top was still capped
+     to .kc's narrower width, so a kanji with 3 wide frequent-word
+     entries (long readings, or one needing a wide pitch-accent SVG —
+     e.g. 的's 5-mora 目的地) wrapped to a second line that .kc-body
+     below then visually covered, making that word look blank. This
+     lets .r-top claim exactly as much width as its content needs,
+     centered over the card, the same way the side columns already do
+     — position:relative (not static) is required for `left` to do
+     anything; the translateX half-cancels the `left:50%` shift so the
+     box ends up centered rather than starting at the card's center. */
   width: max-content;
   max-width: none;
   position: relative;
@@ -153,6 +296,13 @@ body.editMode .wordMeaning:hover, body.editMode .wordMeaning:focus-visible { col
 }
 .r-top small { font-size: var(--font-small); color: var(--color-muted); }
 
+/* ── Generic click-to-lock popup (shared by the variant-glyph tag and
+   the card's info button) ──────────────────────────────────────
+   .popupWrap/.popupTrigger/.popupContent are the plumbing every popup
+   shares — positioning context, trigger reset, open/close via JS's
+   initPopups(). Each popup type then layers its own classes
+   (.variantWrap, .infoWrap, ...) on the same elements for its own
+   size/layout/content styling, so this block stays purely structural. */
 .popupWrap { position: relative; display: inline-block; }
 .popupTrigger {
   font: inherit;
@@ -162,7 +312,24 @@ body.editMode .wordMeaning:hover, body.editMode .wordMeaning:focus-visible { col
   margin: 0;
   cursor: pointer;
 }
-
+/* Selector is `.popupWrap .popupContent`, not bare `.popupContent` —
+   both have one class' worth of specificity on their own, but
+   `.kc-body, .kc-body *` (Card body, further down) ALSO has one
+   class' worth (the universal selector adds none), and later-in-file
+   wins a specificity tie. A popup nested inside .kc-body (the info
+   button) would otherwise render permanently visible, ignoring
+   .open, exactly like .kc-body's own flex takeover was designed to
+   force on everything else in there. The extra .popupWrap ancestor
+   class makes this rule unambiguously win regardless of what any
+   future broad selector elsewhere does, not just this one. */
+/* display can't be transitioned (no intermediate state between none
+   and flex), so showing/hiding is opacity + visibility instead —
+   display stays flex at all times. pointer-events: none while hidden
+   stops an invisible popup from still intercepting clicks/hover in
+   its footprint. Including visibility in the transition (not just
+   opacity) is what keeps it interactive for the whole fade-in but
+   only removes interactivity/focusability at the END of the fade-out,
+   rather than the instant hover/open state changes. */
 .popupWrap .popupContent {
   display: flex;
   position: absolute;
@@ -177,18 +344,39 @@ body.editMode .wordMeaning:hover, body.editMode .wordMeaning:focus-visible { col
   pointer-events: none;
   transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
 }
-
-.popupWrap:hover > .popupContent,
+/* Hover shows a quick preview; .open (click/tap) locks it so the
+   content can be selected or a hyperlink clicked without it closing.
+   Child combinator (>), not descendant — the phenomenon dictionary
+   popups nest a .popupWrap inside another .popupWrap's .popupContent
+   (the info popup), and a plain descendant selector here would match
+   that inner .popupContent too as soon as its OUTER ancestor was
+   hovered, showing it permanently for as long as the info popup
+   itself was open rather than only while its own trigger is hovered
+   or locked. > scopes "show" to a popupContent's own direct wrap.
+   .popupContent:hover (self, not an ancestor) keeps it open once the
+   mouse actually reaches it — without this, nothing does: the trigger
+   combinator above only cares about .popupTrigger, not the content
+   itself, so crossing fully off the trigger (which hovering the
+   content necessarily does) would otherwise close it immediately. This
+   is safe against the same nested-popup bug the comment above
+   describes, because it's self-hover, not ancestor-hover — a nested
+   phenomenon popup only matches its OWN :hover, never its outer
+   .infoPopup's. */
+.popupWrap > .popupTrigger:hover ~ .popupContent,
+.popupContent:hover,
 .popupWrap.open  > .popupContent {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
 }
 
+/* Static/printed output has no hover or click — never show a popup,
+   even if it was left open (`.open`) on the live page before printing. */
 @media print {
   .popupContent { display: none !important; }
 }
 
+/* ── Variant glyph popup (tap/click the "(漢字)" tag to lock it open) ── */
 .variantTag {
   font-size: var(--font-small);
   line-height: inherit;
@@ -205,16 +393,46 @@ body.editMode .wordMeaning:hover, body.editMode .wordMeaning:focus-visible { col
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  margin-bottom: 6px;
+  /* Flush against the trigger (no margin-bottom gap) — a margin here
+     would sit outside .popupWrap's own hoverable box, so moving the
+     mouse from the trigger up into this popup would cross a gap that's
+     part of neither box and drop :hover before ever reaching it (the
+     same bug the nav dropdown had). The popup's own border provides the
+     visual separation instead. */
   padding: 0.5em 0.9em;
   text-align: center;
 }
-
+/* min-width: 0 lets these flex items shrink below their unwrapped
+   content width — without it, max-width on .variantTooltip has no
+   effect and the label is forced onto one (too-wide) line. */
 .variantCol { display: flex; flex-direction: column; align-items: center; gap: 0.15em; min-width: 0; }
 .variantGlyphBig { font-size: 1.8em; line-height: 1; color: var(--color-text); }
 .variantVs { font-size: var(--font-small); color: var(--color-muted); }
 .variantSubLabel { font-size: var(--font-small); color: var(--color-muted); }
 
+/* ── "More readings" overflow popup (l1/l2/l3/r1/r2 — capReadingOverflow
+   in main.js caps a reading field at 3 wrapped columns; whatever
+   wouldn't fit becomes this trigger instead of a 4th column) ────── */
+/* display: inline-flex + an explicit height, not left to the button's
+   own content-based sizing — a <button> contributes to a line box's
+   height differently than the plain-text spans it sits among even at
+   the same font-size (the exact issue .r-top's own fixed height
+   already works around, see its comment above), which was throwing
+   off capReadingOverflow's per-column item count: the trigger
+   wouldn't fit where a normal-height row would, spilling into a 4th
+   column and leaving a gap behind in the 3rd. These two heights are
+   .on/.kun's and .add's own line-height (font-size × line-height)
+   exactly, so the trigger occupies precisely one normal row. */
+/* z-index: 20 here too, not just on .popupContent below — this trigger
+   (the visible "…" itself) lives inside .r2/.l1/etc, inside
+   .kc-left/.kc-right's own position: absolute columns, which already
+   overflow sideways past their own card into a neighboring card's
+   space (by design — see .kc-left, .kc-right further down). Without
+   its own z-index the trigger's box is z-index: auto, and a
+   neighboring card's own overflowing column — rendered later in DOM
+   order — was winning that auto/auto tie and painting over it, making
+   the "…" itself unclickable before a popup ever got the chance to
+   open. */
 .popupWrap.readingMoreWrap {
   display: inline-flex;
   align-items: center;
@@ -223,10 +441,23 @@ body.editMode .wordMeaning:hover, body.editMode .wordMeaning:focus-visible { col
   z-index: 20;
 }
 .popupWrap.readingMoreWrap.add { height: calc(var(--font-add) * 1.133); }
-
+/* color: inherit, not a fixed one — this sits among on/kun/name/add
+   readings of whichever field it's in, each its own color, so it
+   needs to pick up whatever color its container already gives its
+   sibling spans, same as they do. border-bottom uses currentColor for
+   the same reason. font-size/line-height come from the same place too
+   (.popupTrigger's own font: inherit, plus the .add class JS adds to
+   this trigger when its siblings are .add-styled — see main.js). */
 .readingMoreTag { color: inherit; border-bottom: 1px dotted currentColor; }
 .readingMoreTag:hover, .readingMoreTag:focus-visible { border-bottom-style: solid; }
-
+/* z-index: 20, above the generic popup base (10) — this trigger lives
+   inside .r2/.l1/etc, which sit inside .kc-left/.kc-right's own
+   position: absolute columns, already overflowing sideways past their
+   own card into a neighboring card's space (by design — see
+   .kc-left, .kc-right below). A neighboring card's own popups (still
+   at the base z-index: 10) were stacking on top of this one whenever
+   the two overlapped, since DOM order (not visual position) breaks
+   z-index: auto ties between separate position: absolute boxes. */
 .popupWrap.readingMoreWrap .popupContent {
   background: var(--parchment-bg);
   border: 3px solid var(--parchment-border);
@@ -241,20 +472,45 @@ body.editMode .wordMeaning:hover, body.editMode .wordMeaning:focus-visible { col
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  margin-bottom: 6px;
+  /* Flush, not margin-bottom — see .variantTooltip's own comment. */
   padding: 0.5em 0.7em;
   color: var(--parchment-text);
 }
 
+/* ── Furigana reading (rt) ─────────────────────────────────────── */
 rt {
   font-size: var(--font-smaller);
   color: var(--color-muted);
   line-height: 1;
   padding-bottom: 2px;
 }
-
+/* Kun-reading meanings (rt) — same furigana mechanism as the frequent-
+   word readings' own pitch diagram above, just plain text and a step
+   smaller, but positioned absolutely rather than left in normal ruby
+   flow: the real ruby-text layout (as .infoWordRow rt uses below)
+   still makes the container as tall as base + rt combined, which
+   shrinks how many kun readings fit per column before wrapping —
+   nearly a 30% capacity drop in testing, enough to reclassify a large
+   fraction of the whole dataset's density purely from a few added
+   pixels of row height, not any actual width/collision change. An
+   absolutely-positioned rt is removed from flow entirely, so the row
+   is exactly as tall as the reading alone, with the meaning overlaid
+   above it instead of stacked in-flow. .r1 span (the wrapper each kun
+   reading already has, not .r1 ruby itself) is the positioning anchor. */
 .r1 span:has(rt) { position: relative; }
-
+/* Zero row slack means a stacked field's rt reaches a couple px into
+   whatever's directly above it (the previous row, or the field's own
+   top edge) -- without a background, that read as illegible, the two
+   texts' glyphs blended together at the same pixels rather than one
+   sitting cleanly in front of the other. Matching the card's own
+   background paints over whatever's underneath instead. left: 0.5em
+   (not centered) lines the meaning up with r1's own left-aligned
+   reading text (align-items: flex-start -- see capReadingOverflow's
+   comment on l1/l2/l3 vs r1/r2 alignment), growing rightward the same
+   direction the reading itself does -- the 0.5em offset (rather than
+   flush at 0) is because r1's own left edge sits flush against the
+   kanji square's right edge, so 0 would start the meaning with no
+   breathing room from the kanji itself. */
 .r1 rt {
   position: absolute;
   bottom: 100%;
@@ -265,7 +521,12 @@ rt {
   margin-bottom: -1.5px;
   background: var(--color-bg);
 }
-
+/* kunAdd (l3) meanings -- same treatment as kun (r1) above, mirrored
+   horizontally: right: 0.5em (not left) lines the meaning up with
+   l3's own right-aligned reading text (align-items: flex-end, the
+   opposite of r1), growing leftward instead, with the same 0.5em gap
+   from the kanji -- l3's right edge is the one flush against the
+   kanji square here. */
 .l3 span:has(rt) { position: relative; }
 .l3 rt {
   position: absolute;
@@ -278,10 +539,30 @@ rt {
   background: var(--color-bg);
 }
 
+/* ── Pitch-accent diagram (SVG, drawn over furigana) ──────────── */
+/* Kana + pitch dots both live inside one small SVG per word, loosely
+   inspired by kanshudo's own pitch diagrams. The H/L shape is drawn
+   as explicit <circle> dots (sampled along the path by sampleDots()
+   in js/pitch.js) rather than a single dashed <polyline> — dashing
+   was tried first (border-based, then gradient-based, then a dashed
+   polyline) and kept running into rendering-engine quirks: dashes
+   sharing a box with a perpendicular border miter oddly at corners,
+   and a dash short enough to read as round via stroke-linecap is
+   short enough to become sub-pixel and get skipped entirely at
+   normal zoom. A circle has neither problem — it's round at any
+   radius and isn't subject to degenerate-dash-segment heuristics.
+   Geometry (cell width, dot spacing/radius, line heights, font size)
+   lives in PITCH_GEOMETRY / PITCH_FONT_SIZE at the top of js/pitch.js,
+   not here — tune the diagram's shape there; tune only dot color
+   here. */
 .pitch-svg { display: inline-block; vertical-align: middle; overflow: visible; }
 .pitch-char { font-size: 16px; fill: var(--color-muted); font-family: inherit; }
 .pitch-dot { fill: var(--mora-dot-color); }
 
+/* ── Card body (SVG + side columns) ─────────────────────────── */
+/* margin-top: 5px — the visible gap between .r-top's bottom edge and
+   the kanji square. Not a .readingShift leftover (that's gone): this
+   is real breathing room the card is meant to have. */
 .kc-body { overflow: visible; position: relative; padding: 0; margin: 4px auto 0; }
 .kc-body, .kc-body * { display: flex; }
 .kc-body, .kc-body .ctr, svg.kanji { height: var(--kanji-size); width: var(--kanji-size); }
@@ -295,6 +576,21 @@ rt {
   padding: 0;
 }
 
+/* ── Side columns (shared) ───────────────────────────────────── */
+/* width: max-content, not a fixed var(--col-width) — each card's
+   columns are position: absolute (outside the #kanji-grid flex flow
+   entirely, see below), so sizing one card's column to its own widest
+   reading never affects any other card's position or width; a card
+   with only 2-glyph readings stays narrow instead of matching some
+   other card's 5-glyph outlier. var(--col-width) survives as a floor
+   (min-width) so a short reading doesn't look oddly cramped. This does
+   NOT guarantee a very wide outlier reading can't visually reach the
+   neighboring card — the actual gap between cards comes from
+   #kanji-grid's justify-content: space-between, which knows nothing
+   about any card's column content. New kanji should be checked for
+   reading glyph length before going live (see kunAdd/kun-length
+   guidance the user asked to keep in mind); nothing here catches that
+   automatically. */
 .kc-left, .kc-right {
   position: absolute;
   top: 0;
@@ -306,18 +602,59 @@ rt {
 }
 .kc-left  { right: 100%; flex-wrap: wrap-reverse; border-right: var(--border-phonem); }
 .kc-right { left:  100%; flex-wrap: wrap;         border-left:  var(--border-phonem); }
-
+/* An in-progress edit (initFieldEditing's .editing class, on whichever
+   l1/l2/l3/r1/r2 field is active) needs at least double the resting
+   floor for its contenteditable input — min-width, not width, so a
+   column already wider than that (a long real reading) doesn't get
+   shrunk back down to exactly double while editing it. */
 .kc-left:has(.editing), .kc-right:has(.editing) { min-width: calc(var(--col-width) * 2); }
 
 .kc-left  > div, .kc-right > div { flex-direction: column; flex-wrap: wrap; }
-
+/* white-space: nowrap — every reading is meant to be exactly one line
+   (that's the whole point of column-wrapping into extra columns for a
+   kanji with many readings, rather than letting a line grow taller).
+   Without this, a multi-line flex-wrap column's width is resolved
+   through a few passes that can under-estimate what one particular
+   entry needs — when that happens, the browser's default is to wrap
+   that entry's own text onto a second line rather than let it request
+   more width, which silently breaks the one-reading-one-line design
+   (confirmed on 分's kun'yomi: わかれる wrapped internally, which then
+   miscounted its own column's height and pushed the next reading,
+   わかつ, into a spurious second column it didn't need). Forcing
+   nowrap here means a too-narrow estimate shows up as an entry
+   correctly claiming a new column instead, which is what's supposed
+   to happen. */
 .kc-left  > div > span, .kc-right > div > span { padding: 0 var(--pad-adjecent-big); white-space: nowrap; }
 .kc-left  > div:not(:first-child) > span, .kc-right > div:not(:first-child) > span {
    padding: 0 var(--pad-adjecent-big);
 }
+/* r1 specifically (not l1) was missing its left padding — everything
+   else here was already right. */
 
+/* ── Left column (On'yomi + additional readings) ─────────────── */
+/*
+ * l1 = top 50%  → main On'yomi
+ * l2 = top of lower 50% → additional On / kun
+ * l3 = bottom of lower 50% → additional Kun
+ *
+ * Base flex:1 on all children, then l1 overrides to exactly 50%;
+ * l2/l3 share the remaining 50%, with content pinned to opposite ends.
+ */
 .kc-left > div { text-align: right; align-items: flex-end; flex: 1; }
-
+/* row-gap: 3.2px — a fixed, absolute gap between readings, not a
+   relative one: 4 rows at line-height 21.6px (--font-reading, no
+   padding) is 86.4px of content in l1/r1's 96px box, leaving 9.6px of
+   slack split across the 3 gaps between them. That same 3.2px applies
+   regardless of how many readings a kanji actually has — 2 readings
+   get the same small gap 4 would, with the rest of the box left empty
+   below, rather than stretching to fill it (which is what
+   justify-content: space-between did instead, and specifically wasn't
+   wanted — the gap size shouldn't depend on row count). row-gap itself
+   only ever inserts space between consecutive items, never before the
+   first or after the last, so that part doesn't need justify-content
+   to enforce it. Applies per flex-wrap line independently, same as
+   space-between did, so a kanji whose readings wrap into several
+   columns gets this within each column on its own. */
 .l1, .r1 { flex: 1; min-height: 50%; justify-content: flex-start; column-gap: 0.1em; row-gap: 3.2px; }
 .l1      { flex: 0 0 50%; }
 .l2      { justify-content: flex-start; }
@@ -326,6 +663,15 @@ rt {
 .l3      { border-top: var(--border-transparent); }
 .l3-both { border-top: var(--border-dashed); }
 
+/* ── Right column (Kun'yomi + name readings) ─────────────────── */
+/* align-items: flex-start — matches .kc-left > div's own flex-end
+   (above). Without it, r1/r2's reading spans default to align-items:
+   stretch (flex's own default), forcing every span to the column's
+   current width regardless of its own text — which also breaks
+   .kc-right's width: max-content sizing itself, since a stretched
+   child reports the parent's width back as its own "natural" size
+   instead of its real content width, leaving the parent nothing
+   accurate to size to. */
 .kc-right > div { text-align: left; align-items: flex-start; }
 .r2 {
   position: relative;
@@ -334,8 +680,10 @@ rt {
   column-gap: 0px;
   max-height: 50%;
   min-height: 1em;
-}
+} 
+/*! see js/main.js:973 ~ for the shortening of the column-gap; and the dotted line   */
 
+/* ── Reading typography ──────────────────────────────────────── */
 .on, .kun { font-size: var(--font-reading); }
 .on, .kun, .add { line-height: 1.2; }
 .add { font-size: var(--font-add); line-height: 1.133; }
@@ -343,6 +691,7 @@ rt {
 .kun  { color: var(--color-kun);  }
 .name { color: var(--color-name); }
 
+/* ── Kanji SVG (crosshair via CSS gradient) ──────────────────── */
 svg.kanji {
   background:
     repeating-linear-gradient(
@@ -358,6 +707,7 @@ svg.kanji {
   border: var(--border-kanji);
 }
 
+/* ── Animate button ──────────────────────────────────────────── */
 .animBtn {
   position: absolute;
   bottom: 4px;
@@ -375,20 +725,75 @@ svg.kanji {
 .animBtn:hover:not(:disabled) { background: var(--btn-bg-hover); }
 .animBtn:disabled { opacity: 0.35; cursor: default; }
 
-.infoWrap { position: absolute; bottom: 4px; left: 4px; }
+/* ── Info button + popup (bottom-left, mirrors .animBtn's corner) ── */
+/* width/height, close to .infoBtn's own rendered box (19.3px x 19px —
+   its padding + "i" glyph, no fixed size of its own, see its own
+   comment) — needed because .infoBtn is position: absolute (to sit
+   exactly in the corner despite its own margin: 1em, see .infoBtn's own
+   comment), which takes it out of normal flow entirely: .infoWrap no
+   longer has any in-flow content to size itself around, so without this
+   it collapses to 0x0, and .infoPopup's left: 100%/right: 100% (below)
+   — "100% of zero" — lands the popup right on top of the button instead
+   of beside it.
+   .infoBtn's own ::after below covers the gap before the popup. */
+.infoWrap { position: absolute; bottom: 4px; left: 4px; width: 21px; height: 21px; }
 .infoBtn {
-
+  /* Same sizing technique as .animBtn — padding sets the box, no
+     fixed width/height/line-height to fight the flex context every
+     card descendant is forced into. border-radius: 50% rounds a
+     small, roughly-square padded box into a circle. */
   background: var(--btn-bg);
   color: var(--btn-color);
   border-radius: 50%;
   padding: 2px 9px 2px 7px;
+  /* margin-left: 1em; */
+  /* margin-right: -2em; */
+  margin: 1em;
+  position: absolute;
+  left: -1em;
+  bottom: -1.1em;
   font-size: var(--btn-font);
   font-family: serif;
   font-style: italic;
   transition: background 0.2s;
 }
 .infoBtn:hover, .infoBtn:focus-visible { background: var(--btn-bg-hover); }
+/* The popup only shows while .infoBtn itself (the .popupTrigger) is
+   :hover — see .popupWrap > .popupTrigger:hover ~ .popupContent above;
+   that's keyed to the TRIGGER specifically, not .infoWrap, so it can't
+   tell a nested phenomenon-dictionary popup's own hover apart from its
+   outer .infoPopup ancestor's. .infoPopup's own margin (visual gap,
+   see .popupWrap.infoWrap .popupContent) is therefore a dead strip the
+   mouse has to cross without anything hoverable under it — unless
+   something still counts as "hovering .infoBtn" while over it. A
+   pseudo-element is exactly that: ::after paints as part of .infoBtn
+   itself, so hovering it keeps .infoBtn:hover true. Same trick as the
+   old csgoaddict.com info-card's div.info::after. */
+/* Anchored at a single point (the button's own center), not all four
+   edges — "top/right/bottom/left: 0" pins the border box to exactly
+   .infoBtn's own bounds, and padding only shrinks the content area
+   inward from there, it can't push the border box out past edges that
+   are already pinned. With just one anchor point, padding is what
+   sizes the box (ordinary content-box auto-sizing), so it grows
+   outward symmetrically in every direction — covering the gap however
+   the popup opens, with no .openLeft-specific case needed. */
+.infoBtn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1.8em;
+}
 
+/* ── Edit-kanji button (top-left) + placeholder (top-right) ──────
+   Same round "i"-button treatment as .infoBtn, just at the opposite
+   (top) corners — invisible until you hover the kanji square itself
+   (.ctr), not just the button's own tiny hit box, so there's
+   something to hover toward in the first place; :focus-visible keeps
+   them reachable by keyboard regardless of hover. Edit-mode-gated like
+   every other editing affordance (.addWordBtn, [data-field]) — see
+   body.editMode further down. */
 .editKanjiBtn, .placeholderBtn {
   position: absolute;
   top: 4px;
@@ -412,7 +817,18 @@ svg.kanji {
   opacity: 1;
 }
 body:not(.editMode) .editKanjiBtn, body:not(.editMode) .placeholderBtn, body:not(.editMode) .editPositionGroup { display: none; }
-
+/* Quick position edit — hover the "e" button, move the cursor straight
+   down onto the popup that appears a full 1em below it, and edit the
+   number directly, no modal needed. editKanjiBtn is now a normal
+   (position:static) child of this group rather than absolutely
+   positioned itself — the GROUP takes over its old top-left corner and
+   is tall enough (height) to continuously cover the button, the 1em
+   gap, and the popup as one hoverable rectangle, so a cursor moving
+   straight down never crosses empty space with nothing under it to
+   keep the hover state alive (the previous version relied on near-zero
+   gap for exactly this reason; an intentional 1em gap needs this
+   instead). pointer-events: none while hidden so an invisible popup
+   can't still intercept clicks meant for whatever's underneath it. */
 .editPositionGroup {
   position: absolute;
   top: 4px;
@@ -420,13 +836,17 @@ body:not(.editMode) .editKanjiBtn, body:not(.editMode) .placeholderBtn, body:not
   height: 4.5em;
   font-size: var(--font-bot);
   z-index: 3;
-
+  /* .kc-body, .kc-body * (Card body, further up) force-flexes every
+     descendant, this group included — without this, its one
+     in-flow child (the button) stretches to the group's full height
+     under flex's default align-items:stretch, turning the small round
+     edit button into a tall rectangle. */
   align-items: flex-start;
 }
 .editPositionGroup .editKanjiBtn { position: static; }
 .positionQuickPopup {
   position: absolute;
-  top: calc(19px + 1em);
+  top: calc(19px + 1em); /* button's own measured bottom edge, plus a full 1em gap below it */
   left: 0;
   z-index: 4;
   background: var(--btn-bg);
@@ -444,41 +864,82 @@ body:not(.editMode) .editKanjiBtn, body:not(.editMode) .placeholderBtn, body:not
 }
 .positionQuickPopup label { display: flex; align-items: center; gap: 0.4em; font-size: var(--font-bot); color: var(--btn-color); white-space: nowrap; }
 .positionQuickInput { width: 4em; font: inherit; border: none; border-radius: 3px; padding: 0.2em 0.3em; }
-
+/* Vertically centered on the info button and opening to whichever
+   side has room, rather than fixed above/left — the button sits at
+   the kanji square's bottom-left corner, so "above" cramped it
+   against the word-list row and "left" would run off the card (or
+   under the neighbor to the left) whenever there wasn't room. Default
+   is open-right (left: 100%); .infoWrap.openLeft (set by JS in
+   initPopups(), which measures actual available space each time it
+   opens) flips it to open-left instead. */
 .infoPopup {
   flex-direction: column;
   gap: 0.5em;
   top: 50%;
   left: 100%;
   transform: translateY(-50%);
-  margin-left: 6px;
   padding: 0.6em 0.7em;
   width: max-content;
-  min-width: 520px;
+  min-width: 520px; /* still 2x the old 260px max-height — kept as-is,
+    this shape was already right */
   max-width: 600px;
-  max-height: 80vh;
+  max-height: 80vh; /* was 260px — this one hadn't grown yet */
   overflow-y: auto;
-  overflow-x: hidden;
-  font-size: var(--font-bot);
+  overflow-x: hidden; /* explicit, not left to default — with only
+    overflow-y set, overflow-x computes to auto too (the spec's
+    anti-inconsistent-painting rule), which could show a horizontal
+    scrollbar/sliver of a nested phenomenon popup nudged flush against
+    this box's own edge; nothing in here is meant to scroll sideways. */
+  font-size: var(--font-bot); /* was --font-small — this is the card's
+    content, not a footnote; give it the same weight as the meaning
+    text on the card face, not the smallest size in the stylesheet. */
   color: var(--parchment-text);
 }
-
+/* .popupWrap .popupContent (generic popup plumbing, above) sets the
+   dark background/border shared with the variant-glyph popup, at
+   equal specificity (two classes) to a plain .infoPopup override —
+   .infoWrap adds a third class here so this reliably wins regardless
+   of source order (the same trick that selector itself uses against
+   .kc-body, .kc-body *). */
 .popupWrap.infoWrap .popupContent {
   background: var(--parchment-bg);
   border: 3px solid var(--parchment-border);
+  margin: 0.5em;
 }
-
+/* .kc-body, .kc-body * (Card body, further down) force-flexes every
+   descendant of the kanji square, .infoPopup included — that's fine
+   for its own contents, but it also reaches the <ruby>/<rt> inside
+   each word row and overrides their special ruby box model with
+   plain flex, which is what stacks furigana above the base text in
+   the first place (the main card's own word list never hits this,
+   since it lives in .r-top, outside .kc-body). Restoring the real
+   ruby display values here — scoped with enough specificity
+   (.infoWordRow + type selector) to beat that broad rule regardless
+   of source order — puts the furigana back above the kanji instead
+   of beside it. */
 .infoWordRow ruby { display: ruby; }
 .infoWordRow rt   { display: ruby-text; }
-
+/* .wordKanji::before (Frequent-word spans, above) draws a dotted
+   divider to its left — meant to separate consecutive words sitting
+   inline in a row on the card face (外国人 | 犯人 | 人). Each info-popup
+   word is its own bordered box instead, with nothing to its immediate
+   left to divide from, so that leftover divider is just a stray mark
+   here — switched off for this context specifically. */
 .infoWordRow .wordKanji::before { content: none; }
 .infoWrap.openLeft .infoPopup {
   left: auto;
   right: 100%;
-  margin-left: 0;
-  margin-right: 6px;
 }
-
+/* First thing in the popup, before the word list — one row, split
+   left/right: this kanji's pronunciations on the left (its own
+   on'yomi/kun'yomi from kanji.json, the same strings the card face
+   already shows, plus any "extra" reading found on a single-character
+   word entry that isn't part of that list, e.g. ぽん for 本, whose card
+   only lists ホン), and the 4 recognized reading-variation categories
+   (counter suffix, 半濁音化, 連濁, 音便) on the right — always all 4, on
+   every kanji, so this reads as a fixed reference key rather than a
+   sometimes-there-sometimes-not row; see .infoCategoryInactive for the
+   ones this kanji's words don't actually demonstrate. */
 .infoPhenomena {
   align-self: stretch;
   display: flex;
@@ -488,7 +949,11 @@ body:not(.editMode) .editKanjiBtn, body:not(.editMode) .placeholderBtn, body:not
   gap: 0.6em;
   padding-bottom: 0.4em;
   border-bottom: 1px dashed var(--parchment-border-row);
-
+  /* This is a heading for the popup's own main content, not a
+     footnote — same 14px main-text sizing as the rest of the info
+     card (.infoPopup, .r-bot), not the smallest size in the
+     stylesheet. Full parchment-text color + weight 500, matching
+     .r-bot's own treatment of the card's "main" text elsewhere. */
   font-size: var(--font-bot);
   font-weight: 500;
   color: var(--parchment-text);
@@ -496,7 +961,18 @@ body:not(.editMode) .editKanjiBtn, body:not(.editMode) .placeholderBtn, body:not
 .infoReadings, .infoCategoryList { display: flex; flex-wrap: wrap; gap: 0.5em; }
 .infoReadings { align-items: baseline; }
 .infoCategoryList { justify-content: flex-end; font-size: var(--font-small); }
-
+/* Real ruby (display: ruby/ruby-text) was tried here, but its box
+   model always sizes the ruby container to fit whichever of base/
+   annotation is wider — there's no in-flow way to keep that box
+   pinned to the (compact) reading's own width while letting a much
+   longer meaning visually spill past it onto a neighboring reading;
+   a box that's already widened to contain its content can't also
+   overflow that same content past its own edge. position: absolute
+   is what takes the annotation out of the flex row's sizing entirely,
+   so the reading's own box — and the row's flex-wrap/gap around it —
+   never grows to accommodate it, and the (possibly much wider)
+   centered meaning text is free to paint straight over whatever sits
+   above/below/beside it instead. */
 .infoReadingMeaning { position: relative; padding: 8px 0; }
 .infoReadingMeaning rt {
   position: absolute;
@@ -508,20 +984,37 @@ body:not(.editMode) .editKanjiBtn, body:not(.editMode) .placeholderBtn, body:not
   font-size: var(--font-small);
   color: var(--parchment-muted);
 }
-
+/* Alternates with the default (over) per reading so consecutive
+   meanings don't crowd the same line — see buildReadingSpan, main.js. */
 .infoReadingMeaning.rubyUnder rt { bottom: auto; top: 100%; margin-bottom: 0; margin-top: -8px; }
-
+/* An "extra" reading (not part of this kanji's own on'yomi/kun'yomi —
+   see the knownReadings check in buildInfoButton, main.js) — same
+   --parchment-warn used for the "unverified" badge elsewhere, since
+   both mean "this doesn't match what the rest of the card tells you".
+   One tied to a recognized phenomenon (半濁音化, 連濁, counter suffix...)
+   is also a popup trigger (hover, or click/tap to lock — same
+   mechanism as every other popup here, via .popupTrigger +
+   initPopups()) naming and explaining why, rather than a native
+   title-attribute tooltip: styled like the rest of the card instead of
+   however the browser feels like rendering title text, and it works
+   the same on touch. Dotted underline is the same "there's more here"
+   affordance .variantTag uses for the kanji-square's own glyph tags. */
 .infoReadingExtra { color: var(--parchment-warn); }
 button.infoReadingExtra { font: inherit; border-bottom: 1px dotted var(--parchment-warn); }
 button.infoReadingExtra:hover, button.infoReadingExtra:focus-visible { border-bottom-style: solid; }
-
+/* Dictionary entry for one extra reading or category: its definition
+   (or, for an extra reading, the definition of whichever phenomenon
+   produced it). Opens downward (top: 100%) rather than
+   variantTooltip's upward pattern — this row sits at the very top of
+   .infoPopup, and that popup's own overflow-y: auto would clip
+   anything opening above it. */
 .phenomenonPopup {
   flex-direction: column;
   gap: 0.4em;
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  margin-top: 6px;
+  /* Flush, not margin-top — see .variantTooltip's own comment. */
   padding: 0.5em 0.7em;
   width: max-content;
   max-width: 260px;
@@ -529,7 +1022,12 @@ button.infoReadingExtra:hover, button.infoReadingExtra:focus-visible { border-bo
   font-size: var(--font-small);
   color: var(--parchment-muted);
 }
-
+/* One of the 4 fixed categories on the right. All 4 are always
+   present (buildInfoButton, main.js); .infoCategoryInactive marks the
+   ones this kanji's words don't actually demonstrate — grayed out
+   (low-contrast, no underline) rather than omitted, but still a real
+   popup trigger, since the definition itself is still worth a hover
+   even when it isn't relevant to this particular card. */
 .infoCategory {
   font: inherit;
   color: var(--parchment-muted);
@@ -538,22 +1036,46 @@ button.infoReadingExtra:hover, button.infoReadingExtra:focus-visible { border-bo
 .infoCategory:hover, .infoCategory:focus-visible { color: var(--parchment-word); border-bottom-color: var(--parchment-word); }
 .infoCategoryInactive { color: var(--parchment-border-row); border-bottom: none; }
 .infoCategoryInactive:hover, .infoCategoryInactive:focus-visible { color: var(--parchment-muted); }
-
+/* Each word is its own box (border on all sides, not just a bottom
+   divider) so it still reads as a distinct item however it wraps —
+   short ones (short word, short meaning, no jlpt/pos) end up sharing
+   a row with a neighbor instead of each always claiming a full row's
+   width regardless of how little content it actually has. */
 .infoWordList { display: flex; flex-wrap: wrap; gap: 0.5em; }
 .infoWordRow {
   display: flex;
   flex-direction: column;
   gap: 0.1em;
-
+  /* flex-basis stays a fixed 160px, NOT auto/content-based — tried
+     auto first, but a row's real content width includes the whole
+     .infoWordMeta line (meaning + pos + jlpt + link), which is wide
+     enough on nearly every entry, short word or not, that almost
+     every row ended up claiming a full line by itself again — the
+     exact one-per-row problem this whole thing started from. The
+     wrap decision needs a fixed, content-agnostic basis to pack
+     multiple rows per line at all. Content-proportional width instead
+     comes from flex-grow being set per-row inline (in buildInfoButton,
+     main.js) to that same entry's estimated content weight, reusing
+     the sort weight — so on a shared line, the bigger-content row
+     still claims more of the leftover space, without that ever
+     affecting whether rows fit on the line together in the first
+     place. min-width is the hard floor under all of it. */
   flex: 1 1 160px;
   min-width: 160px;
   padding: 0.3em 0.5em;
   border: 1px dashed var(--parchment-border-row);
   border-radius: 4px;
 }
-
+/* Same size as the frequent-word kanji on the card face (--font-top,
+   the .r-top row's font-size, which .wordKanji there just inherits) —
+   .infoPopup's own font-size would otherwise apply here instead. */
 .infoWordRow .wordKanji { color: var(--parchment-word); font-size: var(--font-top); }
-
+/* Only present on words with more than one accepted pronunciation
+   (buildInfoButton, main.js) — e.g. 本 read ほん 90% of the time, ぽん
+   10%. The variant matching the row's own kana (already shown above,
+   in the furigana) is the one actually in --parchment-word; the rest
+   stay muted, so this reads as "here's how common that reading is,
+   and what else it's sometimes read as" rather than N equal options. */
 .infoPronunciation { color: var(--parchment-muted); font-size: var(--font-small); }
 .infoPronunciationActive { color: var(--parchment-word); font-weight: 600; }
 .infoPronunciationSep { padding: 0 0.3em; }
@@ -586,10 +1108,14 @@ button.infoReadingExtra:hover, button.infoReadingExtra:focus-visible { border-bo
   border-top: 1px dashed var(--parchment-border-row);
 }
 .infoEmpty { color: var(--parchment-muted); }
-
+/* .pitch-char / .pitch-dot (pitch-accent SVG, above) are tuned for
+   the dark --color-bg card face; each info-row's furigana reuses the
+   same SVG, so it needs its own, higher-specificity fill here to stay
+   legible (and on-theme) against the parchment background instead. */
 .infoWordRow .pitch-char { fill: var(--parchment-muted); }
 .infoWordRow .pitch-dot { fill: var(--parchment-word); }
 
+/* ── Bottom row (meaning / frequent word meanings) ───────────── */
 .r-bot {
   height: 2em;
   overflow-y: visible;
@@ -597,7 +1123,18 @@ button.infoReadingExtra:hover, button.infoReadingExtra:focus-visible { border-bo
   font-size: var(--font-bot);
   color: var(--color-footer);
   font-weight: 500;
-
+  /* width: max-content + left:50%/translateX(-50%) — same fix .r-top
+     already uses (above) for the identical problem: a kanji with
+     several long meaning entries (e.g. 対's own meaning plus 3 word
+     meanings) wrapped its last entry onto a second line, which then
+     overflowed the fixed 2em height into whatever sat below it on the
+     card. This lets .r-bot claim exactly as much width as its content
+     needs on one line, centered over the card (.kc's own overflow:
+     visible already lets side content like this spill past its edges,
+     same as .kc-left/.kc-right do) — position:relative is required for
+     `left` to do anything; translateX half-cancels the left:50% shift
+     so the box ends up centered rather than starting at the card's
+     center. */
   width: max-content;
   max-width: none;
   position: relative;
@@ -605,6 +1142,11 @@ button.infoReadingExtra:hover, button.infoReadingExtra:focus-visible { border-bo
   transform: translateX(-50%);
 }
 
+/* ── Legend card (grid's first entry — same markup/classes as a real
+   card, buildLegendCard() in main.js, so every area sits exactly
+   where its real counterpart would; labeled instead of populated
+   with actual kanji data). Dashed border + a small tab-style title
+   set it apart from the real cards at a glance. */
 .legendCard { position: relative; border: var(--border-dashed); }
 .legendTitle {
   position: absolute;
@@ -617,21 +1159,56 @@ button.infoReadingExtra:hover, button.infoReadingExtra:focus-visible { border-bo
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
-
+/* Small and italic rather than the real reading/meaning sizes those
+   columns normally carry (--font-reading is 18px — an English phrase
+   at that size would blow out every fixed-width column here) — this
+   is a caption identifying the area, not content filling it.
+   Deliberately no color of its own: every label sits inside (or
+   carries) the same class a real value in that spot would — .on/.kun/
+   .name on the column divs, .wordKanji/.wordMeaning/.meaningKanji/
+   .componentKanji on the labels themselves — so it inherits or is
+   overridden by that field's real color instead of one flat tone,
+   and .wordKanji/.wordMeaning's own ::before dotted-line divider (the
+   same one that separates real frequent words on the card face) comes
+   along for free rather than needing a separate "·" character here. */
 .legendLabel {
   font-size: 8px;
   line-height: 1.2;
   font-style: italic;
   font-weight: normal;
 }
-
+/* The legend's info button describes the real one in prose instead of
+   showing (fabricated or borrowed) word data — much shorter than an
+   actual word list, so a narrower box reads better than the 520px a
+   real one needs to hold several word entries. */
 .legendCard .infoPopup { min-width: 220px; }
 .legendInfoText { display: block; padding: 0.6em 0.7em; text-align: left; white-space: normal; }
 
+/* ── Counters placeholder (grid's last entry — buildCountersPlaceholder,
+   main.js) ─────────────────────────────────────────────────────
+   Marks the spot for a future Japanese-counter-word feature; static
+   label only for now. Shares the grid's own flex-wrap flow with every
+   real card — no forced row-break — landing on whichever row has room
+   (wrapping to a fresh one on its own if it doesn't fit, same as a
+   very wide card would). margin-right: auto is what pushes it flush to
+   that row's own terminal edge: in a flex container, auto margin on an
+   item consumes all leftover space on that side of it within its own
+   line — #kanji-grid's own flex-direction: row-reverse (above) means
+   the main axis runs right-to-left, so the "end of the row" (where the
+   LAST thing in reading order belongs) is now the LEFT side, and the
+   margin needs to push RIGHTward (margin-right: auto) to land there,
+   not margin-left as it would under the normal row direction every
+   other margin: auto trick on this page still assumes (#navMenu's own
+   button group, for one). */
 .counterBox {
   box-sizing: border-box;
   width: calc(var(--card-size) * 4);
-
+  /* height is set inline by syncCountersBoxHeight (main.js), measured
+     from a real card rather than derived here — .r-top/.r-bot's own
+     2em resolve against THEIR OWN font-size (--font-top/--font-bot),
+     not .kc's inherited one, which made a hand-derived calc() drift
+     off by several px from a real card's actual height. This fallback
+     only applies for the one frame before that JS runs. */
   height: var(--kanji-size);
   margin-right: auto;
   display: flex;
@@ -643,6 +1220,31 @@ button.infoReadingExtra:hover, button.infoReadingExtra:focus-visible { border-bo
   color: var(--color-text);
 }
 
+/* ── Nav menu (index.html; wiring in initNavMenu, main.js) ──────
+   position: fixed, not sticky — #kanji-grid overflows the page both
+   vertically AND horizontally now (the ruler footer), and sticky's
+   positioning is bounded by its CONTAINING BLOCK (body), which stays
+   at viewport width even though a child like #kanji-grid overflows it
+   (a child's overflow never enlarges its parent's own box) — so
+   sticky had no room to shift #navMenu rightward as the page scrolled
+   right, confirmed directly: its computed `left` stayed 0px the whole
+   time while it visually scrolled off anyway, since the VIEWPORT
+   moved, not the element. fixed sidesteps this by positioning purely
+   against the viewport, no containing-block involved. The cost: fixed
+   takes #navMenu out of flow entirely, so nothing pushes #kanji-grid
+   down by its height automatically the way sticky did — see
+   syncNavMenuSpacing (main.js), which measures the real rendered
+   height via ResizeObserver and reserves that much space as body's
+   own padding-top instead. */
+/* No vertical padding here — a dropdown-capable child (.navDropdown)
+   needs to be able to stretch to this row's REAL full height, and
+   container padding sits outside any flex item's own box regardless of
+   stretch, making that structurally impossible (see .navDropdown's own
+   comment below). Instead, each ordinary direct child carries its own
+   margin-top/bottom to recreate the same visual spacing individually
+   (#navMenu > .navTitle/.navToggle/button, below) — .navDropdown simply
+   has none, so stretching it reaches all the way to this row's true
+   edges, with nothing left outside any item's box to block it. */
 #navMenu {
   position: fixed;
   top: 0;
@@ -652,17 +1254,43 @@ button.infoReadingExtra:hover, button.infoReadingExtra:focus-visible { border-bo
   display: flex;
   align-items: center;
   gap: 1.2em;
-  padding: 0.6em 1em;
+  padding: 0 1em;
   background: var(--color-bg);
   border-bottom: var(--border-default);
   font-family: sans-serif;
   font-size: var(--font-bot);
   color: var(--color-text);
 }
+/* margin-top/bottom (not the old container padding) is what gives
+   these direct children their vertical breathing room from the nav's
+   own edges — margin-top/bottom specifically, not the margin shorthand,
+   so this never collides with a child's own horizontal margin (e.g.
+   #resetDataBtn's margin-right: auto below). Deliberately scoped to
+   DIRECT children only (#navMenu > ...) — the same classes/elements
+   reappear inside .navDropdownPanel (nested toggles, the recalculate
+   button), which already have their own internal padding and don't
+   need this. */
+#navMenu > .navTitle,
+#navMenu > .navToggle,
+#navMenu > button {
+  margin-top: 0.6em;
+  margin-bottom: 0.6em;
+}
 .navTitle { font-weight: bold; }
-
+/* Sits right after the title on the left; margin-right: auto here
+   (not on .navTitle) pushes every button/toggle after it into its own
+   group at the right edge, instead of the reset button joining that
+   group too. */
 #resetDataBtn { margin-right: auto; }
-.navToggle { display: flex; align-items: center; gap: 0.4em; color: var(--color-muted); cursor: pointer; }
+.navToggle { display: flex; align-items: center; color: var(--color-muted); cursor: pointer; }
+/* Per-element margin, not a shared .navToggle gap — gap would apply the
+   same spacing to every pair of children including the arrow, which
+   needs to sit snug (see .navDropdownArrow's own negative margin-left)
+   rather than match this. .slideToggle is the only one needing it: the
+   checkbox itself is invisible/out of flow (see .slideToggleInput) so
+   there's nothing to space before it, and the arrow already handles its
+   own spacing independently. */
+.navToggle .slideToggle { margin-left: 0.4em; }
 #navMenu button {
   padding: 0.3em 0.6em 0.4em;
   background: var(--btn-bg);
@@ -675,6 +1303,10 @@ button.infoReadingExtra:hover, button.infoReadingExtra:focus-visible { border-bo
 #navMenu button:hover:not(:disabled) { background: var(--btn-bg-hover); }
 #navMenu button:disabled { opacity: 0.4; cursor: default; }
 
+/* Slide toggle — the real checkbox (#editModeToggle/#confirmOverwriteToggle)
+   stays in the DOM, focusable and screen-reader-announced, but visually
+   hidden; .slideToggle is its sibling <span>, styled as a track+thumb
+   off the input's :checked state via the adjacent-sibling selector. */
 .slideToggleInput {
   position: absolute;
   width: 1px;
@@ -707,21 +1339,38 @@ button.infoReadingExtra:hover, button.infoReadingExtra:focus-visible { border-bo
 .slideToggleInput:checked + .slideToggle::before { transform: translateX(1em); }
 .slideToggleInput:focus-visible + .slideToggle { outline: 2px solid var(--color-text); outline-offset: 2px; }
 
+/* ── Click-to-edit fields (initFieldEditing, main.js) — every
+   [data-field] container (on/onAdd/kun/kunAdd/name/meaning/components/
+   variants) on a real card. Same subtle-until-hovered affordance as
+   the word popups, not a permanent dashed box around every field —
+   and only shown at all while edit mode (#editModeToggle, initNavMenu)
+   is on; clicks are JS-blocked when it's off (see initFieldEditing). */
 [data-field] { outline: 1px dashed transparent; outline-offset: 2px; }
 body.editMode [data-field] { cursor: text; }
 body.editMode [data-field]:hover, body.editMode [data-field]:focus { outline-color: var(--color-muted); }
 [data-field].editing { outline: 1px dashed var(--color-word); outline-color: var(--color-word); background: rgba(255, 255, 255, 0.08); }
-
+/* The click target for a field that's currently empty — most visible
+   on a brand-new custom kanji, where every field starts this way.
+   Hidden outside edit mode: an inviting "+" you can't actually click
+   would just be confusing in view-only mode. */
 .fieldPlaceholder { color: var(--color-muted); font-style: italic; }
 body:not(.editMode) .fieldPlaceholder { display: none; }
 
+/* ── Word-slot editor (buildCard's .wordSlotWrap/.wordSlotPopup, wired
+   in initWordSlotEditing, main.js) — a small form instead of a single
+   contenteditable field, since one word slot is word+kana+pitch+pos+
+   jlpt+meaning together, not one value. Centered above its trigger
+   like .variantTooltip, since it's anchored in the card's bottom row
+   with limited room below. */
 .wordSlotPopup {
   flex-direction: column;
   gap: 0.4em;
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  margin-bottom: 6px;
+  /* Flush, not margin-bottom — see .variantTooltip's own comment. This
+     one especially matters: it's a real editing form (word/kana/pitch/
+     pos/JLPT/meaning inputs + Save/Cancel), not just text. */
   padding: 0.6em 0.7em;
   width: max-content;
   font-size: var(--font-small);
@@ -749,7 +1398,8 @@ body:not(.editMode) .fieldPlaceholder { display: none; }
   cursor: pointer;
 }
 .wordSlotActions button:hover { background: var(--btn-bg-hover); }
-
+/* Custom kanji only (buildCard) — sits after the last real .wordKanji
+   chip, same row. */
 .addWordBtn {
   font: inherit;
   font-size: var(--font-small);
@@ -764,6 +1414,25 @@ body:not(.editMode) .fieldPlaceholder { display: none; }
 .addWordBtn:hover { color: var(--color-text); border-color: var(--color-text); }
 body:not(.editMode) .addWordBtn { display: none; }
 
+/* ── "Add a new kanji" modal (index.html; wiring in initAddKanjiModal,
+   main.js) ─────────────────────────────────────────────────────────
+   Every field for a brand-new custom kanji in one screen, rather than
+   clicking through each one individually on the card face afterward
+   (still how EDITING an existing field works — this only replaces the
+   old blank-record-then-fill-in-place flow "+ Add kanji" used before).
+   position: fixed, not absolute — covers the actual viewport
+   regardless of scroll position or which card triggered it, since
+   there's no one natural anchor point for a page-wide action like this
+   the way every other popup here has one. [hidden] over a class toggle
+   for the closed state — nothing here needs the opacity/visibility
+   fade the click-to-lock popups use, and hidden's UA-default display:
+   none is one less thing to keep in sync with a class name. */
+/* isolation: isolate — this overlay already wins the page's global
+   z-index stack (40, above the nav's 30 and every popup's 10/20), but
+   forcing its own stacking context here as well means nothing on the
+   page can ever interfere with it via some unrelated z-index/position
+   combination elsewhere, not just the ones this file happens to set
+   today. */
 .modalOverlay {
   position: fixed;
   inset: 0;
@@ -776,9 +1445,23 @@ body:not(.editMode) .addWordBtn { display: none; }
   background: color-mix(in srgb, var(--color-bg) 80%, transparent);
   overflow-y: auto;
 }
-
+/* [hidden]'s own UA-stylesheet display: none is the SAME specificity
+   as .modalOverlay's display: flex above (one class vs. one
+   attribute) — author styles win a specificity tie over the user-
+   agent stylesheet regardless of source order, so display: flex was
+   winning even while hidden, and every close path (Cancel, Escape,
+   the backdrop) was correctly setting the hidden property the whole
+   time without it ever having any visible effect. The extra
+   [hidden] here (two selectors' worth of specificity) fixes that. */
 .modalOverlay[hidden] { display: none; }
-
+/* Parchment, not the page's own dark palette — this is the same
+   "second reference card" register .infoPopup already uses (see its
+   own comment further up), and a full-screen data-entry form reads
+   the same way: closer to a paper form than another dark panel. */
+/* width: 1440px (was 720) — this form has always had enough fields to
+   need scrolling; doubling the width lets the layout below spread
+   those fields sideways (two columns up top, three word slots across)
+   instead of one long scrolling list. */
 .modalBox {
   display: flex;
   flex-direction: column;
@@ -796,7 +1479,10 @@ body:not(.editMode) .addWordBtn { display: none; }
 .modalBox h2 { margin: 0; color: var(--parchment-word); }
 .modalBox h3 { margin: 0.4em 0 0; font-size: var(--font-bot); color: var(--parchment-muted); }
 .modalBox h3 small { font-weight: normal; }
-
+/* Two side-by-side columns — basic identity (character/meaning/
+   variants/components) on the left, all the reading fields on the
+   right — rather than one long column of same-width rows now that
+   there's the width to spare. */
 .modalTopGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1.4em; align-items: start; }
 .modalTopCol { display: flex; flex-direction: column; gap: 0.6em; }
 .modalField {
@@ -806,9 +1492,26 @@ body:not(.editMode) .addWordBtn { display: none; }
   color: var(--parchment-muted);
   font-size: var(--font-bot);
 }
-
+/* [hidden]'s own UA-stylesheet display: none loses to this class's
+   own display: flex above regardless of selector specificity (author
+   styles always beat user-agent ones) -- akKunAddMeaningField relies
+   on actually hiding when toggled via .hidden in main.js, so this
+   restores that. */
 .modalField[hidden] { display: none; }
-
+/* character+meaning in one sub-column, both components fields in the
+   other, side by side — same 2-column idea as .modalTopGrid itself,
+   just one level deeper. */
+/* A real 2x2 grid (character, components-compact, meaning,
+   components-extensive, in that source order — grid auto-placement
+   fills row-major, so that order alone puts character+compact on row
+   1 and meaning+extensive on row 2) rather than two independent
+   flex-columns: a flex-column's own rows only stack to fit ITS OWN
+   content, with no cross-column row-height sync, so "meaning" and
+   "components (extensive)" only lined up by coincidence — exactly
+   until "components (extensive)" (much longer label than "meaning")
+   wrapped to 2 lines at some narrower width and "meaning" didn't.
+   Grid rows are shared across both columns by definition, so this
+   can't drift out of alignment regardless of how either label wraps. */
 .modalCharCompGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6em 1em; }
 .modalTopCol > .modalField { flex: 0 0 auto; }
 .modalField input, .modalField textarea {
@@ -819,19 +1522,53 @@ body:not(.editMode) .addWordBtn { display: none; }
   padding: 0.3em 0.5em;
   font: inherit;
 }
-
+/* max-width, not flex-basis — a fixed pixel size on the MAIN axis
+   means something different depending on flex-direction (width in a
+   row, height in a column), which is exactly what broke this box
+   before when it moved from sitting beside meaning (a row) to above
+   it (a column). max-width always means width, regardless. */
 .modalFieldChar input { max-width: 100px; font-size: 1.4em; text-align: center; }
-
+/* character + position share row 1 of .modalCharCompGrid's first cell
+   (a plain flex row, not part of the grid itself) so the grid stays a
+   real 2x2 — components(compact)/meaning/components(extensive) still
+   fall into the same cells they always did. */
 .modalFieldCharRow { display: flex; gap: 0.6em; }
-
+/* Generic 2-up row for the second column's reading fields (on'yomi +
+   on'yomi (extra); kun'yomi + its new meaning field; kun'yomi (extra)
+   + its meaning field) — unlike .modalFieldCharRow's fixed-width pair,
+   these two fields split the row evenly. min-width: 0 lets a textarea
+   actually shrink below its content size inside the flex item, rather
+   than forcing the row to overflow. */
 .modalFieldRow { display: flex; gap: 0.6em; }
 .modalTopCol > .modalFieldRow { flex: 0 0 auto; }
 .modalFieldRow > .modalField { flex: 1 1 0; min-width: 0; }
-
+/* Grid slot, not a linguistic field — kept small/plain (no textarea,
+   no comma-list styling) since it's just one integer. */
 .modalFieldPosition input { max-width: 100px; }
-
+/* rows="1" in the markup keeps these compact until there's actually a
+   long comma-separated list (name readings especially can run to
+   dozens) to wrap — resize: vertical, not the browser default (both
+   axes), since these sit in a fixed-width field grid and widening one
+   would just overflow it. */
 .modalField textarea { resize: vertical; min-height: 2.4em; font-family: inherit; }
-
+/* kun/kunAdd meaning — one labeled input per reading (same idea as
+   .modalWordEntryFields giving each word its own fields, rather than
+   one bulk field for all of them), regenerated live as the matching
+   kun'yomi/kun'yomi (extra) textarea changes — see
+   refreshKunMeaningInputs in main.js. Unlike the reading textareas
+   above (paired 50/50 in a .modalFieldRow), this sits on its own
+   full-width row — 4 equal columns, reading stacked above its input
+   same as a frequent-word slot's select-then-gloss stack
+   (.modalFreqWordPickers below) — a kanji can have a dozen-plus kun
+   readings, so grid auto-flows into as many rows as it needs rather
+   than growing one wide row. Grid, not flex-wrap with a 25%
+   flex-basis: four even flex-basis percentages can round up by a
+   sub-pixel each in some browsers, enough that the 4th item doesn't
+   actually fit and wraps anyway (found by testing — 生's 10 readings
+   landed 3 per row, not 4) — grid's fr columns divide the row's real
+   width exactly, no rounding gap to fall into. Same approach
+   .modalFreqWordPickers below already uses, just 4 columns here
+   instead of 3 fixed slots. */
 .modalKunMeanings { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.3em 0.5em; }
 .modalKunMeaningEntry {
   display: flex;
@@ -850,7 +1587,10 @@ body:not(.editMode) .addWordBtn { display: none; }
   font: inherit;
   min-width: 0;
 }
-
+/* ── Frequent words (3 fixed slots — which word shows on the card
+   face) — a simple picker + that slot's own short gloss, nothing
+   else; the word's actual data lives in "All words" below, edited
+   once regardless of how many (if any) of the 3 slots it fills. */
 .modalFreqWordPickers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6em; }
 .modalTopCol > h3 { margin-top: 0; }
 .modalFreqWordPickers label {
@@ -868,7 +1608,11 @@ body:not(.editMode) .addWordBtn { display: none; }
   padding: 0.3em 0.5em;
   font: inherit;
 }
-
+/* ── All words — every word this kanji actually has, not just the 3
+   featured above; rendered dynamically (renderAllWords, main.js),
+   since the count varies per kanji rather than being fixed at 3.
+   auto-fill/minmax, not a fixed 3 columns — however many words there
+   are wrap to fit rather than needing a fixed count assumed anywhere. */
 .modalAllWords { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 0.6em; margin-bottom: 0.6em; }
 .modalWordEntry {
   display: flex;
@@ -879,7 +1623,12 @@ body:not(.editMode) .addWordBtn { display: none; }
   border: 1px dashed var(--parchment-border-row);
   border-radius: 4px;
 }
-
+/* Grid, not flex-wrap — each .modalWordEntry is fairly narrow (auto-fill
+   grid, minmax 320px), so 5 same-width flex-wrap fields were landing
+   one per row (word/kana genuinely need the room; pitch/JLPT are a
+   number and a short code, not nearly as wide). word+kana take the
+   wide columns, pitch+JLPT the narrow ones, pos spans the full row
+   below (it can be a long descriptor, e.g. "'na' adjective, noun"). */
 .modalWordEntryFields { display: grid; grid-template-columns: 2fr 2fr 1fr 1fr; gap: 0.3em 0.5em; }
 .modalWordEntryFields label { display: flex; flex-direction: column; align-items: stretch; gap: 0.15em; color: var(--parchment-muted); font-size: var(--font-bot); }
 .modalWordEntryFull { grid-column: 1 / -1; }
@@ -894,7 +1643,9 @@ body:not(.editMode) .addWordBtn { display: none; }
   font: inherit;
   box-sizing: border-box;
 }
-
+/* JLPT is stored as "N5"/"N3"/etc (see jlptToDigit/digitToJlpt,
+   main.js) — a fixed "N" plus a number input for the digit alone,
+   styled as one cohesive box rather than the input's own border. */
 .modalJlptField {
   display: flex;
   align-items: stretch;
@@ -921,7 +1672,16 @@ body:not(.editMode) .addWordBtn { display: none; }
   cursor: pointer;
 }
 #akAddWordBtn:hover { color: var(--parchment-text); border-color: var(--parchment-text); }
-
+/* Grid, not a single stacked column — each sense still gets a full
+   textarea (a meaning is a full sentence, not a short value like
+   word/kana/pos, the same reasoning that put variants/on/kun/etc. into
+   textareas instead of single-line inputs to begin with), just two to
+   a row instead of one — this dataset's words have at most 2 real
+   senses, the extra two boxes are just headroom for adding more. The
+   label spans both columns as its own header row above them. No
+   flex-basis needed here — .modalWordEntry (its parent) is itself
+   flex-direction: column, so this already gets the full width for
+   free via that parent's default align-items: stretch. */
 .modalMeaningGroup {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -951,10 +1711,16 @@ body:not(.editMode) .addWordBtn { display: none; }
   cursor: pointer;
 }
 .modalActions button:hover { background: var(--parchment-accent); }
-
+/* Cancel: secondary, not the same weight as Save — outline-only
+   against the parchment surface rather than a second solid fill. */
 #addKanjiCancelBtn { background: none; color: var(--parchment-muted); border: 1px solid var(--parchment-border-row); }
 #addKanjiCancelBtn:hover { background: var(--parchment-bg-row); color: var(--parchment-text); }
-
+/* margin-right: auto — same trick #resetDataBtn (nav menu) uses to
+   sit apart from a button group: pushes Delete to the opposite end
+   from Save/Cancel rather than lining up next to them. Only shown at
+   all when editing a custom kanji (initAddKanjiModal) — deleting a
+   real kanji.json entry isn't a thing this app's data model supports,
+   only overriding its fields. */
 #addKanjiDeleteBtn {
   margin-right: auto;
   background: none;
@@ -962,3 +1728,102 @@ body:not(.editMode) .addWordBtn { display: none; }
   border: 1px solid var(--parchment-warn);
 }
 #addKanjiDeleteBtn:hover { background: var(--parchment-warn); color: var(--parchment-bg); }
+
+/* Exploration is an overlay: no card reflow, no replacement of the density rules. */
+.componentLink, .exploreWord { appearance: none; border: 0; background: none; padding: 0; color: inherit; font: inherit; cursor: pointer; }
+.componentLink:hover, .exploreWord:hover { text-decoration: underline; text-underline-offset: 3px; }
+[data-explore-char], [data-explore-word] { cursor: pointer; }
+[data-explore-char]:focus-visible, [data-explore-word]:focus-visible, .componentLink:focus-visible { outline: 2px solid var(--color-num); }
+.kc { scroll-margin-top: 95px; }
+.kc.connectionMatch { box-shadow: inset 0 0 0 2px var(--color-num); }
+.kc.connectionMuted { opacity: 0.32; }
+.kc.connectionMuted:hover, .kc.connectionMuted:focus-within { opacity: 1; }
+.wordUsageNote { font-size: 11px; line-height: 1.35; color: var(--parchment-muted); }
+/* z-index 25: above every popup (10/20), below the nav header (30) and
+   the edit modal (40) — never covers the modal, no override hack needed. */
+#sheetNavigator { position: fixed; z-index: 25; right: 12px; bottom: 12px; width: 280px; max-width: calc(100vw - 24px); box-sizing: border-box; background: #0c1f2ef2; color: var(--color-text); border: 1px solid var(--color-border); padding: 8px; border-radius: 6px; font: 12px/1.4 sans-serif; box-shadow: 0 3px 16px #0005; }
+#sheetNavigator button, .counterBox button { background: var(--btn-bg); color: var(--btn-color); border: 1px solid var(--color-border); border-radius: 3px; padding: 4px 7px; cursor: pointer; font: inherit; }
+#sheetNavigator button:disabled { opacity: .4; cursor: default; }
+.sheetNavigationActions { display: flex; gap: 5px; }
+#sheetOverview { margin-top: 6px; }
+#sheetOverview summary { cursor: pointer; }
+#sheetSearch { display: flex; gap: 4px; margin: 7px 0; }
+#sheetSearch input { min-width: 0; flex: 1; }
+#sheetMap { display: block; width: 100%; cursor: crosshair; background: #071724; }
+#connectionResults { max-height: 180px; overflow: auto; }
+#connectionResults:not(:empty) { border-top: 1px solid var(--color-border); padding-top: 6px; margin-top: 6px; }
+.connectionLinks { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 4px; }
+#counterSummary { width: 100%; margin-top: 6px; }
+.counterBox { display: block; padding: 12px; overflow: auto; font-family: sans-serif; font-size: 14px; }
+.counterHeader { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-bottom: 15px; }
+.counterHeader label { display: flex; align-items: center; gap: 5px; }
+#counterNumber { width: 60px; }
+.counterResults { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px 14px; }
+.counterResult { display: flex; flex-direction: column; gap: 8px; padding: 7px; border: 1px solid var(--color-border); }
+.counterResult small { font-size: 11px; }
+.counterResult .counterWord { background: transparent; border: 0; font-size: 22px; color: var(--color-word); padding: 4px 0; }
+.counterWord rt { font-size: 11px; }
+.counterActive { border-color: var(--color-num); }
+#zoomFit.fitActive { border-color: var(--color-num); }
+.rulerSelected { outline: 2px solid var(--color-num); outline-offset: 4px; }
+@media print { #sheetNavigator { display: none; } .kc.connectionMuted { opacity: 1; } .kc.connectionMatch { box-shadow: none; } }
+
+/* ── Nav dropdown (Edit mode + its two related toggles) ─────────
+   Hover-revealed, same as a native menu — :focus-within is the
+   keyboard-accessible fallback (tab into a hidden toggle and the panel
+   opens the same way hovering does). "Edit mode" itself stays a fully
+   independent, unrelated-to-the-dropdown toggle; the dropdown is just a
+   positioning container around it plus the panel. */
+/* align-self: stretch (not a guessed padding value) makes .navDropdown
+   take up #navMenu's FULL row height — every other nav item opts out of
+   that via #navMenu's own align-items: center, sizing to its own
+   content (plus its own margin, see #navMenu's comment) instead; this
+   one opts back into flexbox's real default, with no margin of its own
+   to eat into the space that stretch gives it. That makes the hoverable
+   area exactly as tall as the row actually is, automatically, however
+   any sibling's height changes later — no pixel guess to keep in sync.
+   Since .navDropdown is no longer itself just label-height, its own
+   child (the trigger label) needs re-centering within that taller box —
+   display:flex + align-items:center here does that, same as #navMenu
+   does for its own children.
+   top: 100% on the absolutely positioned panel below then resolves
+   against this full-height box, landing right at its bottom edge —
+   which, now that #navMenu's own padding has moved onto its ordinary
+   children instead of sitting on the container (see #navMenu's own
+   comment), is genuinely #navMenu's real bottom edge too: nothing left
+   outside any flex item's box to leave a residual gap. */
+.navDropdown { position: relative; align-self: stretch; display: flex; align-items: center; }
+.navDropdownArrow { font-size: 2.5em; color: var(--color-muted); padding: 0 0 0.1em 0; margin-left: -0.05em }
+.navDropdownPanel {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 31;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 0.6em 0.8em;
+  background: var(--color-bg);
+  border: var(--border-default);
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.navDropdown:hover .navDropdownPanel,
+.navDropdown:focus-within .navDropdownPanel {
+  display: flex;
+}
+
+/* ── Poster / print mode ─────────────────────────────────────────
+   A card not in the current poster selection is hidden (not removed —
+   resortGridCards() and friends still iterate the full DOM regardless
+   of visibility), and every other nav control not relevant to printing
+   gets out of the way while composing/previewing a poster. */
+.modalHint { margin: 0; font-size: var(--font-bot); color: var(--parchment-muted); }
+.posterSummary { font-size: var(--font-bot); color: var(--parchment-muted); }
+.posterSummary.posterWarning { color: var(--parchment-warn); }
+.kc.posterOmitted { display: none; }
+body.posterMode #sheetNavigator,
+body.posterMode .counterBox { display: none; }
+@media print {
+  body.posterMode #navMenu, body.posterMode #rulerFooter { display: none; }
+}

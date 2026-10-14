@@ -1,0 +1,59 @@
+{
+  "mora": {
+    "combining": ["ゃ", "ゅ", "ょ", "ぁ", "ぃ", "ぅ", "ぇ", "ぉ", "ャ", "ュ", "ョ", "ァ", "ィ", "ゥ", "ェ", "ォ"],
+    "note": "These small kana attach to the kana before them and do not form their own mora (e.g. きゃ is 1 mora, not 2). Every other kana is its own mora, including ん, っ, and the long-vowel mark ー."
+  },
+  "pitch": {
+    "note": "pitch is the standard accent number for the word's dictionary reading (as shown on kanshudo). Combined with the reading's mora split, it fully determines the word's high/low pitch pattern.",
+    "types": {
+      "0": "heiban (flat) — mora 1 is low, mora 2 through the end are high, and a following particle stays high.",
+      "1": "atamadaka (head-high) — mora 1 is high, everything from mora 2 onward (including a following particle) is low.",
+      "N": "nakadaka (N before the last mora) or odaka (N equals the last mora) — mora 1 is low, mora 2 through N are high, then it drops after mora N. Odaka sounds identical to heiban in isolation, but a following particle drops in pitch, unlike heiban.",
+      "null": "no pitch accent data available for this word"
+    }
+  },
+  "jlpt": {
+    "N5": "easiest / beginner",
+    "N4": "basic",
+    "N3": "intermediate",
+    "N2": "upper intermediate",
+    "N1": "hardest / advanced",
+    "null": "not part of the JLPT vocabulary lists"
+  },
+  "readingPhenomena": {
+    "note": "Why a word is shown with more than one accepted pronunciation (pronunciationSplit in words.json) — these are the recognized causes, not separate dictionary readings. Rendered as a summary banner at the top of a kanji's info popup (buildInfoButton, main.js) whenever one of its words has a tagged variant.",
+    "types": {
+      "counterSuffix": {
+        "label": "counter suffix",
+        "note": "A counter is a suffix attached to a number to count objects of a particular kind (e.g. 本 for long cylindrical objects, 人 for people). Some counters shift pronunciation depending on the number they follow."
+      },
+      "hanDakuonka": {
+        "label": "半濁音化",
+        "note": "han-dakuon-ka (\"half-voicing\") — an h-row reading (は/ひ/ふ/へ/ほ) shifts to its half-voiced p-row counterpart (ぱ/ぴ/ぷ/ぺ/ぽ), most often after a small っ in a counter or compound. E.g. 本 (ほん) → 一本 (いっぽん)."
+      },
+      "rendaku": {
+        "label": "連濁",
+        "note": "rendaku (\"sequential voicing\") — the initial consonant of a compound's second element voices (k→g, s→z, t→d, h→b) when preceded by the first element. E.g. 人 (ひと) → 殺人 (さつじん)."
+      },
+      "onbin": {
+        "label": "音便",
+        "note": "onbin (\"euphonic change\") — a mora contracts or shifts for ease of pronunciation in a compound, most often to a small っ (促音便) or to ん (撥音便). E.g. 一 (いち) + 本 → 一本 (いっぽん)."
+      }
+    }
+  },
+  "variantTypes": {
+    "note": "What each tagged glyph in kanji.json's variants list actually is, shown in the variant-comparison popup (click a variant's parenthetical tag). Keyed by the variant glyph itself; `standard` describes the card's own kanji on the other side of the comparison.",
+    "standard": "standard Japanese kanji",
+    "fallback": "variant form",
+    "types": {
+      "⼈": "Kangxi radical (dictionary index form)",
+      "⼀": "Kangxi radical (dictionary index form)",
+      "⼤": "Kangxi radical (dictionary index form)",
+      "⼦": "Kangxi radical (dictionary index form)",
+      "⾒": "Kangxi radical (dictionary index form)",
+      "⼆": "Kangxi radical (dictionary index form)",
+      "见": "Simplified Chinese form",
+      "囯": "Chinese variant form"
+    }
+  }
+}

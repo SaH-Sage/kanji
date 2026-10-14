@@ -705,5 +705,115 @@
     { "word": "現", "kana": "うつつ", "meaning": ["reality; consciousness"], "pos": "noun", "jlpt": null, "pitch": 0 },
     { "word": "現れる", "kana": "あらわれる", "meaning": ["to appear; to come in sight; to become visible; to come out; to embody; to materialize", "to be expressed (e.g. emotions); to become apparent (e.g. trends, effects)"], "pos": "ichidan verb, intransitive verb", "jlpt": "N3", "pitch": 4 },
     { "word": "実現", "kana": "じつげん", "meaning": ["realization; materialization; implementation"], "pos": "noun, 'suru' verb", "jlpt": "N3", "pitch": 0 }
+  ],
+  "四": [
+    { "word": "四月", "kana": "しがつ", "meaning": ["April"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "四日", "kana": "よっか", "meaning": ["4th day"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "四人", "kana": "よにん", "meaning": ["four people"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true }
+  ],
+  "九": [
+    { "word": "九月", "kana": "くがつ", "meaning": ["September"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "九日", "kana": "ここのか", "meaning": ["9th day"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "九人", "kana": "きゅうにん", "meaning": ["nine people"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true }
+  ],
+  "八": [
+    { "word": "八月", "kana": "はちがつ", "meaning": ["August"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "八日", "kana": "ようか", "meaning": ["8th day"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "八本", "kana": "はっぽん", "meaning": ["eight long objects"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true }
+  ],
+  "六": [
+    { "word": "六月", "kana": "ろくがつ", "meaning": ["June"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "六日", "kana": "むいか", "meaning": ["6th day"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "六本", "kana": "ろっぽん", "meaning": ["six long objects"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true }
+  ],
+  "七": [
+    { "word": "七月", "kana": "しちがつ", "meaning": ["July"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "七日", "kana": "なのか", "meaning": ["7th day"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "七人", "kana": "ななにん", "meaning": ["seven people"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true }
+  ],
+  "午": [
+    { "word": "午前", "kana": "ごぜん", "meaning": ["morning; a.m."], "pos": "adverbial noun (fukushitekimeishi), noun (temporal) (jisoumeishi)", "jlpt": "N5", "pitch": 1 },
+    { "word": "午後", "kana": "ごご", "meaning": ["afternoon; p.m."], "pos": "adverbial noun (fukushitekimeishi), noun (temporal) (jisoumeishi)", "jlpt": "N5", "pitch": 1 },
+    { "word": "午前中", "kana": "ごぜんちゅう", "meaning": ["this morning; in the morning; throughout the morning","during the morning"], "pos": "noun", "jlpt": null, "pitch": 0 }
+  ],
+  "百": [
+    { "word": "百年", "kana": "ひゃくねん", "meaning": ["a hundred years"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "三百", "kana": "さんびゃく", "meaning": ["three hundred"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "何百", "kana": "なんびゃく", "meaning": ["hundreds"], "pos": "noun", "jlpt": null, "pitch": 1 }
+  ],
+  "水": [
+    { "word": "水", "kana": "みず", "meaning": ["water"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "水田", "kana": "すいでん", "meaning": ["(water-filled) paddy field","rice paddy"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "水道", "kana": "すいどう", "meaning": ["water supply"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true }
+  ],
+  "土": [
+    { "word": "土", "kana": "つち", "meaning": ["soil"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "土地", "kana": "とち", "meaning": ["plot of land; lot; soil; land; ground","land"], "pos": "noun", "jlpt": "N3", "pitch": 0 },
+    { "word": "土曜日", "kana": "どようび", "meaning": ["Saturday"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true }
+  ],
+  "木": [
+    { "word": "木", "kana": "き", "meaning": ["tree; wood"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "木曜日", "kana": "もくようび", "meaning": ["Thursday"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "木の実", "kana": "このみ", "meaning": ["nut; fruit of a tree"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true }
+  ],
+  "毎": [
+    { "word": "毎日", "kana": "まいにち", "meaning": ["every day"], "pos": "adverbial noun (fukushitekimeishi), noun (temporal) (jisoumeishi)", "jlpt": "N5", "pitch": 1 },
+    { "word": "毎年", "kana": "まいとし", "meaning": ["every year; yearly; annually","every year"], "pos": "noun (temporal) (jisoumeishi)", "jlpt": "N5", "pitch": 0 },
+    { "word": "毎月", "kana": "まいつき", "meaning": ["every month; each month; monthly","every month"], "pos": "adverbial noun (fukushitekimeishi), noun", "jlpt": "N4", "pitch": 0 }
+  ],
+  "仕": [
+    { "word": "仕事", "kana": "しごと", "meaning": ["work; job; business; occupation; employment; vocation; task","work"], "pos": "noun, 'suru' verb, 'no' adjective", "jlpt": "N5", "pitch": 0 },
+    { "word": "仕方", "kana": "しかた", "meaning": ["way; method; means; resource; course","way of doing"], "pos": "noun", "jlpt": "N4", "pitch": 0 },
+    { "word": "仕業", "kana": "しわざ", "meaning": ["deed (esp. negative); act; action; one's doing","someone's doing"], "pos": "noun", "jlpt": null, "pitch": 0 }
+  ],
+  "門": [
+    { "word": "門", "kana": "もん", "meaning": ["gate"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "入門", "kana": "にゅうもん", "meaning": ["introduction"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "門前", "kana": "もんぜん", "meaning": ["in front of a gate"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true }
+  ],
+  "週": [
+    { "word": "今週", "kana": "こんしゅう", "meaning": ["this week"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "来週", "kana": "らいしゅう", "meaning": ["next week"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "毎週", "kana": "まいしゅう", "meaning": ["every week"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true }
+  ],
+  "火": [
+    { "word": "火", "kana": "ひ", "meaning": ["fire"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "火事", "kana": "かじ", "meaning": ["fire; conflagration","fire (disaster)"], "pos": "noun", "jlpt": "N4", "pitch": 1 },
+    { "word": "火山", "kana": "かざん", "meaning": ["volcano"], "pos": "noun, 'no' adjective", "jlpt": "N3", "pitch": 1 }
+  ],
+  "休": [
+    { "word": "休む", "kana": "やすむ", "meaning": ["to rest"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "休日", "kana": "きゅうじつ", "meaning": ["holiday; day off","day off"], "pos": "adverbial noun (fukushitekimeishi), noun", "jlpt": null, "pitch": 0 },
+    { "word": "休み", "kana": "やすみ", "meaning": ["rest; holiday"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true }
+  ],
+  "零": [
+    { "word": "零", "kana": "れい", "meaning": ["zero"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "零下", "kana": "れいか", "meaning": ["below zero"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "零時", "kana": "れいじ", "meaning": ["midnight"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true }
+  ],
+  "耳": [
+    { "word": "耳", "kana": "みみ", "meaning": ["ear"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "耳元", "kana": "みみもと", "meaning": ["close to one's ear"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "耳鼻科", "kana": "じびか", "meaning": ["ENT department"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true }
+  ],
+  "凸": [
+    { "word": "凸凹", "kana": "でこぼこ", "meaning": ["uneven; bumpy"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "凹凸", "kana": "おうとつ", "meaning": ["unevenness"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "凸レンズ", "kana": "とつレンズ", "meaning": ["convex lens"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true }
+  ],
+  "凹": [
+    { "word": "凸凹", "kana": "でこぼこ", "meaning": ["uneven; bumpy"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "凹凸", "kana": "おうとつ", "meaning": ["unevenness"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true },
+    { "word": "凹む", "kana": "へこむ", "meaning": ["to dent; feel down"], "pos": null, "jlpt": null, "pitch": null, "selfAdded": true }
+  ],
+  "万": [
+    { "word": "一万", "kana": "いちまん", "meaning": ["ten thousand"], "pos": "noun", "jlpt": "N5", "pitch": 3 },
+    { "word": "万一", "kana": "まんいち", "meaning": ["just in case; probability; (unlikely) possibility"], "pos": "adverbial noun, noun", "jlpt": "N2", "pitch": 1 },
+    { "word": "万屋", "kana": "よろずや", "meaning": ["general store; jack-of-all-trades"], "pos": "noun", "jlpt": null, "pitch": 0 }
+  ],
+  "千": [
+    { "word": "千円", "kana": "せんえん", "meaning": ["1000 yen"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "三千", "kana": "さんぜん", "meaning": ["3000"], "pos": "noun", "jlpt": null, "pitch": 0 },
+    { "word": "千代", "kana": "ちよ", "meaning": ["a thousand years; eternity"], "pos": "noun", "jlpt": null, "pitch": 1 }
   ]
 }

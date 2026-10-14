@@ -1,0 +1,12 @@
+{
+  "name": "kanji-grid",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A kanji reference card grid inspired by Kanshudo, displaying the top kanji with stroke-order animation, readings, example words, variants, and components.",
+  "scripts": {
+    "build:docs": "node scripts/build-docs.js"
+  },
+  "devDependencies": {
+    "terser": "^5.51.2"
+  }
+}
