@@ -14,20 +14,25 @@
   --pad-adjecent:     0px;
   --pad-adjecent-big: 4px;
 
-  /* Colours */
+  /* Colours — dark is the default theme; actual values live in the
+     flat --theme-dark-* section below (this just selects them), except
+     --color-warm-parchment/--color-footer, which aren't theme-reactive
+     at all (a couple of fixed-regardless-of-theme spots use them
+     directly — #kanji-grid.error, below) so they stay literal. */
   --color-warm-parchment: #e0d8b8;
-  --color-bg:             #0c1f2e;
-  --color-border:         #1d4472;
-  --color-text:           var(--color-warm-parchment);
-  --color-muted:          #3d6a8a;
+  --color-bg:             var(--theme-dark-bg);
+  --color-border:         var(--theme-dark-border);
+  --color-text:           var(--theme-dark-text);
+  --color-muted:          var(--theme-dark-muted);
   --color-footer:         #ffffff;
-  --color-on:             #8ab8d8;   /* On'yomi */
-  --color-kun:            #71c386;   /* Kun'yomi */
-  --color-name:           #6aa898;   /* Name readings */
-  --color-num:            #e8c060;   /* Stroke-order numbers */
-  --color-word:           #c2b47c;   /* Frequent-word examples */
-  --color-component:      #d6c890;   /* Kanji components */
-  --color-pitch:          #e8c060;   /* Pitch-accent line over furigana */
+  --color-on:             var(--theme-dark-on);       /* On'yomi */
+  --color-kun:            var(--theme-dark-kun);       /* Kun'yomi */
+  --color-name:           var(--theme-dark-name);      /* Name readings */
+  --color-num:            var(--theme-dark-num);       /* Stroke-order numbers */
+  --color-word:           var(--theme-dark-word);      /* Frequent-word examples */
+  --color-component:      var(--theme-dark-component); /* Kanji components */
+  --color-pitch:          var(--theme-dark-pitch);     /* Pitch-accent line over furigana */
+  --color-kanji-ink:      var(--theme-dark-kanji-ink); /* The big stroke-order kanji itself (svg.kanji path) */
 
   /* Parchment — the info-card popup's own palette. It's really a
      second, denser reference card rather than a footnote, so it gets
@@ -35,17 +40,18 @@
      app's own blues/greens/golds (tuned for the dark --color-bg) read
      as washed-out or illegible against something this light, so every
      info-card colour below is its own, darker-for-light-background
-     pick rather than a reuse of the dark-theme tokens. */
-  --parchment-bg:         #f2e8cc;   /* popup surface */
-  --parchment-bg-row:     #e8dab0;   /* each word's own box, a shade darker than the popup */
-  --parchment-border:     #a9825a;   /* popup's own border */
-  --parchment-border-row: #c2a273;   /* dashed word-box / footer dividers */
-  --parchment-text:       #3c2f1e;   /* body text */
-  --parchment-muted:      #7c6a4e;   /* meta line (meaning/pos), pitch furigana */
-  --parchment-word:       #8a4a1f;   /* word kanji, pitch dots */
-  --parchment-accent:     #92661a;   /* JLPT tag */
-  --parchment-warn:       #a13e1f;   /* "unverified" badge */
-  --parchment-link:       #1f5c6e;   /* kanshudo links */
+     pick rather than a reuse of the dark-theme tokens. Values again
+     live in the flat --theme-dark-parchment-* section below. */
+  --parchment-bg:         var(--theme-dark-parchment-bg);         /* popup surface */
+  --parchment-bg-row:     var(--theme-dark-parchment-bg-row);     /* each word's own box, a shade darker than the popup */
+  --parchment-border:     var(--theme-dark-parchment-border);     /* popup's own border */
+  --parchment-border-row: var(--theme-dark-parchment-border-row); /* dashed word-box / footer dividers */
+  --parchment-text:       var(--theme-dark-parchment-text);       /* body text */
+  --parchment-muted:      var(--theme-dark-parchment-muted);      /* meta line (meaning/pos), pitch furigana */
+  --parchment-word:       var(--theme-dark-parchment-word);       /* word kanji, pitch dots */
+  --parchment-accent:     var(--theme-dark-parchment-accent);     /* JLPT tag */
+  --parchment-warn:       var(--theme-dark-parchment-warn);       /* "unverified" badge */
+  --parchment-link:       var(--theme-dark-parchment-link);       /* kanshudo links */
 
   /* Typography */
   --font-top:     15px;
@@ -56,10 +62,11 @@
   --font-smaller:  7px;
   --font-tiniest:  6px;
 
-  /* Animate button */
-  --btn-bg:       #1a5070;
-  --btn-bg-hover: #226088;
-  --btn-color:    #b8d8ec;
+  /* Buttons (Animate, nav, sheet navigator, ...) — selected per theme,
+     same as --color-* (see Themes, below) */
+  --btn-bg:       var(--theme-dark-btn-bg);
+  --btn-bg-hover: var(--theme-dark-btn-bg-hover);
+  --btn-color:    var(--theme-dark-btn-color);
   --btn-font:     var(--font-small);
 
   /* Borders */
@@ -70,6 +77,327 @@
   --border-transparent: 1px solid transparent;
   --border-dashed:      1px dashed var(--color-border);
   --mora-dot-color:     color-mix(in srgb, var(--color-muted) 100%, transparent);
+}
+
+/* ── Theme palettes — every color, for every theme, lives here and
+   ONLY here. --color-* and --parchment-* above and :root[data-theme=...]
+   below never declare a color directly anymore — they just SELECT one
+   theme's set, var(--theme-<name>-<property>), so there's exactly one
+   place to look up or change what any given theme's "bg" (say) really
+   is, and no literal hex duplicated between an override block and
+   anything (like the nav's Alt preview buttons, below) that needs a
+   SPECIFIC theme's color regardless of which one is currently active.
+   It's also what lets JS read a theme's color without that theme being
+   active — getComputedStyle(document.documentElement).getPropertyValue
+   ('--theme-light-alt-bg') works no matter what [data-theme] is
+   currently set to, unlike --color-bg itself, which only ever holds
+   whichever theme is ACTIVE right now. */
+:root {
+  /* dark — the default/"as is" theme */
+  --theme-dark-bg: #0c1f2e;
+  --theme-dark-border: #1d4472;
+  --theme-dark-text: #e0d8b8;
+  --theme-dark-muted: #3d6a8a;
+  --theme-dark-word: #c2b47c;
+  --theme-dark-on: #8ab8d8;
+  --theme-dark-kun: #71c386;
+  --theme-dark-name: #6aa898;
+  --theme-dark-num: #e8c060;
+  --theme-dark-component: #b8a2e3;
+  --theme-dark-pitch: #e8c060;
+  --theme-dark-kanji-ink: #fff;
+  --theme-dark-btn-bg: #1a5070;
+  --theme-dark-btn-bg-hover: #226088;
+  --theme-dark-btn-color: #b8d8ec;
+  --theme-dark-parchment-bg: #f2e8cc;
+  --theme-dark-parchment-bg-row: #e8dab0;
+  --theme-dark-parchment-border: #a9825a;
+  --theme-dark-parchment-border-row: #c2a273;
+  --theme-dark-parchment-text: #3c2f1e;
+  --theme-dark-parchment-muted: #7c6a4e;
+  --theme-dark-parchment-word: #8a4a1f;
+  --theme-dark-parchment-accent: #92661a;
+  --theme-dark-parchment-warn: #a13e1f;
+  --theme-dark-parchment-link: #1f5c6e;
+
+  /* light — "essentially a color swap with the popup": main page takes
+     the popup's palette and vice versa (see the Themes comment below) */
+  --theme-light-bg: #f2e8cc;
+  --theme-light-border: #a9825a;
+  --theme-light-text: #3c2f1e;
+  --theme-light-muted: #7c6a4e;
+  --theme-light-word: #8a4a1f;
+  --theme-light-on: #1a5a8a;
+  --theme-light-kun: #1f7a3a;
+  --theme-light-name: #2a6a5a;
+  --theme-light-num: #92661a;
+  --theme-light-component: #6a4aa0;
+  --theme-light-pitch: #92661a;
+  --theme-light-kanji-ink: #2b2b2e;
+  --theme-light-btn-bg: #e2d3a8;
+  --theme-light-btn-bg-hover: #d6c493;
+  --theme-light-btn-color: #3c2f1e;
+  --theme-light-parchment-bg: #0c1f2e;
+  --theme-light-parchment-bg-row: #13283a;
+  --theme-light-parchment-border: #1d4472;
+  --theme-light-parchment-border-row: #2a5a8a;
+  --theme-light-parchment-text: #e0d8b8;
+  --theme-light-parchment-muted: #3d6a8a;
+  --theme-light-parchment-word: #c2b47c;
+  --theme-light-parchment-accent: #e8c060;
+  --theme-light-parchment-warn: #e06a4a;
+  --theme-light-parchment-link: #5fd0e0;
+
+  /* dark-alt — same structure as dark, neutral grayscale hue instead
+     of navy, so it's visually distinct from dark at a glance */
+  --theme-dark-alt-bg: #121212;
+  --theme-dark-alt-border: #3a3a3a;
+  --theme-dark-alt-text: #e8e8e8;
+  --theme-dark-alt-muted: #8a8a8a;
+  --theme-dark-alt-word: #e8c060;
+  --theme-dark-alt-on: #8ab8d8;
+  --theme-dark-alt-kun: #71c386;
+  --theme-dark-alt-name: #6aa898;
+  --theme-dark-alt-num: #e8c060;
+  --theme-dark-alt-component: #b8a2e3;
+  --theme-dark-alt-pitch: #e8c060;
+  --theme-dark-alt-kanji-ink: #fff;
+  --theme-dark-alt-btn-bg: #2c2c2c;
+  --theme-dark-alt-btn-bg-hover: #3a3a3a;
+  --theme-dark-alt-btn-color: #e0e0e0;
+  --theme-dark-alt-parchment-bg: #f0f0f0;
+  --theme-dark-alt-parchment-bg-row: #e4e4e4;
+  --theme-dark-alt-parchment-border: #888888;
+  --theme-dark-alt-parchment-border-row: #aaaaaa;
+  --theme-dark-alt-parchment-text: #1a1a1a;
+  --theme-dark-alt-parchment-muted: #666666;
+  --theme-dark-alt-parchment-word: #333333;
+  --theme-dark-alt-parchment-accent: #555555;
+  --theme-dark-alt-parchment-warn: #b03030;
+  --theme-dark-alt-parchment-link: #1f6e7c;
+
+  /* light-alt — same structure as light, neutral grayscale */
+  --theme-light-alt-bg: #f5f5f5;
+  --theme-light-alt-border: #888888;
+  --theme-light-alt-text: #1a1a1a;
+  --theme-light-alt-muted: #666666;
+  --theme-light-alt-word: #92661a;
+  --theme-light-alt-on: #1a5a8a;
+  --theme-light-alt-kun: #1f7a3a;
+  --theme-light-alt-name: #2a6a5a;
+  --theme-light-alt-num: #92661a;
+  --theme-light-alt-component: #6a4aa0;
+  --theme-light-alt-pitch: #92661a;
+  --theme-light-alt-kanji-ink: #1a1a1a;
+  --theme-light-alt-btn-bg: #e2e2e2;
+  --theme-light-alt-btn-bg-hover: #d2d2d2;
+  --theme-light-alt-btn-color: #1a1a1a;
+  --theme-light-alt-parchment-bg: #121212;
+  --theme-light-alt-parchment-bg-row: #1e1e1e;
+  --theme-light-alt-parchment-border: #3a3a3a;
+  --theme-light-alt-parchment-border-row: #4a4a4a;
+  --theme-light-alt-parchment-text: #e8e8e8;
+  --theme-light-alt-parchment-muted: #8a8a8a;
+  --theme-light-alt-parchment-word: #c8c8c8;
+  --theme-light-alt-parchment-accent: #e8c060;
+  --theme-light-alt-parchment-warn: #e06a4a;
+  --theme-light-alt-parchment-link: #5fd0e0;
+
+  /* washi (和紙) — light, Japanese traditional colors: kinari (生成り)
+     paper, sumi (墨) ink, ai (藍) on'yomi, tokiwa (常磐) kun'yomi, shu
+     (朱) words, murasaki (紫) components, sakura (桜) buttons. Its popup
+     is urushi's lacquer, the same surface swap light/dark do. */
+  --theme-washi-bg: #f6f0e2;
+  --theme-washi-border: #c2a597;
+  --theme-washi-text: #2b2523;
+  --theme-washi-muted: #8c7a72;
+  --theme-washi-word: #c8442f;
+  --theme-washi-on: #165e83;
+  --theme-washi-kun: #1f7a46;
+  --theme-washi-name: #2a6e62;
+  --theme-washi-num: #a6741c;
+  --theme-washi-component: #7a4a9a;
+  --theme-washi-pitch: #a6741c;
+  --theme-washi-kanji-ink: #262222;
+  --theme-washi-btn-bg: #efd3d0;
+  --theme-washi-btn-bg-hover: #e6c0bc;
+  --theme-washi-btn-color: #4a2a2a;
+  --theme-washi-parchment-bg: #1f1719;
+  --theme-washi-parchment-bg-row: #2a1f22;
+  --theme-washi-parchment-border: #6b3236;
+  --theme-washi-parchment-border-row: #84434a;
+  --theme-washi-parchment-text: #efe6d2;
+  --theme-washi-parchment-muted: #9c8378;
+  --theme-washi-parchment-word: #ec8a6a;
+  --theme-washi-parchment-accent: #d8b450;
+  --theme-washi-parchment-warn: #ef7a5a;
+  --theme-washi-parchment-link: #6cc4d8;
+
+  /* urushi (漆) — dark, Japanese traditional colors: neutral sumi-e
+     charcoal (no color tint), kinari kanji, asagi (浅葱) on'yomi,
+     wakatake (若竹) kun'yomi, hinomaru-red words, kin (金) gold numbers, fuji (藤) components,
+     enji (臙脂) buttons. Its popup is washi paper. */
+  --theme-urushi-bg: #1e1e20;
+  --theme-urushi-border: #5a2a2c;
+  --theme-urushi-text: #efe6d2;
+  --theme-urushi-muted: #8a6b63;
+  --theme-urushi-word: #f74c56;
+  --theme-urushi-on: #4fa9bd;
+  --theme-urushi-kun: #6bbf8a;
+  --theme-urushi-name: #82b8a6;
+  --theme-urushi-num: #d4b04c;
+  --theme-urushi-component: #a99ad1;
+  --theme-urushi-pitch: #d4b04c;
+  --theme-urushi-kanji-ink: #f3ecdc;
+  --theme-urushi-btn-bg: #6e2a30;
+  --theme-urushi-btn-bg-hover: #84343b;
+  --theme-urushi-btn-color: #f3e3d6;
+  --theme-urushi-parchment-bg: #f6efe0;
+  --theme-urushi-parchment-bg-row: #ece2cc;
+  --theme-urushi-parchment-border: #a8846a;
+  --theme-urushi-parchment-border-row: #c4a68a;
+  --theme-urushi-parchment-text: #2d2420;
+  --theme-urushi-parchment-muted: #7b6a5e;
+  --theme-urushi-parchment-word: #b8452f;
+  --theme-urushi-parchment-accent: #9a7420;
+  --theme-urushi-parchment-warn: #b03a2e;
+  --theme-urushi-parchment-link: #1f5c7a;
+
+  /* The nav theme-dropdown's own preview-swatch buttons — border
+     thickness as a variable here too, not a literal on the button rule
+     itself (see #navMenu .themeSwatch, below). */
+  --theme-preview-border-width: 3px;
+}
+
+/* ── Themes (nav's light/dark widget, initThemeToggle in main.js) ───
+   Dark (above) is the default, "as is" — :root's own --color-* and
+   --parchment-* (above) already select the flat --theme-dark-*
+   values. Every other theme reassigns those same custom properties
+   under [data-theme] to a different flat theme's values instead,
+   nothing downstream ever needed to change: every rule in this file
+   already reads --color-* and --parchment-* by name, never a literal hex.
+
+   "Light" is "essentially a color swap with the popup" exactly: the
+   main page takes on the popup's existing light parchment palette, and
+   the popup takes on the main page's existing dark palette — the two
+   surfaces trade identities rather than either getting new colors.
+   --color-on/kun/name/num/component/pitch (reading accents) are the
+   one thing that doesn't swap this way — they're pastel tones tuned
+   for a dark background and would read as washed-out on a light one,
+   so light/light-alt both get one shared darker-for-light-bg set
+   instead (dark/dark-alt keep the original pastels unchanged, since
+   both still have a dark main page). --btn-* (every button) follows
+   the theme too, so buttons sit in the same palette as the page.
+
+   Dark-alt/light-alt are the "1 more alternative" pair in the
+   dropdown panel — same light/dark STRUCTURE (which surface is light,
+   which is dark) as the primary pair, just a neutral grayscale hue
+   instead of navy/warm-parchment, so they're visually distinct from
+   the primary pair at a glance rather than a subtle variation of it. */
+:root[data-theme="light"] {
+  --color-bg:      var(--theme-light-bg);
+  --color-border:  var(--theme-light-border);
+  --color-text:    var(--theme-light-text);
+  --color-muted:   var(--theme-light-muted);
+  --color-word:    var(--theme-light-word);
+  --parchment-bg:         var(--theme-light-parchment-bg);
+  --parchment-bg-row:     var(--theme-light-parchment-bg-row);
+  --parchment-border:     var(--theme-light-parchment-border);
+  --parchment-border-row: var(--theme-light-parchment-border-row);
+  --parchment-text:       var(--theme-light-parchment-text);
+  --parchment-muted:      var(--theme-light-parchment-muted);
+  --parchment-word:       var(--theme-light-parchment-word);
+  --parchment-accent:     var(--theme-light-parchment-accent);
+  --parchment-warn:       var(--theme-light-parchment-warn);
+  --parchment-link:       var(--theme-light-parchment-link);
+  --color-on: var(--theme-light-on); --color-kun: var(--theme-light-kun); --color-name: var(--theme-light-name);
+  --color-num: var(--theme-light-num); --color-component: var(--theme-light-component); --color-pitch: var(--theme-light-pitch);
+  --color-kanji-ink: var(--theme-light-kanji-ink);
+  --btn-bg: var(--theme-light-btn-bg); --btn-bg-hover: var(--theme-light-btn-bg-hover); --btn-color: var(--theme-light-btn-color);
+}
+:root[data-theme="dark-alt"] {
+  --color-bg:      var(--theme-dark-alt-bg);
+  --color-border:  var(--theme-dark-alt-border);
+  --color-text:    var(--theme-dark-alt-text);
+  --color-muted:   var(--theme-dark-alt-muted);
+  --color-word:    var(--theme-dark-alt-word);
+  --parchment-bg:         var(--theme-dark-alt-parchment-bg);
+  --parchment-bg-row:     var(--theme-dark-alt-parchment-bg-row);
+  --parchment-border:     var(--theme-dark-alt-parchment-border);
+  --parchment-border-row: var(--theme-dark-alt-parchment-border-row);
+  --parchment-text:       var(--theme-dark-alt-parchment-text);
+  --parchment-muted:      var(--theme-dark-alt-parchment-muted);
+  --parchment-word:       var(--theme-dark-alt-parchment-word);
+  --parchment-accent:     var(--theme-dark-alt-parchment-accent);
+  --parchment-warn:       var(--theme-dark-alt-parchment-warn);
+  --parchment-link:       var(--theme-dark-alt-parchment-link);
+  --color-on: var(--theme-dark-alt-on); --color-kun: var(--theme-dark-alt-kun); --color-name: var(--theme-dark-alt-name);
+  --color-num: var(--theme-dark-alt-num); --color-component: var(--theme-dark-alt-component); --color-pitch: var(--theme-dark-alt-pitch);
+  --color-kanji-ink: var(--theme-dark-alt-kanji-ink);
+  --btn-bg: var(--theme-dark-alt-btn-bg); --btn-bg-hover: var(--theme-dark-alt-btn-bg-hover); --btn-color: var(--theme-dark-alt-btn-color);
+}
+:root[data-theme="light-alt"] {
+  --color-bg:      var(--theme-light-alt-bg);
+  --color-border:  var(--theme-light-alt-border);
+  --color-text:    var(--theme-light-alt-text);
+  --color-muted:   var(--theme-light-alt-muted);
+  --color-word:    var(--theme-light-alt-word);
+  --parchment-bg:         var(--theme-light-alt-parchment-bg);
+  --parchment-bg-row:     var(--theme-light-alt-parchment-bg-row);
+  --parchment-border:     var(--theme-light-alt-parchment-border);
+  --parchment-border-row: var(--theme-light-alt-parchment-border-row);
+  --parchment-text:       var(--theme-light-alt-parchment-text);
+  --parchment-muted:      var(--theme-light-alt-parchment-muted);
+  --parchment-word:       var(--theme-light-alt-parchment-word);
+  --parchment-accent:     var(--theme-light-alt-parchment-accent);
+  --parchment-warn:       var(--theme-light-alt-parchment-warn);
+  --parchment-link:       var(--theme-light-alt-parchment-link);
+  --color-on: var(--theme-light-alt-on); --color-kun: var(--theme-light-alt-kun); --color-name: var(--theme-light-alt-name);
+  --color-num: var(--theme-light-alt-num); --color-component: var(--theme-light-alt-component); --color-pitch: var(--theme-light-alt-pitch);
+  --color-kanji-ink: var(--theme-light-alt-kanji-ink);
+  --btn-bg: var(--theme-light-alt-btn-bg); --btn-bg-hover: var(--theme-light-alt-btn-bg-hover); --btn-color: var(--theme-light-alt-btn-color);
+}
+:root[data-theme="washi"] {
+  --color-bg:      var(--theme-washi-bg);
+  --color-border:  var(--theme-washi-border);
+  --color-text:    var(--theme-washi-text);
+  --color-muted:   var(--theme-washi-muted);
+  --color-word:    var(--theme-washi-word);
+  --parchment-bg:         var(--theme-washi-parchment-bg);
+  --parchment-bg-row:     var(--theme-washi-parchment-bg-row);
+  --parchment-border:     var(--theme-washi-parchment-border);
+  --parchment-border-row: var(--theme-washi-parchment-border-row);
+  --parchment-text:       var(--theme-washi-parchment-text);
+  --parchment-muted:      var(--theme-washi-parchment-muted);
+  --parchment-word:       var(--theme-washi-parchment-word);
+  --parchment-accent:     var(--theme-washi-parchment-accent);
+  --parchment-warn:       var(--theme-washi-parchment-warn);
+  --parchment-link:       var(--theme-washi-parchment-link);
+  --color-on: var(--theme-washi-on); --color-kun: var(--theme-washi-kun); --color-name: var(--theme-washi-name);
+  --color-num: var(--theme-washi-num); --color-component: var(--theme-washi-component); --color-pitch: var(--theme-washi-pitch);
+  --color-kanji-ink: var(--theme-washi-kanji-ink);
+  --btn-bg: var(--theme-washi-btn-bg); --btn-bg-hover: var(--theme-washi-btn-bg-hover); --btn-color: var(--theme-washi-btn-color);
+}
+:root[data-theme="urushi"] {
+  --color-bg:      var(--theme-urushi-bg);
+  --color-border:  var(--theme-urushi-border);
+  --color-text:    var(--theme-urushi-text);
+  --color-muted:   var(--theme-urushi-muted);
+  --color-word:    var(--theme-urushi-word);
+  --parchment-bg:         var(--theme-urushi-parchment-bg);
+  --parchment-bg-row:     var(--theme-urushi-parchment-bg-row);
+  --parchment-border:     var(--theme-urushi-parchment-border);
+  --parchment-border-row: var(--theme-urushi-parchment-border-row);
+  --parchment-text:       var(--theme-urushi-parchment-text);
+  --parchment-muted:      var(--theme-urushi-parchment-muted);
+  --parchment-word:       var(--theme-urushi-parchment-word);
+  --parchment-accent:     var(--theme-urushi-parchment-accent);
+  --parchment-warn:       var(--theme-urushi-parchment-warn);
+  --parchment-link:       var(--theme-urushi-parchment-link);
+  --color-on: var(--theme-urushi-on); --color-kun: var(--theme-urushi-kun); --color-name: var(--theme-urushi-name);
+  --color-num: var(--theme-urushi-num); --color-component: var(--theme-urushi-component); --color-pitch: var(--theme-urushi-pitch);
+  --color-kanji-ink: var(--theme-urushi-kanji-ink);
+  --btn-bg: var(--theme-urushi-btn-bg); --btn-bg-hover: var(--theme-urushi-btn-bg-hover); --btn-color: var(--theme-urushi-btn-color);
 }
 
 /* ── Page ────────────────────────────────────────────────────── */
@@ -230,6 +558,12 @@ body { margin: 0; background: var(--color-bg); }
 .wordKanji, .wordMeaning { color: var(--color-word); }
 .wordMeaning.popupTrigger { font-size: var(--font-small); }
 .componentKanji { color: var(--color-component); }
+/* variantsKanji/meaningKanji share the big kanji's own ink color
+   (not --color-component, which only .componentKanji uses) — the
+   stroke SVG, its loading-state fallback character, and these two are
+   all displaying the SAME kanji (or ones directly related to it), so
+   they read as one consistent color rather than each picking its own. */
+.variantsKanji, .meaningKanji { color: var(--color-kanji-ink); }
 /* .wordMeaning opens a popup (the word-slot editor — see .wordSlotWrap
    below) rather than editing in place directly, so it just needs the
    same "there's more here" hover affordance every other popup trigger
@@ -706,6 +1040,19 @@ svg.kanji {
     ) no-repeat 0 50% / 100% 0.8px;
   border: var(--border-kanji);
 }
+/* appendStrokes (main.js) no longer sets stroke/fill inline — a value
+   baked in once at load time would never update on a later theme
+   switch, since nothing rebuilds these paths/text when the theme
+   changes. Live CSS custom properties fix that for free. */
+svg.kanji path { stroke: var(--color-kanji-ink); }
+svg.kanji text { fill: var(--color-num); }
+/* The plain-text placeholder (resetSVG, main.js) shown before the real
+   stroke SVG loads (or permanently, if it fails) — a <text> element
+   same as the stroke-order numbers above, so it needs its own class to
+   take a different color (the kanji's own ink color, matching the
+   real strokes once they load, not the numbers' gold) rather than
+   inheriting svg.kanji text's fill. */
+svg.kanji text.kanjiFallback { fill: var(--color-kanji-ink); }
 
 /* ── Animate button ──────────────────────────────────────────── */
 .animBtn {
@@ -1277,11 +1624,15 @@ button.infoReadingExtra:hover, button.infoReadingExtra:focus-visible { border-bo
   margin-bottom: 0.6em;
 }
 .navTitle { font-weight: bold; }
-/* Sits right after the title on the left; margin-right: auto here
-   (not on .navTitle) pushes every button/toggle after it into its own
-   group at the right edge, instead of the reset button joining that
-   group too. */
-#resetDataBtn { margin-right: auto; }
+/* Sits right after the title/Extensive-components toggle on the left;
+   margin-right: auto here pushes every button/toggle after it into its
+   own group at the right edge. Used to live on #resetDataBtn (the
+   element that was in this structural spot) — moved to .themeDropdown
+   when Reset all changes relocated into Edit mode's own dropdown
+   panel, since margin-right: auto only does anything on whichever
+   element currently sits first in the "right group", not on a specific
+   button by name. */
+.themeDropdown { margin-right: auto; }
 .navToggle { display: flex; align-items: center; color: var(--color-muted); cursor: pointer; }
 /* Per-element margin, not a shared .navToggle gap — gap would apply the
    same spacing to every pair of children including the arrow, which
@@ -1741,7 +2092,7 @@ body:not(.editMode) .addWordBtn { display: none; }
 .wordUsageNote { font-size: 11px; line-height: 1.35; color: var(--parchment-muted); }
 /* z-index 25: above every popup (10/20), below the nav header (30) and
    the edit modal (40) — never covers the modal, no override hack needed. */
-#sheetNavigator { position: fixed; z-index: 25; right: 12px; bottom: 12px; width: 280px; max-width: calc(100vw - 24px); box-sizing: border-box; background: #0c1f2ef2; color: var(--color-text); border: 1px solid var(--color-border); padding: 8px; border-radius: 6px; font: 12px/1.4 sans-serif; box-shadow: 0 3px 16px #0005; }
+#sheetNavigator { position: fixed; z-index: 25; right: 12px; bottom: 12px; width: 280px; max-width: calc(100vw - 24px); box-sizing: border-box; background: color-mix(in srgb, var(--color-bg) 95%, transparent); color: var(--color-text); border: 1px solid var(--color-border); padding: 8px; border-radius: 6px; font: 12px/1.4 sans-serif; box-shadow: 0 3px 16px #0005; }
 #sheetNavigator button, .counterBox button { background: var(--btn-bg); color: var(--btn-color); border: 1px solid var(--color-border); border-radius: 3px; padding: 4px 7px; cursor: pointer; font: inherit; }
 #sheetNavigator button:disabled { opacity: .4; cursor: default; }
 .sheetNavigationActions { display: flex; gap: 5px; }
@@ -1749,7 +2100,7 @@ body:not(.editMode) .addWordBtn { display: none; }
 #sheetOverview summary { cursor: pointer; }
 #sheetSearch { display: flex; gap: 4px; margin: 7px 0; }
 #sheetSearch input { min-width: 0; flex: 1; }
-#sheetMap { display: block; width: 100%; cursor: crosshair; background: #071724; }
+#sheetMap { display: block; width: 100%; cursor: crosshair; background: color-mix(in srgb, var(--color-bg) 88%, #000); }
 #connectionResults { max-height: 180px; overflow: auto; }
 #connectionResults:not(:empty) { border-top: 1px solid var(--color-border); padding-top: 6px; margin-top: 6px; }
 .connectionLinks { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 4px; }
@@ -1794,6 +2145,17 @@ body:not(.editMode) .addWordBtn { display: none; }
    outside any flex item's box to leave a residual gap. */
 .navDropdown { position: relative; align-self: stretch; display: flex; align-items: center; }
 .navDropdownArrow { font-size: 2.5em; color: var(--color-muted); padding: 0 0 0.1em 0; margin-left: -0.05em }
+/* Theme widget's own trigger row — a 3-column layout (light toggle |
+   arrow | dark toggle), the middle column naturally only as wide as
+   the arrow glyph itself since nothing here stretches it. Reuses
+   .navDropdownArrow's own look but with normal margins on both sides
+   instead of that span's tuned negative margin-left (which only made
+   sense flush against a single preceding toggle, not centered between
+   two). The row as a whole is what .navDropdown:hover/:focus-within
+   (above) opens the panel from, same as every other dropdown here. */
+.themeToggleRow { display: flex; align-items: center; }
+.themeToggleRow .navDropdownArrow { margin: 0 0 }
+.themeToggle { margin: 0 0.2em; }
 .navDropdownPanel {
   display: none;
   position: absolute;
@@ -1812,6 +2174,71 @@ body:not(.editMode) .addWordBtn { display: none; }
 .navDropdown:focus-within .navDropdownPanel {
   display: flex;
 }
+/* Theme panel specifically: 150% of .themeToggleRow above it (width:
+   150% of .navDropdown, the panel's own containing block —
+   .navDropdown has no explicit width of its own, so it shrink-wraps
+   exactly to .themeToggleRow, the only in-flow content it has; the
+   panel is position: absolute, so it never contributes to that sizing
+   itself). Centered under the row: the extra 50% width is split evenly
+   each side, so the left edge needs to sit a quarter of the row's own
+   width to the left of the row's left edge — left: -25% (overriding
+   .navDropdownPanel's own left: 0, above) is exactly that, since
+   percentage offsets resolve against this same containing block/width.
+   Two columns so each alt button sits directly under its own side's
+   toggle (light under Light, dark under Dark) instead of stacking as
+   one flex column like every other dropdown panel here.
+   display is NOT set here — only in .themeDropdown:hover/:focus-within
+   .navDropdownPanel below. This rule's 2 classes (0,2,0) beat the
+   generic .navDropdownPanel { display: none } (0,1,0) regardless of
+   hover state, so a display here would show the panel permanently,
+   bypassing hover entirely (confirmed live: a fresh, untouched page
+   load already had display: grid computed on this panel). grid-
+   template-columns has no visible effect while actually hidden anyway
+   — it only matters once the hover rule flips display to grid. */
+.themeDropdown .navDropdownPanel {
+  width: 150%;
+  left: -25%;
+  box-sizing: border-box; /* width has to include this panel's own
+    padding, not just add it on top (content-box's default), or the
+    rendered box ends up wider than 150% of .themeToggleRow after all */
+  grid-template-columns: 1fr 1fr;
+  white-space: normal;
+}
+.themeDropdown:hover .navDropdownPanel,
+.themeDropdown:focus-within .navDropdownPanel {
+  display: grid;
+}
+/* Each swatch button previews ITS OWN theme, not whichever theme is
+   currently active — so unlike --color-* / --parchment-* elsewhere in
+   this file, these reference the flat --theme-<name>-* variables
+   directly (see the Theme palettes section, top of file) rather than
+   --color-*: --color-* only ever holds the CURRENTLY ACTIVE theme's
+   values, which would just repaint these to match whatever's active
+   and defeat the preview. bg is that theme's own background, text is
+   its --kanji-ink (the stroke color the big kanji itself would use
+   there), border is its --word color. Each button only names its
+   theme's three colors (--swatch-*); the shared .themeSwatch rule does
+   the rest. Pill shape (border-radius: 999px) to read as a small theme
+   swatch rather than an ordinary nav button; hover mixes the bg a
+   little toward that theme's own ink, so it works for light and dark
+   swatches alike. #navMenu prefix isn't just scoping — #navMenu
+   button (ID + type = (1,0,1)) would otherwise beat a bare
+   .themeSwatch on every property they share
+   (background/color/border/border-radius); #navMenu .themeSwatch is
+   (1,1,0), which wins at the 2nd specificity tier. */
+#navMenu .themeSwatch {
+  width: 100%;
+  border-radius: 999px;
+  border: var(--theme-preview-border-width) solid var(--swatch-word);
+  font-weight: 600;
+  background: var(--swatch-bg);
+  color: var(--swatch-ink);
+}
+#navMenu .themeSwatch:hover:not(:disabled) { background: color-mix(in srgb, var(--swatch-bg) 88%, var(--swatch-ink)); }
+#lightAltThemeBtn { --swatch-bg: var(--theme-light-alt-bg); --swatch-ink: var(--theme-light-alt-kanji-ink); --swatch-word: var(--theme-light-alt-word); }
+#darkAltThemeBtn  { --swatch-bg: var(--theme-dark-alt-bg);  --swatch-ink: var(--theme-dark-alt-kanji-ink);  --swatch-word: var(--theme-dark-alt-word); }
+#washiThemeBtn    { --swatch-bg: var(--theme-washi-bg);     --swatch-ink: var(--theme-washi-kanji-ink);     --swatch-word: var(--theme-washi-word); }
+#urushiThemeBtn   { --swatch-bg: var(--theme-urushi-bg);    --swatch-ink: var(--theme-urushi-kanji-ink);    --swatch-word: var(--theme-urushi-word); }
 
 /* ── Poster / print mode ─────────────────────────────────────────
    A card not in the current poster selection is hidden (not removed —

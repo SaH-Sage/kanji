@@ -521,16 +521,28 @@ function buildCountersPlaceholder() {
  * approach syncNavMenuSpacing (above) already uses for the same
  * reason. ResizeObserver, not a one-time read, since the real card's
  * own height can shift with zoom/font-metric changes the counters box
- * should track too.
+ * should track too. rerenderCard replaces cards outright (e.g. the
+ * "Extensive components" toggle rebuilds all of them), and a detached
+ * card reports a 0 height — so when the observed card is gone, switch
+ * to whichever card is first now instead of copying that 0.
  */
 function syncCountersBoxHeight() {
   const box = document.getElementById('kc-counters');
-  const referenceCard = document.querySelector('#kanji-grid .kc:not(.legendCard)');
+  const findReference = () => document.querySelector('#kanji-grid .kc:not(.legendCard)');
+  let referenceCard = findReference();
   if (!box || !referenceCard) return;
   box.style.height = `${referenceCard.getBoundingClientRect().height}px`;
   const ro = new ResizeObserver(entries => {
-    const height = entries[0].borderBoxSize
-      ? entries[0].borderBoxSize[0].blockSize
+    if (!referenceCard.isConnected) {
+      ro.unobserve(referenceCard);
+      referenceCard = findReference();
+      if (referenceCard) ro.observe(referenceCard); // its own initial callback sets the height
+      return;
+    }
+    const entry = entries.find(e => e.target === referenceCard);
+    if (!entry) return;
+    const height = entry.borderBoxSize
+      ? entry.borderBoxSize[0].blockSize
       : referenceCard.getBoundingClientRect().height;
     box.style.height = `${height}px`;
   });
@@ -568,7 +580,9 @@ function resetSVG(char, svg, btn, st) {
     'text-anchor': 'middle',
     'dominant-baseline': 'central',
     'font-size': [...char].length > 1 ? 42 : 82,
-    fill: '#ffffff',
+    class: 'kanjiFallback', // color comes from CSS (svg.kanji text.kanjiFallback,
+      // style.css) — same reasoning as appendStrokes' own paths/numbers:
+      // a literal fill here would never update on a later theme switch
     'font-family': 'serif',
   }, char);
   st.fb.style.userSelect = 'none';
@@ -600,14 +614,18 @@ async function fetchStrokeSVG(code) {
  * order. Split out of loadKanji so loadKanjiMulti can reuse it
  * per-character instead of duplicating this loop.
  */
-function appendStrokes(svgSource, target, st, numColor) {
+function appendStrokes(svgSource, target, st) {
   const doc = new DOMParser().parseFromString(svgSource, 'image/svg+xml');
   doc.querySelectorAll('path').forEach((p, i) => {
     const d  = p.getAttribute('d');
+    // stroke/fill come from CSS (svg.kanji path/text, style.css), not
+    // set here — a literal color baked in now would never update when
+    // the theme changes later, since nothing re-creates these elements
+    // on a theme switch (unlike cssVar(), a live CSS value keeps
+    // tracking --color-kanji-ink/--color-num for free).
     const el = svgEl('path', {
       d,
       fill: 'none',
-      stroke: '#fff',
       'stroke-width': '3.5',
       'stroke-linecap': 'round',
       'stroke-linejoin': 'round',
@@ -620,7 +638,6 @@ function appendStrokes(svgSource, target, st, numColor) {
     if (m) {
       const t = svgEl('text', {
         x: +m[1], y: +m[2] - 3,
-        fill: numColor,
         'font-size': '7',
         'font-weight': 'bold',
         'text-anchor': 'middle',
@@ -658,7 +675,7 @@ async function loadKanji(char, svg, btn, st) {
   const code = char.codePointAt(0).toString(16).padStart(5, '0');
   try {
     const svgSource = await fetchStrokeSVG(code);
-    appendStrokes(svgSource, svg, st, cssVar('--color-num'));
+    appendStrokes(svgSource, svg, st);
     finishLoad(st, btn);
   } catch (e) {
     // Fallback character remains; button stays disabled
@@ -696,7 +713,6 @@ async function loadKanjiMulti(chars, svg, btn, st) {
   const yOffset = (109 - size) / 2;
   const startX  = 109 / 2 - spacing * (list.length - 1) / 2;
   try {
-    const numColor = cssVar('--color-num');
     const sources = await Promise.all(
       list.map(c => fetchStrokeSVG(c.codePointAt(0).toString(16).padStart(5, '0')))
     );
@@ -704,7 +720,7 @@ async function loadKanjiMulti(chars, svg, btn, st) {
       const centerX = startX + i * spacing;
       const g = svgEl('g', { transform: `translate(${centerX - size / 2}, ${yOffset}) scale(${scale})` });
       svg.appendChild(g);
-      appendStrokes(svgSource, g, st, numColor);
+      appendStrokes(svgSource, g, st);
     });
     finishLoad(st, btn);
   } catch (e) {
@@ -1013,6 +1029,12 @@ function applyRowRescueSwaps() {
     // the density tier check already decided was achievable, so it
     // needs to target that same tier, not the older, looser row-rescue
     // threshold tuned for a different (index-paired) formula.
+    // Reset r2 to natural order before measuring it — measuring
+    // whatever order a PREVIOUS pass left behind made this pass
+    // non-idempotent: equal-length readings tie in
+    // bestColumnArrangement, so each pass rotated them one more step
+    // (生's ふ/み/さ/そ cycled endlessly on repeated passes).
+    applyRowOrder(prev.querySelector('.r2'), prevName);
     const prevNameCols = densityColumnsOfElement(prev.querySelector('.r2'));
     if (prevNameCols.length) {
       const namePartner = [...curOnAdd, ...curKunAdd];
@@ -1043,7 +1065,6 @@ function markR2Columns(r2) {
   const items = [...r2.querySelectorAll('span.add')];
   if (!items.length) return;
 
-  const borderColor = cssVar('--color-border');
   const firstLeft    = items[0].getBoundingClientRect().left;
 
   // Pull the overflow column R2_EXTRA_PULL px closer than column-gap
@@ -1083,7 +1104,7 @@ function markR2Columns(r2) {
     div.className = 'r2-divider';
     div.style.cssText =
       `position:absolute; left:${colLeft - columnGap / 2}px; top:${top}px;` +
-      `height:${bottom - top}px; border-left:1px dotted ${borderColor};` +
+      `height:${bottom - top}px; border-left:1px dotted var(--mora-dot-color);` +
       `pointer-events:none;`;
     r2.appendChild(div);
   });
@@ -1356,7 +1377,7 @@ const appState = {
   kanji: [], words: {}, moraInfo: null,
   kanjiOverrides: {}, wordOverrides: {},
   customKanji: [], customWords: {},
-  settings: { confirmOverwrite: true, editMode: false, extensiveComponents: false, densityFitStrategy: 'sequential' },
+  settings: { confirmOverwrite: true, editMode: false, extensiveComponents: false, densityFitStrategy: 'sequential', theme: 'dark' },
   // Pure in-memory overlay for the density-fit-strategy toggle (see
   // initNavMenu) -- char -> position, recomputed live via
   // computeDensityPreview() whenever the toggle changes. Never written
@@ -2337,8 +2358,13 @@ function rerenderCard(char) {
   // adjacent to whom. See the matching comment in init() for why
   // applyRowRescueSwaps must run before capCardReadingOverflow, and why
   // setTimeout rather than requestAnimationFrame (rAF doesn't fire at
-  // all in a background/inactive tab).
+  // all in a background/inactive tab). Coalesced: rerenderAllCards
+  // calls this ~120 times in one go, and each whole-grid pass is slow
+  // (computeDensityPreview), so only the first call schedules one.
+  if (gridPassPending) return;
+  gridPassPending = true;
   setTimeout(() => {
+    gridPassPending = false;
     applyRowRescueSwaps();
     const { classification, densities } = computeDensityPreview();
     document.querySelectorAll('#kanji-grid .kc:not(.legendCard)').forEach(card =>
@@ -2347,6 +2373,7 @@ function rerenderCard(char) {
     SheetExplorer.refresh();
   }, 0);
 }
+let gridPassPending = false;
 
 /** Both "Export additions" and "Reset all changes" only make sense
  * once there's actually something local to act on — same emptiness
@@ -3332,6 +3359,56 @@ function syncNavMenuSpacing() {
   ro.observe(nav);
 }
 
+/** Light/dark theme widget (nav, replacing "Reset all changes"'s old
+ * slot — see index.html). Every theme is just [data-theme] on <html>
+ * selecting a block of CSS custom-property reassignments (style.css,
+ * "Themes" section) — nothing here ever touches individual elements'
+ * styling directly. The two row toggles (Light/Dark) are a manually
+ * kept mutually-exclusive pair, not real radios, so they can sit side
+ * by side with a label each rather than one ambiguous shared switch;
+ * picking either one always lands on that side's NON-alt variant, same
+ * as clicking a radio resets which option is chosen regardless of
+ * what was previously active. The swatch buttons (in the dropdown
+ * panel: the Alt pair, then washi/urushi under them) set their theme
+ * directly and sync the row's checked
+ * state to match which side they belong to, so the row never looks
+ * out of sync with which family (light vs dark) is actually active. */
+function initThemeToggle() {
+  const lightToggle = document.getElementById('lightThemeToggle');
+  const darkToggle = document.getElementById('darkThemeToggle');
+  const lightAltBtn = document.getElementById('lightAltThemeBtn');
+  const darkAltBtn = document.getElementById('darkAltThemeBtn');
+
+  function applyTheme(theme) {
+    appState.settings.theme = theme;
+    saveLocal(SETTINGS_KEY, appState.settings);
+    if (theme === 'dark') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', theme);
+    const isLight = theme === 'light' || theme === 'light-alt' || theme === 'washi';
+    lightToggle.checked = isLight;
+    darkToggle.checked = !isLight;
+    // Whichever control triggered this (a toggle or an Alt button) keeps
+    // keyboard focus after being clicked, and .navDropdownPanel's show
+    // condition includes :focus-within (so keyboard users can tab into
+    // it) — without this, the panel stays open indefinitely after any
+    // click, long after the mouse has moved away, since :focus-within
+    // doesn't care where the cursor is, only where focus is.
+    document.activeElement.blur();
+  }
+
+  applyTheme(appState.settings.theme);
+  // checked reflects whichever way THIS click just flipped it — toggling
+  // either one off has to land on the other side, not stay stuck "off"
+  // with neither family active, so both branches read the live state
+  // rather than assuming the click always meant "turn mine on".
+  lightToggle.addEventListener('change', () => applyTheme(lightToggle.checked ? 'light' : 'dark'));
+  darkToggle.addEventListener('change', () => applyTheme(darkToggle.checked ? 'dark' : 'light'));
+  lightAltBtn.addEventListener('click', () => applyTheme('light-alt'));
+  darkAltBtn.addEventListener('click', () => applyTheme('dark-alt'));
+  document.getElementById('washiThemeBtn').addEventListener('click', () => applyTheme('washi'));
+  document.getElementById('urushiThemeBtn').addEventListener('click', () => applyTheme('urushi'));
+}
+
 function initNavMenu() {
   const addBtn      = document.getElementById('addKanjiBtn');
   const editToggle  = document.getElementById('editModeToggle');
@@ -3435,12 +3512,13 @@ async function init() {
       customKanji: kanjiDomain.custom,
       wordOverrides: wordDomain.overrides,
       customWords: wordDomain.custom,
-      settings: { confirmOverwrite: true, editMode: false, extensiveComponents: false, densityFitStrategy: 'sequential', ...loadLocal(SETTINGS_KEY, {}) },
+      settings: { confirmOverwrite: true, editMode: false, extensiveComponents: false, densityFitStrategy: 'sequential', theme: 'dark', ...loadLocal(SETTINGS_KEY, {}) },
       posterConfig: { widthCm: null, heightCm: null, forcedChars: [], ...loadLocal(POSTER_CONFIG_KEY, {}), active: false },
     });
     initFieldEditing();
     initPositionQuickEdit();
     initWordSlotEditing();
+    initThemeToggle();
     initNavMenu();
     syncNavMenuSpacing();
     initAddKanjiModal();

@@ -128,7 +128,11 @@ const SheetExplorer = (() => {
       savedScroll = {x: scrollX, y: scrollY};
       grid.style.zoom = ''; ruler.style.zoom = ''; // reset first so the measurements below are the real, unscaled size
       const navHeight = document.getElementById('navMenu')?.getBoundingClientRect().height || 0;
-      const width = Math.max(grid.scrollWidth, ruler.scrollWidth);
+      // grid: offsetWidth, not scrollWidth — its overflow-x: clip hides
+      // overflow that scrollWidth still counts, which left phantom
+      // empty space on the right once fitted. The ruler isn't clipped,
+      // so its scrollWidth is its real visible width.
+      const width = Math.max(grid.offsetWidth, ruler.scrollWidth);
       const height = grid.scrollHeight + ruler.scrollHeight;
       const scale = Math.min(innerWidth / width, (innerHeight - navHeight) / height, 1);
       grid.style.zoom = scale;
@@ -147,11 +151,14 @@ const SheetExplorer = (() => {
     const sx=canvas.width/width,sy=canvas.height/height;
     ctx.clearRect(0,0,canvas.width,canvas.height);
     const rect=grid.getBoundingClientRect();
+    // Theme colors, read live so the map follows whichever theme is active.
+    const css=getComputedStyle(document.documentElement),color=name=>css.getPropertyValue(name).trim();
+    const matchColor=color('--color-num'),cardColor=color('--color-muted');
     for(const el of cards()) {
-      const r=el.getBoundingClientRect();ctx.fillStyle=el.classList.contains('connectionMatch')?'#e8c060':'#3d6a8a';
+      const r=el.getBoundingClientRect();ctx.fillStyle=el.classList.contains('connectionMatch')?matchColor:cardColor;
       ctx.fillRect((r.left-rect.left)*sx,(r.top-rect.top)*sy,Math.max(2,r.width*sx-1),Math.max(2,r.height*sy-1));
     }
-    ctx.strokeStyle='#e0d8b8';ctx.lineWidth=2;
+    ctx.strokeStyle=color('--color-text');ctx.lineWidth=2;
     ctx.strokeRect(-rect.left*sx,-rect.top*sy,innerWidth*sx,innerHeight*sy);
   }
   function refresh() {apply();}
@@ -169,6 +176,7 @@ const SheetExplorer = (() => {
     canvas.addEventListener('click',e=>{const r=canvas.getBoundingClientRect(),g=document.getElementById('kanji-grid');window.scrollTo({left:(e.clientX-r.left)/r.width*g.scrollWidth-innerWidth/2,top:g.offsetTop+(e.clientY-r.top)/r.height*g.scrollHeight-innerHeight/2,behavior:'smooth'});});
     window.addEventListener('scroll',()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(drawMap);},{passive:true});
     window.addEventListener('resize',()=>{drawMap();});
+    new MutationObserver(drawMap).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
     // Capture read-only exploration before the original click-to-edit handlers.
     document.addEventListener('click',e=>{
       const ruler=e.target.closest('[data-ruler-number]');

@@ -13,7 +13,7 @@ const SheetExplorer = (() => {
     "⻍": "辵"
   };
   const normalize = c => aliases[c] || c.normalize("NFKC");
-  let selection = null, number = 3, context = "number", root, result, canvas, overview, frame;
+  let selection = null, number = 3, context = "number", root, result, canvas, overview, frame, fitted = false, savedScroll = null;
   const cards = () => [ ...document.querySelectorAll("#kanji-grid .kc:not(.legendCard)") ];
   const records = () => [ ...appState.kanji, ...appState.customKanji ].map(k => ({
     ...k,
@@ -201,6 +201,34 @@ const SheetExplorer = (() => {
       summary.textContent = reading ? reading.word + " (" + reading.kana + ")" : "Outside this counter range";
     }
   }
+  function fitToggle() {
+    const grid = document.getElementById("kanji-grid"), ruler = document.getElementById("rulerFooter"), btn = root?.querySelector("#zoomFit");
+    if (fitted) {
+      grid.style.zoom = "";
+      ruler.style.zoom = "";
+      if (savedScroll) window.scrollTo(savedScroll.x, savedScroll.y);
+      fitted = false;
+    } else {
+      savedScroll = {
+        x: scrollX,
+        y: scrollY
+      };
+      grid.style.zoom = "";
+      ruler.style.zoom = "";
+      const navHeight = document.getElementById("navMenu")?.getBoundingClientRect().height || 0;
+      const width = Math.max(grid.offsetWidth, ruler.scrollWidth);
+      const height = grid.scrollHeight + ruler.scrollHeight;
+      const scale = Math.min(innerWidth / width, (innerHeight - navHeight) / height, 1);
+      grid.style.zoom = scale;
+      ruler.style.zoom = scale;
+      window.scrollTo(0, grid.offsetTop);
+      fitted = true;
+    }
+    if (btn) {
+      btn.classList.toggle("fitActive", fitted);
+      btn.setAttribute("aria-pressed", String(fitted));
+    }
+  }
   function drawMap() {
     if (!canvas || !overview.open) return;
     const ctx = canvas.getContext("2d");
@@ -212,12 +240,14 @@ const SheetExplorer = (() => {
     const sx = canvas.width / width, sy = canvas.height / height;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     const rect = grid.getBoundingClientRect();
+    const css = getComputedStyle(document.documentElement), color = name => css.getPropertyValue(name).trim();
+    const matchColor = color("--color-num"), cardColor = color("--color-muted");
     for (const el of cards()) {
       const r = el.getBoundingClientRect();
-      ctx.fillStyle = el.classList.contains("connectionMatch") ? "#e8c060" : "#3d6a8a";
+      ctx.fillStyle = el.classList.contains("connectionMatch") ? matchColor : cardColor;
       ctx.fillRect((r.left - rect.left) * sx, (r.top - rect.top) * sy, Math.max(2, r.width * sx - 1), Math.max(2, r.height * sy - 1));
     }
-    ctx.strokeStyle = "#e0d8b8";
+    ctx.strokeStyle = color("--color-text");
     ctx.lineWidth = 2;
     ctx.strokeRect(-rect.left * sx, -rect.top * sy, innerWidth * sx, innerHeight * sy);
   }
@@ -228,12 +258,13 @@ const SheetExplorer = (() => {
     root = document.createElement("aside");
     root.id = "sheetNavigator";
     root.setAttribute("aria-label", "Sheet navigation");
-    root.innerHTML = `<div class="sheetNavigationActions"><button id="sheetStart" type="button">Start ↗</button><button id="showCounters" type="button">Counters</button><button id="clearConnections" type="button" disabled>Clear</button></div><details id="sheetOverview"><summary>Explore / overview</summary><form id="sheetSearch"><input aria-label="Find kanji, reading, or word" placeholder="Kanji, reading, word…"><button type="submit">Find</button></form><canvas id="sheetMap" aria-label="Overview of the kanji sheet"></canvas><small>Click the map to move; use Find for keyboard navigation.</small></details><div id="connectionResults" aria-live="polite"></div><button type="button" id="counterSummary" title="Open counters"></button>`;
+    root.innerHTML = `<div class="sheetNavigationActions"><button id="sheetStart" type="button">Start ↗</button><button id="showCounters" type="button">Counters</button><button id="clearConnections" type="button" disabled>Clear</button><button id="zoomFit" type="button" aria-pressed="false" title="Zoom out to fit the whole sheet in view, or back to actual size">Fit ⤢</button></div><details id="sheetOverview"><summary>Explore / overview</summary><form id="sheetSearch"><input aria-label="Find kanji, reading, or word" placeholder="Kanji, reading, word…"><button type="submit">Find</button></form><canvas id="sheetMap" aria-label="Overview of the kanji sheet"></canvas><small>Click the map to move; use Find for keyboard navigation.</small></details><div id="connectionResults" aria-live="polite"></div><button type="button" id="counterSummary" title="Open counters"></button>`;
     document.body.append(root);
     result = root.querySelector("#connectionResults");
     canvas = root.querySelector("#sheetMap");
     overview = root.querySelector("#sheetOverview");
     root.querySelector("#sheetStart").addEventListener("click", () => start());
+    root.querySelector("#zoomFit").addEventListener("click", fitToggle);
     const openCounters = () => document.getElementById("kc-counters").scrollIntoView({
       behavior: "smooth",
       block: "center",
@@ -266,6 +297,10 @@ const SheetExplorer = (() => {
     });
     window.addEventListener("resize", () => {
       drawMap();
+    });
+    new MutationObserver(drawMap).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: [ "data-theme" ]
     });
     document.addEventListener("click", e => {
       const ruler = e.target.closest("[data-ruler-number]");

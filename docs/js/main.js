@@ -162,11 +162,20 @@ function buildCountersPlaceholder() {
 
 function syncCountersBoxHeight() {
   const box = document.getElementById("kc-counters");
-  const referenceCard = document.querySelector("#kanji-grid .kc:not(.legendCard)");
+  const findReference = () => document.querySelector("#kanji-grid .kc:not(.legendCard)");
+  let referenceCard = findReference();
   if (!box || !referenceCard) return;
   box.style.height = `${referenceCard.getBoundingClientRect().height}px`;
   const ro = new ResizeObserver(entries => {
-    const height = entries[0].borderBoxSize ? entries[0].borderBoxSize[0].blockSize : referenceCard.getBoundingClientRect().height;
+    if (!referenceCard.isConnected) {
+      ro.unobserve(referenceCard);
+      referenceCard = findReference();
+      if (referenceCard) ro.observe(referenceCard);
+      return;
+    }
+    const entry = entries.find(e => e.target === referenceCard);
+    if (!entry) return;
+    const height = entry.borderBoxSize ? entry.borderBoxSize[0].blockSize : referenceCard.getBoundingClientRect().height;
     box.style.height = `${height}px`;
   });
   ro.observe(referenceCard);
@@ -198,7 +207,7 @@ function resetSVG(char, svg, btn, st) {
     "text-anchor": "middle",
     "dominant-baseline": "central",
     "font-size": [ ...char ].length > 1 ? 42 : 82,
-    fill: "#ffffff",
+    class: "kanjiFallback",
     "font-family": "serif"
   }, char);
   st.fb.style.userSelect = "none";
@@ -213,14 +222,13 @@ async function fetchStrokeSVG(code) {
   return remote.text();
 }
 
-function appendStrokes(svgSource, target, st, numColor) {
+function appendStrokes(svgSource, target, st) {
   const doc = (new DOMParser).parseFromString(svgSource, "image/svg+xml");
   doc.querySelectorAll("path").forEach((p, i) => {
     const d = p.getAttribute("d");
     const el = svgEl("path", {
       d: d,
       fill: "none",
-      stroke: "#fff",
       "stroke-width": "3.5",
       "stroke-linecap": "round",
       "stroke-linejoin": "round"
@@ -232,7 +240,6 @@ function appendStrokes(svgSource, target, st, numColor) {
       const t = svgEl("text", {
         x: +m[1],
         y: +m[2] - 3,
-        fill: numColor,
         "font-size": "7",
         "font-weight": "bold",
         "text-anchor": "middle"
@@ -265,7 +272,7 @@ async function loadKanji(char, svg, btn, st) {
   const code = char.codePointAt(0).toString(16).padStart(5, "0");
   try {
     const svgSource = await fetchStrokeSVG(code);
-    appendStrokes(svgSource, svg, st, cssVar("--color-num"));
+    appendStrokes(svgSource, svg, st);
     finishLoad(st, btn);
   } catch (e) {
     console.warn(`Failed to load stroke data for ${char}:`, e);
@@ -281,7 +288,6 @@ async function loadKanjiMulti(chars, svg, btn, st) {
   const yOffset = (109 - size) / 2;
   const startX = 109 / 2 - spacing * (list.length - 1) / 2;
   try {
-    const numColor = cssVar("--color-num");
     const sources = await Promise.all(list.map(c => fetchStrokeSVG(c.codePointAt(0).toString(16).padStart(5, "0"))));
     sources.forEach((svgSource, i) => {
       const centerX = startX + i * spacing;
@@ -289,7 +295,7 @@ async function loadKanjiMulti(chars, svg, btn, st) {
         transform: `translate(${centerX - size / 2}, ${yOffset}) scale(${scale})`
       });
       svg.appendChild(g);
-      appendStrokes(svgSource, g, st, numColor);
+      appendStrokes(svgSource, g, st);
     });
     finishLoad(st, btn);
   } catch (e) {
@@ -447,6 +453,7 @@ function applyRowRescueSwaps() {
     applyRowOrder(prevR1El, [ ...l1r1.theirsPerm, ...l2r1.theirsPerm ]);
     const l3r2 = computePairRescue(curKunAdd, prevName, ROW_RESCUE_THRESHOLD_SECONDARY);
     applyRowOrder(cur.querySelector(".l3"), l3r2.minePerm);
+    applyRowOrder(prev.querySelector(".r2"), prevName);
     const prevNameCols = densityColumnsOfElement(prev.querySelector(".r2"));
     if (prevNameCols.length) {
       const namePartner = [ ...curOnAdd, ...curKunAdd ];
@@ -469,7 +476,6 @@ function markR2Columns(r2) {
   r2.querySelectorAll(".r2-divider").forEach(d => d.remove());
   const items = [ ...r2.querySelectorAll("span.add") ];
   if (!items.length) return;
-  const borderColor = cssVar("--color-border");
   const firstLeft = items[0].getBoundingClientRect().left;
   items.forEach(el => {
     const isOverflow = el.getBoundingClientRect().left > firstLeft + 1;
@@ -491,7 +497,7 @@ function markR2Columns(r2) {
     const bottom = Math.max(...rects.map(r => r.bottom)) - r2Rect.top;
     const div = document.createElement("div");
     div.className = "r2-divider";
-    div.style.cssText = `position:absolute; left:${colLeft - columnGap / 2}px; top:${top}px;` + `height:${bottom - top}px; border-left:1px dotted ${borderColor};` + `pointer-events:none;`;
+    div.style.cssText = `position:absolute; left:${colLeft - columnGap / 2}px; top:${top}px;` + `height:${bottom - top}px; border-left:1px dotted var(--mora-dot-color);` + `pointer-events:none;`;
     r2.appendChild(div);
   });
 }
@@ -644,7 +650,8 @@ const appState = {
     confirmOverwrite: true,
     editMode: false,
     extensiveComponents: false,
-    densityFitStrategy: "sequential"
+    densityFitStrategy: "sequential",
+    theme: "dark"
   },
   densityPreviewPositions: null,
   posterConfig: {
@@ -1294,7 +1301,10 @@ function rerenderCard(char) {
   if (old) old.replaceWith(newCard); else grid.appendChild(newCard);
   initCard(newCard);
   resortGridCards();
+  if (gridPassPending) return;
+  gridPassPending = true;
   setTimeout(() => {
+    gridPassPending = false;
     applyRowRescueSwaps();
     const {classification: classification, densities: densities} = computeDensityPreview();
     document.querySelectorAll("#kanji-grid .kc:not(.legendCard)").forEach(card => capCardReadingOverflow(card, densities[card.dataset.kanji] || 0));
@@ -1302,6 +1312,8 @@ function rerenderCard(char) {
     SheetExplorer.refresh();
   }, 0);
 }
+
+let gridPassPending = false;
 
 function updateDataButtonsVisibility() {
   const isEmpty = Object.keys(appState.kanjiOverrides).length === 0 && Object.keys(appState.wordOverrides).length === 0 && appState.customKanji.length === 0 && Object.keys(appState.customWords).length === 0;
@@ -2051,6 +2063,29 @@ function syncNavMenuSpacing() {
   ro.observe(nav);
 }
 
+function initThemeToggle() {
+  const lightToggle = document.getElementById("lightThemeToggle");
+  const darkToggle = document.getElementById("darkThemeToggle");
+  const lightAltBtn = document.getElementById("lightAltThemeBtn");
+  const darkAltBtn = document.getElementById("darkAltThemeBtn");
+  function applyTheme(theme) {
+    appState.settings.theme = theme;
+    saveLocal(SETTINGS_KEY, appState.settings);
+    if (theme === "dark") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", theme);
+    const isLight = theme === "light" || theme === "light-alt" || theme === "washi";
+    lightToggle.checked = isLight;
+    darkToggle.checked = !isLight;
+    document.activeElement.blur();
+  }
+  applyTheme(appState.settings.theme);
+  lightToggle.addEventListener("change", () => applyTheme(lightToggle.checked ? "light" : "dark"));
+  darkToggle.addEventListener("change", () => applyTheme(darkToggle.checked ? "dark" : "light"));
+  lightAltBtn.addEventListener("click", () => applyTheme("light-alt"));
+  darkAltBtn.addEventListener("click", () => applyTheme("dark-alt"));
+  document.getElementById("washiThemeBtn").addEventListener("click", () => applyTheme("washi"));
+  document.getElementById("urushiThemeBtn").addEventListener("click", () => applyTheme("urushi"));
+}
+
 function initNavMenu() {
   const addBtn = document.getElementById("addKanjiBtn");
   const editToggle = document.getElementById("editModeToggle");
@@ -2125,6 +2160,7 @@ async function init() {
         editMode: false,
         extensiveComponents: false,
         densityFitStrategy: "sequential",
+        theme: "dark",
         ...loadLocal(SETTINGS_KEY, {})
       },
       posterConfig: {
@@ -2138,6 +2174,7 @@ async function init() {
     initFieldEditing();
     initPositionQuickEdit();
     initWordSlotEditing();
+    initThemeToggle();
     initNavMenu();
     syncNavMenuSpacing();
     initAddKanjiModal();

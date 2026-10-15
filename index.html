@@ -14,7 +14,27 @@
       Extensive components
       <span class="slideToggle" aria-hidden="true"></span>
     </label>
-    <button id="resetDataBtn" type="button" disabled>Reset all changes</button>
+    <div class="navDropdown themeDropdown">
+      <div class="themeToggleRow">
+        <label class="navToggle themeToggle">
+          <input type="checkbox" id="lightThemeToggle" class="slideToggleInput">
+          Light
+          <span class="slideToggle" aria-hidden="true"></span>
+        </label>
+        <span class="navDropdownArrow" aria-hidden="true">&#9662;</span>
+        <label class="navToggle themeToggle">
+          <input type="checkbox" id="darkThemeToggle" class="slideToggleInput" checked>
+          Dark
+          <span class="slideToggle" aria-hidden="true"></span>
+        </label>
+      </div>
+      <div class="navDropdownPanel">
+        <button type="button" id="lightAltThemeBtn" class="themeSwatch" title="Light theme, neutral grayscale instead of the warm-parchment/navy swap">Alt</button>
+        <button type="button" id="darkAltThemeBtn" class="themeSwatch" title="Dark theme, neutral grayscale instead of navy">Alt</button>
+        <button type="button" id="washiThemeBtn" class="themeSwatch" title="Washi (和紙) — light theme in traditional Japanese colors: paper, sumi ink, indigo, vermilion">和紙</button>
+        <button type="button" id="urushiThemeBtn" class="themeSwatch" title="Urushi (漆) — dark theme in traditional Japanese colors: black lacquer, vermilion, gold">漆</button>
+      </div>
+    </div>
     <div class="navDropdown">
       <label class="navToggle">
         <input type="checkbox" id="editModeToggle" class="slideToggleInput">
@@ -34,6 +54,7 @@
           <span class="slideToggle" aria-hidden="true"></span>
         </label>
         <button id="recalculateDensityBtn" type="button" title="Density/position is cached off the current kanji, word, and extensive-components data — this forces a guaranteed-fresh recomputation from scratch regardless.">Recalculate density</button>
+        <button id="resetDataBtn" type="button" disabled>Reset all changes</button>
       </div>
     </div>
     <button id="posterBtn" type="button">Poster</button>

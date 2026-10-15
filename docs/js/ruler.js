@@ -1,5 +1,5 @@
 function initRuler(container) {
-  const YC = "#F5C518", BC = "#4FB8E8", RC = "#EE4444", WC = "#FFFFFF", MC = "#aaaaaa";
+  const YC = "#F5C518", BC = "#4FB8E8", RC = "#EE4444", WC = "var(--color-kanji-ink)", MC = "#aaaaaa";
   const OC = "#FF8C42", PC = "#C07AE8";
   const CW = 60, TH = 112, CH = 28, BH = 24;
   const SANS = "'Hiragino Sans','Yu Gothic','Meiryo',sans-serif";
